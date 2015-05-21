@@ -6,7 +6,7 @@
 Andy Tran
 
 ### Scrum Master
-David Grundfest
+Dave Grundfest
 
 ### Development Team
 Joseph Lin
