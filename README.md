@@ -1,2 +1,13 @@
-# unexpectedpuppy
-A new way to sell all your stuff
+# Unexpected Puppy
+
+## Meet the Team
+
+### Product Owner
+Andy Tran
+
+### Scrum Master
+David Grundfest
+
+### Development Team
+Joseph Lin
+Vivek Tumrukota
