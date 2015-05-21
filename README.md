@@ -12,7 +12,7 @@
 <ul>
   <li><b>Ionic/Cordova</b></li>
   <li><b>MongoDB</b></li>
-  <li><b>**AngularJS</b</li>
-  <li><b>**Express**</b></li>
-  <li><b>**Node**</b></li>
+  <li><b>AngularJS</b</li>
+  <li><b>Express</b></li>
+  <li><b>Node</b></li>
 </ul>
