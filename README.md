@@ -9,5 +9,5 @@ Andy Tran
 Dave Grundfest
 
 ### Development Team
-Joseph Lin
+Joseph Lin  
 Vivek Tumrukota
