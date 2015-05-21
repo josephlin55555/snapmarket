@@ -8,9 +8,9 @@
 
 ##Technology
 <ol>
-*  **Ionic/Cordova**
-*  **MongoDB**
-*  **AngularJS**
-*  **Express**
-*  **Node**
+<li>**Ionic/Cordova**</li>
+<li>**MongoDB**</li>
+<li>**AngularJS**</li>
+<li>**Express**</li>
+<li>**Node**</li>
 </ol>
