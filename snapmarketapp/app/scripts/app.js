@@ -38,46 +38,63 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.buySearch', {
+    url: '/buySearch',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-buySearch': {
+        templateUrl: 'templates/tab-buySearch.html',
+        controller: 'BuySearchCtrl'
       }
     }
   })
-
-  .state('tab.chats', {
-      url: '/chats',
+    .state('tab.buyItemDetail', {
+      url: '/buySearch/itemId',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'buy-ItemDetail': {
+          templateUrl: 'templates/buy-itemDetail.html',
+          controller: 'BuyItemDetailCtrl'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+        .state('tab.buyItemOffer', {
+      url: '/buySearch/itemId/offer',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'buy-ItemOffer': {
+          templateUrl: 'templates/buy-itemOffer.html',
+          controller: 'BuyItemOfferCtrl'
+        }
+      }
+    })
+  .state('tab.sellCamera', {
+      url: '/sellCamera',
+      views: {
+        'tab-sellCamera': {
+          templateUrl: 'templates/tab-sellCamera.html',
+          controller: 'SellCameraCtrl'
         }
       }
     })
 
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.transactions', {
+    url: '/transactions',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-transactions': {
+        templateUrl: 'templates/tab-transactions.html',
+        controller: 'TransactionsCtrl'
       }
     }
   });
 
+  .state('tab.profile', {
+    url: '/profile',
+    views: {
+      'tab-profile': {
+        templateUrl: 'templates/tab-profile.html',
+        controller: 'ProfileCtrl'
+      }
+    }
+  });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/buySearch');
 
 });
