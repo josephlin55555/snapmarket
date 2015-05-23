@@ -37,12 +37,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   // Each tab has its own nav history stack:
-
+  .state('tab.login', {
+    url: '/login',
+    views: {
+      'login': {
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+      }
+    }
+  })
   .state('tab.buySearch', {
     url: '/buySearch',
     views: {
-      'tab-buySearch': {
-        templateUrl: 'templates/tab-buySearch.html',
+      'buy-search': {
+        templateUrl: 'templates/buy-search.html',
         controller: 'BuySearchCtrl'
       }
     }
@@ -56,45 +64,106 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-        .state('tab.buyItemOffer', {
-      url: '/buySearch/itemId/offer',
-      views: {
-        'buy-ItemOffer': {
-          templateUrl: 'templates/buy-itemOffer.html',
-          controller: 'BuyItemOfferCtrl'
+      .state('tab.buyItemOffer', {
+        url: '/buySearch/:itemId/offer',
+        views: {
+          'buy-ItemOffer': {
+            templateUrl: 'templates/buy-itemOffer.html',
+            controller: 'BuyItemOfferCtrl'
+          }
         }
-      }
-    })
+      })
   .state('tab.sellCamera', {
-      url: '/sellCamera',
+    url: '/sellCamera',
+    views: {
+      'sell-camera': {
+        templateUrl: 'templates/sell-camera.html',
+        controller: 'SellCameraCtrl'
+      }
+    }
+  })
+    .state('tab.sellCreateListing', {
+      url: '/sellCamera/sellCreateListing',
       views: {
-        'tab-sellCamera': {
-          templateUrl: 'templates/tab-sellCamera.html',
-          controller: 'SellCameraCtrl'
+        'sell-createListing': {
+          templateUrl: 'templates/sell-createListing.html',
+          controller: 'SellCreateListingCtrl'
         }
       }
     })
-
+      .state('tab.sellTagItem', {
+        url: '/sellCamera/sellCreateListing/sellTagItem',
+        views: {
+          'sell-tagItem': {
+            templateUrl: 'templates/sell-tagItem.html',
+            controller: 'SellTagItemCtrl'
+          }
+        }
+      })
   .state('tab.transactions', {
     url: '/transactions',
     views: {
-      'tab-transactions': {
-        templateUrl: 'templates/tab-transactions.html',
+      'transactions': {
+        templateUrl: 'templates/transactions.html',
         controller: 'TransactionsCtrl'
       }
     }
-  });
-
+  })
+    .state('tab.buyOffers', {
+      url: '/transactions/buyOffers',
+      views: {
+        'buy-offers': {
+          templateUrl: 'templates/buy-offers.html',
+          controller: 'BuyOfferCtrl'
+        }
+      }
+    })
+      .state('tab.transcationChat', {
+        url: '/transactions/buyOffers/:transactionChatId',
+        views: {
+          'buy-transactionChat': {
+            templateUrl: 'templates/buy-transactionChat.html',
+            controller: 'BuyTransactionChatCtrl'
+          }
+        }
+      })
+    .state('tab.sellListings', {
+      url: '/transactions/sellListings',
+      views: {
+        'sell-listings': {
+          templateUrl: 'templates/sell-listings.html',
+          controller: 'SellListingsCtrl'
+        }
+      }
+    })
+      .state('tab.sellListingItems', {
+        url: '/transactions/sellListingItems',
+        views: {
+          'sell-listingItems': {
+            templateUrl: 'templates/sell-listingItems.html',
+            controller: 'SellListingItemsCtrl'
+          }
+        }
+      })
+        .state('tab.sellItemOffers', {
+          url: '/transactions/sellItemOffers',
+          views: {
+            'sell-itemOffers': {
+              templateUrl: 'templates/sell-itemOffers.html',
+              controller: 'SellItemOffersCtrl'
+            }
+          }
+        })
   .state('tab.profile', {
     url: '/profile',
     views: {
-      'tab-profile': {
-        templateUrl: 'templates/tab-profile.html',
+      'profile': {
+        templateUrl: 'templates/profile.html',
         controller: 'ProfileCtrl'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/buySearch');
+  $urlRouterProvider.otherwise('/tab/login');
 
 });
