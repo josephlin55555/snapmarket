@@ -1,20 +1,19 @@
 angular.module('starter.controllers', [])
+.controller('LoginCtrl', function($scope) {})
 
-.controller('DashCtrl', function($scope) {})
+.controller('BuySearchCtrl', function($scope) {})
+.controller('BuyItemDetailCtrl', function($scope) {})
+.controller('BuyItemOfferCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
-})
+.controller('SellCameraCtrl', function($scope) {})
+.controller('SellCreateListingCtrl', function($scope) {})
+.controller('SellTagItemCtrl', function($scope) {})
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+.controller('TransactionCtrl', function($scope) {})
+.controller('BuyOfferCtrl', function($scope) {})
+.controller('BuyTransactionChatCtrl', function($scope) {})
+.controller('SellListingsCtrl', function($scope) {})
+.controller('SellListingItemsCtrl', function($scope) {})
+.controller('SellItemOffersCtrl', function($scope) {})
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+.controller('ProfileCtrl', function($scope) {});
