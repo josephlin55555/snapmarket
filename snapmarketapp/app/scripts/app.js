@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
     .state('tab.buyItemDetail', {
-      url: '/buySearch/itemId',
+      url: '/buySearch/:itemId',
       views: {
         'buy-ItemDetail': {
           templateUrl: 'templates/buy-itemDetail.html',
