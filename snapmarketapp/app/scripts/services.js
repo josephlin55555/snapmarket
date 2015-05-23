@@ -1,1 +1,1 @@
-angular.module('starter.services', ['buy.services', 'sell.services', 'tranaction.services', 'profile.services']);
+angular.module('starter.services', ['buy.services', 'sell.services', 'transaction.services', 'profile.services']);

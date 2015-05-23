@@ -100,17 +100,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           }
         }
       })
-  .state('tab.transactions', {
-    url: '/transactions',
+  .state('tab.transaction', {
+    url: '/transaction',
     views: {
-      'transactions': {
-        templateUrl: 'templates/transactions.html',
-        controller: 'TransactionsCtrl'
+      'transaction': {
+        templateUrl: 'templates/transaction.html',
+        controller: 'TransactionCtrl'
       }
     }
   })
     .state('tab.buyOffers', {
-      url: '/transactions/buyOffers',
+      url: '/transaction/buyOffers',
       views: {
         'buy-offers': {
           templateUrl: 'templates/buy-offers.html',
@@ -119,7 +119,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
       .state('tab.transcationChat', {
-        url: '/transactions/buyOffers/:transactionChatId',
+        url: '/transaction/buyOffers/:transactionChatId',
         views: {
           'buy-transactionChat': {
             templateUrl: 'templates/buy-transactionChat.html',
@@ -128,7 +128,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       })
     .state('tab.sellListings', {
-      url: '/transactions/sellListings',
+      url: '/transaction/sellListings',
       views: {
         'sell-listings': {
           templateUrl: 'templates/sell-listings.html',
@@ -137,7 +137,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
       .state('tab.sellListingItems', {
-        url: '/transactions/sellListingItems',
+        url: '/transaction/sellListingItems',
         views: {
           'sell-listingItems': {
             templateUrl: 'templates/sell-listingItems.html',
@@ -146,7 +146,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       })
         .state('tab.sellItemOffers', {
-          url: '/transactions/sellItemOffers',
+          url: '/transaction/sellItemOffers',
           views: {
             'sell-itemOffers': {
               templateUrl: 'templates/sell-itemOffers.html',
