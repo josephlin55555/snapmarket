@@ -1,7 +1,14 @@
 <ion-view view-title="Profile">
   <ion-content>
     <ion-list>
-        This is a simple profile.
+
+    <button class="button button-positive" ng-click="logout()">Logout
+    </button>
+
+    <ion-toggle  ng-model="settings.enableFriends">
+        Enable Friends
+    </ion-toggle>
+    
     </ion-list>
   </ion-content>
 </ion-view>
