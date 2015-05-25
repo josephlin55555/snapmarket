@@ -40,7 +40,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('tab.login', {
     url: '/login',
     views: {
-      'login': {
+      'profile': {
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
       }
@@ -49,7 +49,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('tab.buySearch', {
     url: '/buySearch',
     views: {
-      'buy-search': {
+      'buy': {
         templateUrl: 'templates/buy-search.html',
         controller: 'BuySearchCtrl'
       }
@@ -58,7 +58,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab.buyItemDetail', {
       url: '/buySearch/:itemId',
       views: {
-        'buy-ItemDetail': {
+        'buy': {
           templateUrl: 'templates/buy-itemDetail.html',
           controller: 'BuyItemDetailCtrl'
         }
@@ -67,7 +67,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       .state('tab.buyItemOffer', {
         url: '/buySearch/:itemId/offer',
         views: {
-          'buy-ItemOffer': {
+          'buy': {
             templateUrl: 'templates/buy-itemOffer.html',
             controller: 'BuyItemOfferCtrl'
           }
@@ -76,7 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('tab.sellCamera', {
     url: '/sellCamera',
     views: {
-      'sell-camera': {
+      'sell': {
         templateUrl: 'templates/sell-camera.html',
         controller: 'SellCameraCtrl'
       }
@@ -85,7 +85,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab.sellCreateListing', {
       url: '/sellCamera/sellCreateListing',
       views: {
-        'sell-createListing': {
+        'sell': {
           templateUrl: 'templates/sell-createListing.html',
           controller: 'SellCreateListingCtrl'
         }
@@ -94,7 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       .state('tab.sellTagItem', {
         url: '/sellCamera/sellCreateListing/sellTagItem',
         views: {
-          'sell-tagItem': {
+          'sell': {
             templateUrl: 'templates/sell-tagItem.html',
             controller: 'SellTagItemCtrl'
           }
@@ -112,7 +112,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab.buyOffers', {
       url: '/transaction/buyOffers',
       views: {
-        'buy-offers': {
+        'transcation': {
           templateUrl: 'templates/buy-offers.html',
           controller: 'BuyOfferCtrl'
         }
@@ -121,7 +121,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       .state('tab.transcationChat', {
         url: '/transaction/buyOffers/:transactionChatId',
         views: {
-          'buy-transactionChat': {
+          'transaction': {
             templateUrl: 'templates/buy-transactionChat.html',
             controller: 'BuyTransactionChatCtrl'
           }
@@ -130,7 +130,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab.sellListings', {
       url: '/transaction/sellListings',
       views: {
-        'sell-listings': {
+        'transaction': {
           templateUrl: 'templates/sell-listings.html',
           controller: 'SellListingsCtrl'
         }
@@ -139,7 +139,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       .state('tab.sellListingItems', {
         url: '/transaction/sellListingItems',
         views: {
-          'sell-listingItems': {
+          'transaction': {
             templateUrl: 'templates/sell-listingItems.html',
             controller: 'SellListingItemsCtrl'
           }
@@ -148,7 +148,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         .state('tab.sellItemOffers', {
           url: '/transaction/sellItemOffers',
           views: {
-            'sell-itemOffers': {
+            'transaction': {
               templateUrl: 'templates/sell-itemOffers.html',
               controller: 'SellItemOffersCtrl'
             }
