@@ -112,7 +112,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab.buyOffers', {
       url: '/transaction/buyOffers',
       views: {
-        'transcation': {
+        'transaction': {
           templateUrl: 'templates/buy-offers.html',
           controller: 'BuyOfferCtrl'
         }
