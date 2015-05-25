@@ -8,7 +8,9 @@
   <ion-content class="padding">
     <img ng-src="{{chat.face}}" style="width: 64px; height: 64px">
     <p>
-      {{chat.lastText}}
+        <button ng-click="getPhoto()" class="button button-block button-primary">Photo</button>
+        <button ng-click="dummyFunc()" class="button button-block button-primary">Is It Injected?</button>
+      This is the camera
     </p>
   </ion-content>
 </ion-view>
