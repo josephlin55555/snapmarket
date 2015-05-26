@@ -1,7 +1,7 @@
 /* 
   Sets size of profile picture and changes the shape to a circle
 */
-.image {
+.imageAvatar {
   border-radius: 50%;
   width: 140px;
   height: 140px;
