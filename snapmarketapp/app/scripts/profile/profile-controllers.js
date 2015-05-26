@@ -15,7 +15,6 @@ angular.module('profile.controllers', ['firebase'])
 
         //waits until user has been fully loaded, then add user into firebase database
         users.$loaded().then(function() {
-          console.log("users", users);
 
           //create an object for a user
           users[authData.uid] = {
@@ -43,6 +42,11 @@ angular.module('profile.controllers', ['firebase'])
     $state.go('tab.login');
   }
 
+  var currentUser = ref.getAuth();
+  $scope.profileDisplayName = currentUser.facebook.displayName;
+  $scope.profileEmail = currentUser.facebook.email;
+  $scope.profileImage = currentUser.facebook.cachedUserProfile.picture.data.url;
+
   $scope.logout = function() {
     //ends current user session
     ref.unauth(); 
@@ -50,6 +54,9 @@ angular.module('profile.controllers', ['firebase'])
     //moves to login page
     $state.go('tab.login'); 
   };
+
+
+
 
 
 });
