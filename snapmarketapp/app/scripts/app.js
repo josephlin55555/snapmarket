@@ -91,7 +91,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
         'sell': {
           templateUrl: 'templates/sell-createListing.html',
-          controller: 'SellCreateListingCtrl'
+          controller: 'SellCreateListingCtrl',
         }
       }
     })
