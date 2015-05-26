@@ -1,7 +1,8 @@
 angular.module('profile.controllers', ['firebase'])
-.controller('LoginCtrl', function($scope, $state) {
+.controller('LoginCtrl', function($scope, $state, $firebaseObject) {
 
   var ref = new Firebase("https://snapmarket.firebaseio.com");
+  var users = $firebaseObject(ref.child("users"));
 
   $scope.auth = function() {
 
@@ -11,6 +12,22 @@ angular.module('profile.controllers', ['firebase'])
         console.log("Login Failed!", error);
       } else {
         console.log("Authenticated successfully with payload:", authData);
+
+        //waits until user has been fully loaded, then add user into firebase database
+        users.$loaded().then(function() {
+          console.log("users", users);
+
+          //create an object for a user
+          users[authData.uid] = {
+            name: authData.facebook.displayName,
+            email: authData.facebook.email,
+            photo: authData.facebook.cachedUserProfile.picture.data.url,
+          };
+
+          // saves or updates user to database
+          users.$save();
+
+        });
         //redirect to profile page
         $state.go('tab.profile');
       } //asks user for permission to grab facebook email
