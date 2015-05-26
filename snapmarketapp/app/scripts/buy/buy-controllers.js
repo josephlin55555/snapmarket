@@ -1,13 +1,16 @@
 angular.module('buy.controllers', ['firebase'])
-.controller('BuySearchCtrl', function($rootScope, $scope, $firebaseObject) {
+.controller('BuySearchCtrl', function($scope, $firebaseObject) {
   
   // download the data into a local object
-  $rootScope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/"));
+  var ref = new Firebase("https://snapmarket.firebaseio.com/listings");
+  var listings = $firebaseObject(ref);
+  $scope.items = [];
 
   // once loaded, perform callback
-  $rootScope.db.$loaded()
+  listings.$loaded()
     .then(function() {
-      console.log('finished loading firebase:', $rootScope.db.users);
+      //generate all listings
+
     })
     .catch(function(err) {
       console.error(err);
