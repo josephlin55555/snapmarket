@@ -1,6 +1,6 @@
 angular.module('profile.controllers', ['firebase'])
-.controller('LoginCtrl', function($scope, $state, $firebaseObject) {
-
+.controller('LoginCtrl', function($scope, $state, $firebaseObject, $rootScope) {
+  
   var ref = new Firebase("https://snapmarket.firebaseio.com");
   var users = $firebaseObject(ref.child("users"));
 
@@ -17,13 +17,14 @@ angular.module('profile.controllers', ['firebase'])
         users.$loaded().then(function() {
 
           //create an object for a user
-          users[authData.uid] = {
+          $rootScope.profile = {
             name: authData.facebook.displayName,
             email: authData.facebook.email,
             photo: authData.facebook.cachedUserProfile.picture.data.url,
           };
 
           // saves or updates user to database
+          users[authData.uid] = $rootScope.profile;
           users.$save();
 
         });
@@ -33,7 +34,7 @@ angular.module('profile.controllers', ['firebase'])
     }, {scope: "email"});
   }
 })
-.controller('ProfileCtrl', function($scope, $state) {
+.controller('ProfileCtrl', function($scope, $state, $rootScope) {
 
   var ref = new Firebase("https://snapmarket.firebaseio.com");
 
@@ -41,12 +42,6 @@ angular.module('profile.controllers', ['firebase'])
   if(!ref.getAuth()) {
     $state.go('tab.login');
   }
-
-  //sets profile name, image, and email to the current user
-  var currentUser = ref.getAuth();
-  $scope.profileDisplayName = currentUser.facebook.displayName;
-  $scope.profileEmail = currentUser.facebook.email;
-  $scope.profileImage = currentUser.facebook.cachedUserProfile.picture.data.url;
 
   $scope.logout = function() {
     //ends current user session
