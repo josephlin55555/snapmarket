@@ -42,6 +42,7 @@ angular.module('profile.controllers', ['firebase'])
     $state.go('tab.login');
   }
 
+  //sets profile name, image, and email to the current user
   var currentUser = ref.getAuth();
   $scope.profileDisplayName = currentUser.facebook.displayName;
   $scope.profileEmail = currentUser.facebook.email;
@@ -54,9 +55,5 @@ angular.module('profile.controllers', ['firebase'])
     //moves to login page
     $state.go('tab.login'); 
   };
-
-
-
-
 
 });
