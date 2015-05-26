@@ -6,3 +6,21 @@
   width: 140px;
   height: 140px;
 }
+
+.logoutButton {
+  border: 0;
+}
+
+.profileImage {
+  border: 0;
+}
+
+.profileName {
+  font-size: 30px;
+  border: 0;
+}
+
+.profileEmail {
+  font-size: 20px;
+  border: 0;
+}
