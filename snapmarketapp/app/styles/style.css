@@ -1,5 +1,6 @@
-/* Empty. Add your own CSS if you like */
-
+/* 
+  Sets size of profile picture and changes the shape to a circle
+*/
 .image {
   border-radius: 50%;
   width: 140px;
