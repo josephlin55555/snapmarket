@@ -1,1 +1,26 @@
-/* Empty. Add your own CSS if you like */
+/* 
+  Sets size of profile picture and changes the shape to a circle
+*/
+.imageAvatar {
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+}
+
+.logoutButton {
+  border: 0;
+}
+
+.profileImage {
+  border: 0;
+}
+
+.profileName {
+  font-size: 30px;
+  border: 0;
+}
+
+.profileEmail {
+  font-size: 20px;
+  border: 0;
+}
