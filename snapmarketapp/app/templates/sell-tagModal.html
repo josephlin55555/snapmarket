@@ -1,0 +1,27 @@
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Tag Item</h1>
+      <button class="button right" ng-click = "closeModal(false)">
+        <i class="icon ion-close"></i>
+      </button>
+    </ion-header-bar>
+    <label class="item item-input">
+  <span class="input-label">Describe Item</span>
+  <input type="text">
+</label>
+    <ion-content>
+      <form action="">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">Description</span>
+            <input type="text" placeholder="{{newTag.text}}" ng-model="newTag.text">
+          </label>
+         <label class="item item-input">
+           <span class="input-label">Price</span>
+           <input type="number" placeholder = "{{newTag.price}}" ng-model="newTag.price">
+         </label>
+        </div>
+        <button type="submit" class="button button-block button-balanced" ng-click = "closeModal(true)">Tag</button>
+      </form>
+    </ion-content>
+  </ion-modal-view>
