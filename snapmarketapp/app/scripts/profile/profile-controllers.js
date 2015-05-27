@@ -21,6 +21,7 @@ angular.module('profile.controllers', ['firebase'])
             name: authData.facebook.displayName,
             email: authData.facebook.email,
             photo: authData.facebook.cachedUserProfile.picture.data.url,
+            uid : authData.uid
           };
 
           // saves or updates user to database

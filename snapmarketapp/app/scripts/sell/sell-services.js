@@ -20,3 +20,8 @@ angular.module('sell.services', [])
     }
   }
 }]);
+
+// .factory('SaveListingFireBase' , function($firebaseObject , listing){
+//   return {};
+// });
+

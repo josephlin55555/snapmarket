@@ -26,7 +26,20 @@ angular.module('sell.controllers', [])
 
 })
 
-.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal ) {
+.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray  ) {
+
+  $scope.db = $firebaseArray(new Firebase("https://snapmarket.firebaseio.com/listings2"));
+
+  $scope.db.$loaded()
+  .then(function() {
+    console.log('finished loading firebase:', $scope.db);
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
+
+
+
   $scope.lastPhoto = $rootScope.lastPhoto;
 
   //this is the newItem for the modal to use. It is set to the tap.
@@ -84,6 +97,7 @@ angular.module('sell.controllers', [])
 
 
   $scope.addItem = function(){
+    console.log($rootScope.profile);
     var tagTouchRadius = 100;
     var tap = getTap(event);
     var existing = false;
@@ -98,6 +112,21 @@ angular.module('sell.controllers', [])
       $scope.newItem=tap;
     }
     $scope.openModal();
+  };
+
+  $scope.submitListing = function(){
+    var listing = {
+      user : $rootScope.profile.uid || 'Test User',
+      title : 'Test Listing ' + new Date().toString(),
+      img : $scope.lastPhoto || null,
+      items : $scope.items,
+      allTags : ''
+    }
+    if($scope.items.length>0){
+      $scope.modal.remove();
+      $scope.db.$add(listing).then(console.log('SUBMIT LISTING'));
+      $state.go('tab.transaction');
+    }
   };
 })
 
