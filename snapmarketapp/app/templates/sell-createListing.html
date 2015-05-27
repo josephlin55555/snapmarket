@@ -9,7 +9,7 @@
   <ion-content class="padding" on-tap = "addTag()">
     <img ng-src="{{lastPhoto}}" style="max-width: 100%">
     <div ng-repeat="tag in tags">
-      <i class="icon ion-social-usd" ng-style="position(tag)"{{tag}}></i>
+      <i class="icon ion-social-usd" ng-style="position(tag)"{{tag}}> {{tag.price}}</i>
     </div>
   </ion-content>
 </ion-view>
