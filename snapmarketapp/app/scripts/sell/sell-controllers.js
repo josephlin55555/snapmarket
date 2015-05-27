@@ -1,39 +1,41 @@
 angular.module('sell.controllers', [])
+//controller for default state when clicking on sell tab
 .controller('SellCameraCtrl', function($rootScope, $scope , $state, Camera) {
 
   $scope.getPhoto = function() {
-    console.log('running on init')
-    Camera.getPicture().then(function(imageURI) {
-      $rootScope.lastPhoto=imageURI;
+    console.log('running on init',Camera.cameraExists());
+    //for development if the camera does not exists redirect to a static image
+    if(!Camera.cameraExists()){
+      $rootScope.lastPhoto='../img/IMG_1379.JPG';
       $state.go('tab.sellCreateListing');
-    }, function(err) {
-      console.err(err);
-    }, {
-      quality: 100,
-      sourceType : 1,
-      targetWidth: 750,
-      targetHeight: 1334,
-      saveToPhotoAlbum: true
-    });
+    } else{
+      Camera.getPicture().then(function(imageURI) {
+        $rootScope.lastPhoto=imageURI;
+        $state.go('tab.sellCreateListing');
+      }, function(err) {
+        console.err(err);
+      }, {
+        quality: 100,
+        sourceType : 1,
+        targetWidth: 750,
+        targetHeight: 1334,
+        saveToPhotoAlbum: true
+      });
+    }
   };
 
-  /* Currently the photo functionality only works if you use ionic review on you iPhone. Uncomment this code and comment out above to
-  test in emulator or on browser */
-
-  // $scope.getPhoto = function() {
-  //   console.log('running on init');
-  //   $rootScope.lastPhoto = '../img/IMG_1379.JPG';
-  //     console.log("Last Photo",$rootScope.lastPhoto);
-
-  //     console.log($rootScope.lastPhoto);
-  //   $state.go('tab.sellCreateListing');
-  // };
-
-
 })
+
 .controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal ) {
-  var r = 30;
-  $scope.newTag = {};
+  $scope.lastPhoto = $rootScope.lastPhoto;
+
+  //this is the newItem for the modal to use. It is set to the tap.
+
+  $scope.newItem = {};
+
+  //array of tagged items will be synced with DB on submit
+
+  $scope.items=[];
 
   $ionicModal.fromTemplateUrl('templates/sell-tagModal.html', {
     scope: $scope,
@@ -47,8 +49,9 @@ angular.module('sell.controllers', [])
   };
   
   $scope.closeModal = function(save) {
+    //this is triggered by clicking the x
     if(!save){
-      $scope.newTag = {};
+      $scope.newItem = {};
     } 
     $scope.modal.hide();
   };
@@ -56,13 +59,11 @@ angular.module('sell.controllers', [])
   $scope.$on('modal.hidden', function() {
     //the new tag is empty because modal was exited
     //else
-    if(Object.keys($scope.newTag).length > 0){
-      $scope.tags.push($scope.newTag);
-      $scope.newTag={};
+    if($scope.newItem.price && $scope.newItem.text){
+      $scope.items.push($scope.newItem);
+      $scope.newItem={};
     }
-    console.log($scope.tags);
   });
-
 
 
   var headerBarOffset = 44;
@@ -81,22 +82,23 @@ angular.module('sell.controllers', [])
             top: tap.y+'px'};
   };
 
-  $scope.tags=[];
 
-  $scope.addTag = function(){
+  $scope.addItem = function(){
+    var tagTouchRadius = 100;
     var tap = getTap(event);
     var existing = false;
-    for(var i = 0; i < $scope.tags.length; i++){
-      if(Math.sqrt( (tap.x-$scope.tags[i].x)*(tap.x-$scope.tags[i].x) + (tap.y-$scope.tags[i].y)*(tap.y-$scope.tags[i].y)) <= r){
-        $scope.newTag = $scope.tags.splice(i,1)[0];
+    for(var i = 0; i < $scope.items.length; i++){
+      if(Math.sqrt( (tap.x-$scope.items[i].x)*(tap.x-$scope.items[i].x) + (tap.y-$scope.items[i].y)*(tap.y-$scope.items[i].y)) <= tagTouchRadius){
+        $scope.newItem = $scope.items.splice(i,1)[0];
         existing=true;
-        console.log('ALL TAGS',$scope.tags,'EXISTING TAG',$scope.newTag);
+        console.log('ALL items',$scope.items,'EXISTING TAG',$scope.newItem);
       }
     }
     if(!existing){
-      $scope.newTag=tap;
+      $scope.newItem=tap;
     }
     $scope.openModal();
   };
 })
+
 .controller('SellTagItemCtrl', function($scope) {})
