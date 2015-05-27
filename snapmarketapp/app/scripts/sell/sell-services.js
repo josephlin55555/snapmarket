@@ -15,8 +15,8 @@ angular.module('sell.services', [])
 
       return q.promise;
     },
-    dummyFunc: function(){
-      console.log("It's injected");
+    cameraExists: function(){
+      return navigator.camera !== undefined;
     }
   }
 }]);
