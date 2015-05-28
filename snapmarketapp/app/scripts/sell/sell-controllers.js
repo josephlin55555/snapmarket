@@ -1,13 +1,19 @@
 angular.module('sell.controllers', [])
 //controller for default state when clicking on sell tab
-.controller('SellCameraCtrl', function($rootScope, $scope , $state, Camera) {
+.controller('SellCameraCtrl', function($rootScope, $scope , $state, Camera , $firebaseObject) {
+
+
 
   $scope.getPhoto = function() {
     console.log('running on init',Camera.cameraExists());
     //for development if the camera does not exists redirect to a static image
     if(!Camera.cameraExists()){
-      $rootScope.lastPhoto='../img/IMG_1379.JPG';
-      $state.go('tab.sellCreateListing');
+      $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings/1112223334"))
+      $scope.db.$loaded().then(
+        function(data){
+          $rootScope.lastPhoto=data.img;
+          $state.go('tab.sellCreateListing');
+        });
     } else{
       Camera.getPicture().then(function(imageURI) {
         $rootScope.lastPhoto=imageURI;
@@ -26,7 +32,9 @@ angular.module('sell.controllers', [])
 
 })
 
-.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray  ) {
+
+
+.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover  ) {
 
   $scope.db = $firebaseArray(new Firebase("https://snapmarket.firebaseio.com/listings2"));
 
@@ -38,8 +46,7 @@ angular.module('sell.controllers', [])
     console.error(err);
   });
 
-
-
+  $scope.title = 'Tag Your Things';
   $scope.lastPhoto = $rootScope.lastPhoto;
 
   //this is the newItem for the modal to use. It is set to the tap.
@@ -114,20 +121,46 @@ angular.module('sell.controllers', [])
     $scope.openModal();
   };
 
+  var allTags = function(){
+    var result = '';
+    for(var i = 0; i < $scope.items.length; i++){
+      result+=' '+$scope.items[i].text;
+    }
+    return result;
+  }
+
   $scope.submitListing = function(){
     var listing = {
       user : $rootScope.profile.uid || 'Test User',
-      title : 'Test Listing ' + new Date().toString(),
+      title : $scope.title,
       img : $scope.lastPhoto || null,
       items : $scope.items,
-      allTags : ''
+      allTags : allTags()
     }
+    console.log('ALL TAGS',allTags());
     if($scope.items.length>0){
       $scope.modal.remove();
       $scope.db.$add(listing).then(console.log('SUBMIT LISTING'));
-      $state.go('tab.transaction');
+      $state.go('tab.sellListings');
     }
   };
+
+
+  $ionicPopover.fromTemplateUrl('my-popover.html', {
+    scope: $scope
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
+
+
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+  };
+
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+  };
+
 })
 
 .controller('SellTagItemCtrl', function($scope) {})
