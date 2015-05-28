@@ -1,29 +1,34 @@
 angular.module('buy.controllers', ['firebase'])
-.controller('BuySearchCtrl', function($scope, $firebaseObject) {
+.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray) {
   
+  // provides a scope variable so the add button can access input value on search bar
   $scope.searchVal = '';
 
-  // download the data into a local object
-  var ref = new Firebase("https://snapmarket.firebaseio.com/listings");
-  var listings = $firebaseObject(ref);
-  $scope.listings = [];
+  // alternative array type for firebase listings
+    //TODO: convert to Ref
+  var ref = new Firebase("https://snapmarket.firebaseio.com/listings2");
+  $scope.listings = $firebaseArray(ref);
   $scope.results = [];
 
-  // once listings have been loaded, place each listing into an array called $scope.listings
-    //TODO: convert firebase listing object into array instead
-  listings.$loaded()
-    .then(function(){
-      angular.forEach(listings, function(value){
-        if( !angular.isFunction(value)){
-          $scope.listings.push(value);
-        }
-      });
-    })
-    .catch(function(err) {
-      console.error(err);
-  });
+  // filter listings/results to display
+  var filterListings = function(array, tag){
+    var res = [];
+    for(var i = 0; i < array.length; i++){
+      var listing = array[i];
+      if(tag === undefined || listing.allTags.indexOf(tag) > -1){
+        res.push(array[i]);
+      }
+    }
+    return res;
+  }
 
-  // download tags into a local object
+  // copy over full listings to the results array for display
+  $scope.listings.$loaded()
+    .then(function(){
+      $scope.results = filterListings($scope.listings)
+    });
+
+  // download tags into a local object for search
   var tags = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/tags"));
   $scope.tags = [];
   $scope.tagResults = [];
@@ -55,11 +60,16 @@ angular.module('buy.controllers', ['firebase'])
   };
 
   $scope.tagCloud = [];
+
   //create a function to add a tag to tag cloud
   $scope.addTag = function(string){
     if(string && $scope.tagCloud.indexOf(string) < 0){
       $scope.tagCloud.push(string);
     }
+
+    //filter scope.results
+    $scope.results = filterListings($scope.results, string);
+    console.log($scope.results);
   }
 
   //remove tag from tag cloud when we press 'x' on tag
@@ -68,7 +78,16 @@ angular.module('buy.controllers', ['firebase'])
     if(string && index > -1){
       $scope.tagCloud.splice(index, 1);
     }
+
+    //recompute scope.results
+    $scope.results = filterListings($scope.listings)
+    for(var i = 0; i < $scope.tagCloud.length; i++){
+      var tag = $scope.tagCloud[i];
+      $scope.results = filterListings($scope.results, tag);
+    }
+    console.log($scope.results);
   }
+
 
 })
 .directive('ionSearch', function() {
@@ -85,7 +104,6 @@ angular.module('buy.controllers', ['firebase'])
       attrs.minLength = attrs.minLength || 0;
       scope.placeholder = attrs.placeholder || '';
       scope.search = {value: ''};
-      console.log(scope);
       if (attrs.class){
         element.addClass(attrs.class);
       }
