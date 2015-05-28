@@ -4,18 +4,31 @@
     <div class="bar bar-header bar-positive item-input-inset">
       <ion-search class="search-wrapper-light" placeholder="Search" min-length="0" model="results" source="showResults(str)">
       </ion-search>
-      <button class="button button-clear">
-        Clear
+      <button class="button button-clear" ng-click="addTag(searchVal)">
+        Add
       </button>
     </div>
-
+    
+    
     <ion-list>
+      <ion-item class="tagCloud">
+        <button class="button button-small button-stable" ng-repeat="hashtag in tagCloud" ng-click="removeTag(hashtag)">
+        {{hashtag}}
+        </button>
+      </ion-item>
+
+      <ion-item collection-repeat="tag in tagResults" class="item" ng-click="addTag(tag[0])">
+        {{tag[0]}} : {{tag[1]}} listings
+      </ion-item>
+    </ion-list>
+
+<!--     <ion-list>
       <ion-item collection-repeat="result in results" class="item">
         {{result.title}}
         <p>
         <img class="listing" src="{{result.img}}">
       </ion-item>
-    </ion-list>
+    </ion-list> -->
 
   </ion-content>
 </ion-view>
