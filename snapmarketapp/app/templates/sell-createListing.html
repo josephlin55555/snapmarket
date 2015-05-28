@@ -5,12 +5,16 @@
   The Friends service returns an array of friend data
 -->
 <ion-view view-title="Tag Your Things">
-
   <ion-content class="padding" on-tap = "addItem()">
     <img ng-src="{{lastPhoto}}" style="max-width: 100%">
     <!-- <p>The image item{{lastPhoto}}</p> -->
+    <p>The db {{db}}</p>
+
     <div ng-repeat="item in items">
       <i class="icon ion-social-usd" ng-style="position(item)"{{item}}> {{item.price}}</i>
     </div>
+  <button class="button right" ng-click = "submitListing()">
+    <i class="icon ion-arrow-right-a"></i>
+  </button>
   </ion-content>
 </ion-view>
