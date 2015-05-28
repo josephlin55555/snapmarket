@@ -130,8 +130,8 @@ angular.module('sell.controllers', [])
   }
 
   var getUserForTesting = function(){
-    if($rootScope.user){
-      return $rootScope.user.uid;
+    if($rootScope.profile){
+      return $rootScope.profile.uid;
     }
     return 'Test User';
   };
