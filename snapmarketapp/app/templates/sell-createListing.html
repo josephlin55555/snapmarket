@@ -4,17 +4,35 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="Tag Your Things">
-  <ion-content class="padding" on-tap = "addItem()">
-    <img ng-src="{{lastPhoto}}" style="max-width: 100%">
+<ion-view view-title="{{title}}">
+    <ion-nav-buttons side="right">
+      <button class="button button-icon ion-edit" ng-click = "openPopover($event)"></button>
+      <button class="button button-icon ion-arrow-right-a" ng-click = "submitListing()"></button>
+    </ion-nav-buttons>
+  <ion-content class="padding">
+    <img src="{{lastPhoto}}" style="max-width: 100%" on-tap = "addItem()">
     <!-- <p>The image item{{lastPhoto}}</p> -->
-    <p>The db {{db}}</p>
+    <!-- <p>The db {{db}}</p> -->
 
     <div ng-repeat="item in items">
       <i class="icon ion-social-usd" ng-style="position(item)"{{item}}> {{item.price}}</i>
     </div>
-  <button class="button right" ng-click = "submitListing()">
-    <i class="icon ion-arrow-right-a"></i>
-  </button>
   </ion-content>
 </ion-view>
+
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-content> 
+    <form action="">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="{{popover.scope.$parent.title}}" ng-model="popover.scope.$parent.title">
+          </label>
+        </div>
+      </form>
+    </ion-content>
+
+  </ion-popover-view>
+</script>
+

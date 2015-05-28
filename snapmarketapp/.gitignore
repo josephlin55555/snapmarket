@@ -1,4 +1,5 @@
 node_modules
+ionic.project
 www
 .idea
 .temp
@@ -11,6 +12,5 @@ plugins
 *.swo
 *.log
 *.DS_Store
-ionic.project
 
 app/scripts/configuration.js
