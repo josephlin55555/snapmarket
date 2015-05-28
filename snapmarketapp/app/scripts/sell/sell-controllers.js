@@ -129,15 +129,22 @@ angular.module('sell.controllers', [])
     return result;
   }
 
+  var getUserForTesting = function(){
+    if($rootScope.user){
+      return $rootScope.user.uid;
+    }
+    return 'Test User';
+  };
+
   $scope.submitListing = function(){
+
     var listing = {
-      user : $rootScope.profile.uid || 'Test User',
+      user : getUserForTesting(),
       title : $scope.title,
       img : $scope.lastPhoto || null,
       items : $scope.items,
       allTags : allTags()
     }
-    console.log('ALL TAGS',allTags());
     if($scope.items.length>0){
       $scope.modal.remove();
       $scope.db.$add(listing).then(console.log('SUBMIT LISTING'));
