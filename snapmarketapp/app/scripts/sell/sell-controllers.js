@@ -57,6 +57,8 @@ angular.module('sell.controllers', [])
 
   $scope.items=[];
 
+  //modal for tagging
+
   $ionicModal.fromTemplateUrl('templates/sell-tagModal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -136,6 +138,8 @@ angular.module('sell.controllers', [])
     return 'Test User';
   };
 
+  //syncs listing with fb and redirect to sell listings tab
+
   $scope.submitListing = function(){
 
     var listing = {
@@ -152,7 +156,7 @@ angular.module('sell.controllers', [])
     }
   };
 
-
+  //popover for editing title 
   $ionicPopover.fromTemplateUrl('my-popover.html', {
     scope: $scope
   }).then(function(popover) {
