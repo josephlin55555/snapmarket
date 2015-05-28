@@ -1,20 +1,24 @@
-angular.module('transaction.controllers', ['firebase'])
+angular.module('transaction.controllers', [])
 .controller('TransactionCtrl', function($scope) {
 
-  // download the data into a local object
-  $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/"));
-
-  // once loaded, perform callback
-  $scope.db.$loaded()
-    .then(function() {
-      console.log('finished loading firebase:', $scope.db.users);
-    })
-    .catch(function(err) {
-      console.error(err);
-  });
+ 
 })
 .controller('BuyOfferCtrl', function($scope) {})
 .controller('BuyTransactionChatCtrl', function($scope) {})
-.controller('SellListingsCtrl', function($scope) {})
+
+.controller('SellListingsCtrl', function($scope, $state, Db) {
+  console.log(Db);
+//
+  $scope.sellView = function(){
+    $state.go('tab.sellListings');
+    console.log('hits');
+  }
+  $scope.buyView = function(){
+    $state.go('tab.buyOffers');
+    console.log('hits');
+  }
+
+})
+
 .controller('SellListingItemsCtrl', function($scope) {})
 .controller('SellItemOffersCtrl', function($scope) {})
