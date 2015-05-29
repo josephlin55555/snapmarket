@@ -27,9 +27,38 @@
 }
 
 ion-scroll[direction=y] {
-  height: 95vh;
+  height: 80vh;
 }
 
-.listingThumbnail {
-  width: 40vw;
+
+
+
+@media (max-width: 400px) {
+  .listingThumbnail {
+    width: 84vw;
+    height: 50vh;
+  }
 }
+
+@media (min-width: 400px) and (max-width: 800px) {
+  .listingThumbnail {
+    width: 38vw;
+  }
+  .item { 
+    width: 45vw;
+  }
+}
+
+@media (min-width: 800px) {
+  .listingThumbnail {
+    width: 28vw;
+  }
+}
+
+.cardTitle {
+  font-size: 1.5em;
+}
+
+
+
+
