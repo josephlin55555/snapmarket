@@ -3,22 +3,21 @@
   <ion-content>
 
     <div class="bar bar-header bar-positive item-input-inset">
-      <ion-search class="search-wrapper-light" placeholder="Search" min-length="0" model="tags" source="showResults(str)">
-      </ion-search>
-      <button class="button button-clear" ng-click="addTag(searchVal)">
+      <tag-search class="search-wrapper-light" placeholder="Search" min-length="0" model="tags" watch="true" enter-callback="filterOne">
+      </tag-search>
+      <button class="button button-clear" ng-click="addTag(search.value, filterOne)">
         Add
       </button>
     </div>
     
-    
     <ion-list>
       <ion-item class="tagCloud">
-        <button class="button button-small button-stable" ng-repeat="hashtag in tagCloud" ng-click="removeTag(hashtag)">
-        {{hashtag}}
+        <button class="button button-small button-stable" ng-repeat="tag in tagCloud" ng-click="removeTag(tag, filterAll)">
+        {{tag}}
         </button>
       </ion-item>
 
-      <ion-item collection-repeat="tag in tagResults" class="item" ng-click="addTag(tag[0])">
+      <ion-item collection-repeat="tag in tagResults" class="item" ng-click="addTag(tag[0], filterOne)">
         {{tag[0]}} : {{tag[1]}} listings
       </ion-item>
     </ion-list>
