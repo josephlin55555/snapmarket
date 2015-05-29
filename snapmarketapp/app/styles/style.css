@@ -26,13 +26,18 @@
   border: 0;
 }
 
+/*
+allows for scrolling capability; 
+80vh is required to allow for full view of listings
+*/
 ion-scroll[direction=y] {
   height: 80vh;
 }
 
-
-
-
+/*
+if screen width is less than or equal to 400 px, then
+make listings fill the entire page
+*/
 @media (max-width: 400px) {
   .listingThumbnail {
     width: 84vw;
@@ -40,15 +45,30 @@ ion-scroll[direction=y] {
   }
 }
 
-@media (min-width: 400px) and (max-width: 800px) {
+/*
+if screen width is between 401 and 799 px, then 
+change listings to fill 2 columns
+*/
+@media (min-width: 401px) and (max-width: 799px) {
   .listingThumbnail {
     width: 38vw;
   }
+  
   .item { 
     width: 45vw;
   }
+  /*
+  .item affects tagCloud, so tagCloud is respecified here
+  */
+  .tagCloud {
+    width: 100vw;
+  }
 }
 
+/*
+if screen width is 800 px or greater, then 
+change listings to fill 3 columns
+*/
 @media (min-width: 800px) {
   .listingThumbnail {
     width: 28vw;

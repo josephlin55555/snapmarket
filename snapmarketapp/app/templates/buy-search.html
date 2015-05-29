@@ -24,7 +24,8 @@
 
   <ion-scroll direction="y">
     <div masonry>
-      <div class="masonry-brick" ng-repeat="result in results">
+      <!-- give ability to click on card below -->
+      <div class="masonry-brick" ng-repeat="result in results" ng-click="selectCard(result)">
         <div class="card">
           <div class="item">
             <p><img class="listingThumbnail" ng-src="{{ result.img }}"></p>
@@ -36,19 +37,5 @@
       </div>
     </div>
   </ion-scroll> 
-<!--       <ion-item ng-repeat="result in results" class="listing">
-        <div id="container">
-          <div class="item">
-
-            {{result.title}}<p>
-            <img ng-src="{{result.img}}"/><p>
-            Seller: {{result.user}}<p>
-            Tags: {{result.allTags}}<p>
-
-          </div>
-        </div>
-      </ion-item> -->
-
-
   </ion-content>
 </ion-view>
