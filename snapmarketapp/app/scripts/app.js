@@ -110,6 +110,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'transaction': {
         templateUrl: 'templates/transaction.html',
         controller: 'TransactionCtrl'
+      },
+      'transaction@tab': {
+        templateUrl: 'templates/buy-offers.html',
+        controller: 'BuyOfferCtrl'
+      },  
+      'transaction@tab': {
+        templateUrl: 'templates/sell-listings.html',
+        controller: 'SellListingsCtrl'
       }
     }
   })
@@ -119,7 +127,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         'transaction@tab': {
           templateUrl: 'templates/buy-offers.html',
           controller: 'BuyOfferCtrl'
-        }
+        } 
       }
     })
      .state('tab.transaction.sellListings', {
