@@ -3,7 +3,7 @@
   <ion-content>
 
     <div class="bar bar-header bar-positive item-input-inset">
-      <tag-search class="search-wrapper-light" placeholder="Search" min-length="0" model="tags" watch="true">
+      <tag-search class="search-wrapper-light" placeholder="Search" min-length="0" model="tags" watch="true" enter-callback="filterOne">
       </tag-search>
       <button class="button button-clear" ng-click="addTag(search.value, filterOne)">
         Add
