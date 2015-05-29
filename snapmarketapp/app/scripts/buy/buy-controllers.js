@@ -1,8 +1,5 @@
 angular.module('buy.controllers', ['firebase'])
 .controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray) {
-  
-  // provides a scope variable so the add button can access input value on search bar
-  $scope.searchVal = '';
 
   // alternative array type for firebase listings
     //TODO: convert to Ref
