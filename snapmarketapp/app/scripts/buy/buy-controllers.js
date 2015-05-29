@@ -1,8 +1,5 @@
 angular.module('buy.controllers', ['firebase'])
-.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray) {
-  
-  // provides a scope variable so the add button can access input value on search bar
-  $scope.searchVal = '';
+.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state) {
 
   // alternative array type for firebase listings
     //TODO: convert to Ref
@@ -33,6 +30,11 @@ angular.module('buy.controllers', ['firebase'])
     $scope.results = filterListings($scope.results, tag);
   }
 
+  $scope.selectCard = function(card) {
+    //card argument is listing object
+    $state.go('tab.buyItemDetail');
+  };
+
     //recompute scope.results
   $scope.filterAll = function(tagRemoved, tagCloud){
     $scope.results = filterListings($scope.listings);
@@ -58,6 +60,7 @@ angular.module('buy.controllers', ['firebase'])
     .catch(function(err) {
       console.error(err);
   });
+
 })
 .controller('BuyItemDetailCtrl', function($scope) {})
 .controller('BuyItemOfferCtrl', function($scope) {})

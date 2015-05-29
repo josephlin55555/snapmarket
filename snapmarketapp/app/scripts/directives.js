@@ -1,4 +1,4 @@
-angular.module('starter.directives', [])
+angular.module('starter.directives', ['wu.masonry'])
 .directive('tagSearch', function() {
 
   return {

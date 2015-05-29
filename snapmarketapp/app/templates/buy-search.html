@@ -22,10 +22,20 @@
       </ion-item>
     </ion-list>
 
-      <ion-item ng-repeat="result in results" class="listing">
-        {{result.title}}<p>
-        {{result.allTags}}
-      </ion-item>
-  
+  <ion-scroll direction="y">
+    <div masonry>
+      <!-- give ability to click on card below -->
+      <div class="masonry-brick" ng-repeat="result in results" ng-click="selectCard(result)">
+        <div class="card">
+          <div class="item">
+            <p><img class="listingThumbnail" ng-src="{{ result.img }}"></p>
+            <h1 class="cardTitle">{{result.title}}</h1>
+            <p class="cardUser">Posted by {{result.user}}</p>
+            <p class="cardTag">Tags: {{result.allTags}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-scroll> 
   </ion-content>
 </ion-view>
