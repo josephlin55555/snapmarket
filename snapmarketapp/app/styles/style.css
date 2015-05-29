@@ -26,6 +26,10 @@
   border: 0;
 }
 
-ion-item {
-  text-align: center;
+ion-scroll[direction=y] {
+  height: 95vh;
+}
+
+.listingThumbnail {
+  width: 40vw;
 }

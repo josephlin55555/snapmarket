@@ -1,6 +1,6 @@
 
 <ion-view view-title="Search" hide-nav-bar="true">
-  <ion-content direction="xy" style="height:94vh">
+  <ion-content>
 
     <div class="bar bar-header bar-positive item-input-inset">
       <tag-search class="search-wrapper-light" placeholder="Search" min-length="0" model="tags" watch="true" enter-callback="filterOne">
@@ -22,8 +22,17 @@
       </ion-item>
     </ion-list>
 
-      <ion-item ng-repeat="result in results" class="listing">
-        <!-- <ion-item id="container"> -->
+  <ion-scroll direction="y">
+    <div masonry>
+      <div class="masonry-brick" ng-repeat="result in results">
+        {{result.title}}<p>
+        <img class="listingThumbnail" ng-src="{{ result.img }}"><p>
+        Seller: {{result.user}}<p>
+        Tags: {{result.allTags}}<p>
+      </div>
+    </div>
+  </ion-scroll> 
+<!--       <ion-item ng-repeat="result in results" class="listing">
         <div id="container">
           <div class="item">
 
@@ -34,8 +43,7 @@
 
           </div>
         </div>
-        <!-- </ion-item> -->
-      </ion-item>
+      </ion-item> -->
 
 
   </ion-content>
