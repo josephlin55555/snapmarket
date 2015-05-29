@@ -25,10 +25,14 @@
   <ion-scroll direction="y">
     <div masonry>
       <div class="masonry-brick" ng-repeat="result in results">
-        {{result.title}}<p>
-        <img class="listingThumbnail" ng-src="{{ result.img }}"><p>
-        Seller: {{result.user}}<p>
-        Tags: {{result.allTags}}<p>
+        <div class="card">
+          <div class="item">
+            <p><img class="listingThumbnail" ng-src="{{ result.img }}"></p>
+            <h1 class="cardTitle">{{result.title}}</h1>
+            <p class="cardUser">Posted by {{result.user}}</p>
+            <p class="cardTag">Tags: {{result.allTags}}</p>
+          </div>
+        </div>
       </div>
     </div>
   </ion-scroll> 
