@@ -116,7 +116,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     .state('tab.transaction.buyOffers', {
       url: '/buyOffers',
       views: {
-        'transaction-tab': {
+        'transaction@tab': {
           templateUrl: 'templates/buy-offers.html',
           controller: 'BuyOfferCtrl'
         }
@@ -125,7 +125,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
      .state('tab.transaction.sellListings', {
       url: '/sellListings',
       views: {
-        'transaction-tab': {
+        'transaction@tab': {
           templateUrl: 'templates/sell-listings.html',
           controller: 'SellListingsCtrl'
         }
