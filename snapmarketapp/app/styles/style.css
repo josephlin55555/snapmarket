@@ -57,6 +57,7 @@ change listings to fill 2 columns
   .item { 
     width: 45vw;
   }
+
   /*
   .item affects tagCloud, so tagCloud is respecified here
   */
@@ -73,6 +74,14 @@ change listings to fill 3 columns
   .listingThumbnail {
     width: 28vw;
   }
+}
+
+/*
+after clicking on a card, .listingThumbnailDetail 
+is loaded
+*/
+.listingThumbnailDetail {
+  width: 100vw;
 }
 
 .cardTitle {
