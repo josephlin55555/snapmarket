@@ -1,26 +1,12 @@
-
 <ion-view hide-nav-bar="true">
   <ion-content>
       <div class="button-bar">
-          <button class="button ion-bag button-positive transaction" 
-          ui-sref="tab.transaction.buyOffers">&nbsp Buy</button>   
-          <button class="button ion-cash button-positive transaction" 
-          ui-sref="tab.transaction.sellListings">&nbsp Sell</button>
+          <button class="button ion-bag button-positive" 
+          ui-sref="tab.transaction.buyOffers" ui-sref-active="active">&nbsp Buy</button>   
+          <button class="button ion-cash button-positive" 
+          ui-sref="tab.transaction.sellListings" ui-sref-active="active">&nbsp Sell</button>
       </div>
 
     <div ui-view name='offers'></div>
   </ion-content>">
 </ion-view>
-<!-- 
-<ion view> 
-<div class="bar bar-header">
-  <a class="button button-icon icon ion-navicon"></a>
-  <a class="h1 title">Header Buttons</a>
-</div>
-</ion>
-
-<div class="button-bar">
-  <a class="button">First</a>
-  <a class="button">Second</a>
-  <a class="button">Third</a>
-</div> -->
