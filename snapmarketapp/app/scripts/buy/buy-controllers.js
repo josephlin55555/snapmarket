@@ -1,5 +1,5 @@
 angular.module('buy.controllers', ['firebase'])
-.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state) {
+.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope) {
 
   // alternative array type for firebase listings
     //TODO: convert to Ref
@@ -32,6 +32,7 @@ angular.module('buy.controllers', ['firebase'])
 
   $scope.selectCard = function(card) {
     //card argument is listing object
+    $rootScope.currentListing = card;
     $state.go('tab.buyItemDetail');
   };
 
@@ -62,5 +63,14 @@ angular.module('buy.controllers', ['firebase'])
   });
 
 })
-.controller('BuyItemDetailCtrl', function($scope) {})
+.controller('BuyItemDetailCtrl', function($scope, $rootScope, $state) {
+  if($rootScope.currentListing === undefined) {
+    $state.go('tab.buySearch');
+  }
+})
 .controller('BuyItemOfferCtrl', function($scope) {})
+
+
+
+
+
