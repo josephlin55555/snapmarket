@@ -89,10 +89,10 @@ is loaded
 }
 
 /*This affects the styling for the Transaction tab header*/
-button {
+.transactionButton {
   width: 100%;
-  
 }
+
 .transaction {
   padding: 0px;
 
