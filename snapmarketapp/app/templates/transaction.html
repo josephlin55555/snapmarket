@@ -1,15 +1,26 @@
- 
-<!-- 
- <ion-nav-view>
+
+<ion-view hide-nav-bar="true">
   <ion-content>
-    <button>HELLO</button>
-    </ion-content>
-    </ion-nav-view>  -->
-    <ion-nav-bar>
-        <ion-nav-buttons side='left'>
-            <button class="button" ui-sref="tab.transaction.buyOffers">Buy</button>
-        </ion-nav-buttons>
-        <ion-nav-buttons side='right'>    
-            <button class="button" ui-sref="tab.transaction.sellListings">Sell</button>
-        </ion-nav-buttons>
-      </ion-nav-bar>
+      <div class="button-bar">
+          <button class="button ion-bag button-positive transaction" 
+          ui-sref="tab.transaction.buyOffers">&nbsp Buy</button>   
+          <button class="button ion-cash button-positive transaction" 
+          ui-sref="tab.transaction.sellListings">&nbsp Sell</button>
+      </div>
+
+    <div ui-view name='offers'></div>
+  </ion-content>">
+</ion-view>
+<!-- 
+<ion view> 
+<div class="bar bar-header">
+  <a class="button button-icon icon ion-navicon"></a>
+  <a class="h1 title">Header Buttons</a>
+</div>
+</ion>
+
+<div class="button-bar">
+  <a class="button">First</a>
+  <a class="button">Second</a>
+  <a class="button">Third</a>
+</div> -->

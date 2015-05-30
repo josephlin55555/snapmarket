@@ -79,6 +79,12 @@ change listings to fill 3 columns
   font-size: 1.5em;
 }
 
+/*This affects the styling for the Transaction tab header*/
+button {
+  width: 100%;
+  
+}
+.transaction {
+  padding: 0px;
 
-
-
+}
