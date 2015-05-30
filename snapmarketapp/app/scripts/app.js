@@ -113,51 +113,52 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-    .state('tab.buyOffers', {
-      url: '/transaction/buyOffers',
+    .state('tab.transaction.buyOffers', {
+      url: '/buyOffers',
       views: {
-        'transaction': {
+        'offers': {
           templateUrl: 'templates/buy-offers.html',
           controller: 'BuyOfferCtrl'
-        }
+        } 
       }
     })
-      .state('tab.transcationChat', {
-        url: '/transaction/buyOffers/:transactionChatId',
-        views: {
-          'transaction': {
-            templateUrl: 'templates/buy-transactionChat.html',
-            controller: 'BuyTransactionChatCtrl'
-          }
-        }
-      })
-    .state('tab.sellListings', {
-      url: '/transaction/sellListings',
+     .state('tab.transaction.sellListings', {
+      url: '/sellListings',
       views: {
-        'transaction': {
+        'offers': {
           templateUrl: 'templates/sell-listings.html',
           controller: 'SellListingsCtrl'
         }
       }
     })
-      .state('tab.sellListingItems', {
-        url: '/transaction/sellListingItems',
-        views: {
-          'transaction': {
-            templateUrl: 'templates/sell-listingItems.html',
-            controller: 'SellListingItemsCtrl'
-          }
-        }
-      })
-        .state('tab.sellItemOffers', {
-          url: '/transaction/sellItemOffers',
-          views: {
-            'transaction': {
-              templateUrl: 'templates/sell-itemOffers.html',
-              controller: 'SellItemOffersCtrl'
-            }
-          }
-        })
+    //   .state('tab.transcationChat', {
+    //     url: '/transaction/buyOffers/:transactionChatId',
+    //     views: {
+    //       'transaction-tab': {
+    //         templateUrl: 'templates/buy-transactionChat.html',
+    //         controller: 'BuyTransactionChatCtrl'
+    //       }
+    //     }
+    //   })
+
+      // .state('tab.sellListingItems', {
+      //   url: '/transaction/sellListingItems',
+      //   views: {
+      //     'transaction': {
+      //       templateUrl: 'templates/sell-listingItems.html',
+      //       controller: 'SellListingItemsCtrl'
+      //     }
+      //   }
+      // })
+      //   .state('tab.sellItemOffers', {
+      //     url: '/transaction/sellItemOffers',
+      //     views: {
+      //       'transaction': {
+      //         templateUrl: 'templates/sell-itemOffers.html',
+      //         controller: 'SellItemOffersCtrl'
+      //       }
+      //     }
+      //   })
   .state('tab.profile', {
     url: '/profile',
     views: {
