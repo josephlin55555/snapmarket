@@ -57,6 +57,7 @@ change listings to fill 2 columns
   .item { 
     width: 45vw;
   }
+
   /*
   .item affects tagCloud, so tagCloud is respecified here
   */
@@ -74,6 +75,42 @@ change listings to fill 3 columns
     width: 28vw;
   }
 }
+
+/*
+@media for .listingThumbnailDetal details view sizes 
+for buy-itemDetail
+*/
+
+.listingThumbnailDetail {
+  width: 100vw;
+}
+
+/*
+@media (max-width: 415px) {
+  .listingThumbnailDetail {
+    width: 95vw;
+    height: 57vh;
+  }
+}
+
+@media (min-width: 416px) (max-width: 700px) {
+  .listingThumbnailDetail {
+    width: 1vw;
+    height: 1vh;
+  }
+}
+
+@media (min-width: 701px) (max-width: 800px) {
+  .listingThumbnailDetail {
+    width: 35vw;
+  }
+}
+
+@media (max-width: 801px) {
+  .listingThumbnailDetail {
+
+  }
+}*/
 
 .cardTitle {
   font-size: 1.5em;
