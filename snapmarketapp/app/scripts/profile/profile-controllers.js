@@ -47,7 +47,7 @@ angular.module('profile.controllers', ['firebase'])
   $scope.logout = function() {
     //ends current user session
     ref.unauth(); 
-
+    $rootScope.profile = null;    //clear out user info on logout
     //moves to login page
     $state.go('tab.login'); 
   };
