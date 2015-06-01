@@ -33,7 +33,9 @@ angular.module('buy.controllers', ['firebase'])
   $scope.selectCard = function(card) {
     //card argument is listing object
     $rootScope.currentListing = card;
-    $state.go('tab.buyItemDetail');
+
+    //$id is the unique hash id for each item in the firebase array
+    $state.go('tab.buyItemDetail', {'listingId': card.$id});
   };
 
     //recompute scope.results
