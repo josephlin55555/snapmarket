@@ -2,21 +2,19 @@ angular.module('transaction.controllers', [])
 .controller('TransactionCtrl', function($rootScope, $scope, $state, Db) {
   //default to Buy view once transaction tab is pressed
   console.log('Loaded Transaction');
-
-  //!!! only working on first pass, next times arent redirecting
-
-  var user = $rootScope.profile;
-   if(user === null|| user === undefined) {
-    console.log('redirecting to login');
-    $state.go("tab.login");   //take you to login page
+  if(Db.getAuth()) {
+    $state.go('tab.transaction.buyOffers'); 
   } else {
-    $state.go('tab.transaction.buyOffers'); //if logged in default to buyOffers
+    $state.go('tab.login');
   }
-
 })
 
-//////////////////Buy Navigation controllers
+//Buy Navigation controllers
 .controller('BuyOfferCtrl', function($rootScope, $scope, $state, Db) {
+  if(!Db.getAuth()) {
+    $state.go('tab.login');
+  }
+
   $scope.dummy = [1,3,4,5,2,8];
   //array of the particular user's buyOffer listing objects
   $scope.allOffers = [];
