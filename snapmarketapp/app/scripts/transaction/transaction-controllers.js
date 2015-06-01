@@ -1,4 +1,5 @@
 angular.module('transaction.controllers', [])
+
 //Buy Navigation controllers
 .controller('BuyOfferCtrl', function($rootScope, $scope, $state, $firebaseObject, Db) {
   $rootScope.nav = {
