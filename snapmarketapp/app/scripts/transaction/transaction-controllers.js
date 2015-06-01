@@ -22,12 +22,6 @@ angular.module('transaction.controllers', [])
   $scope.allOffers = [];
   //array of listingId's (of the offers) in user's firebase object
   $scope.listingIds = [];
-  //Make sure the user is logged-in
-     //will return null if not logged in
-  var userId = $rootScope.profile;
-   console.log(userId);
-
- // var users = Db.Users.lis;
 })
 .controller('BuyTransactionChatCtrl', function($scope) {})
 .controller('SellListingsCtrl', function($scope, $state, Db) {})
