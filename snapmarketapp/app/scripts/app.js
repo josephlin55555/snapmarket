@@ -131,6 +131,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'SellListingsCtrl'
         }
       }
+
     });
     //   .state('tab.transcationChat', {
     //     url: '/transaction/buyOffers/:transactionChatId',
@@ -151,6 +152,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       //     }
       //   }
       // })
+  
       //   .state('tab.sellItemOffers', {
       //     url: '/transaction/sellItemOffers',
       //     views: {

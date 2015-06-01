@@ -2,6 +2,7 @@ angular.module('transaction.controllers', [])
 .controller('TransactionCtrl', function($rootScope, $scope, $state, Db) {
   //default to buy view once transaction tab is pressed
   $state.go('tab.transaction.buyOffers'); 
+
 })
 
 //Buy Navigation controllers
