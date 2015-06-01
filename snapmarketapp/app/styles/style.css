@@ -35,53 +35,52 @@ ion-scroll[direction=y] {
 }
 
 /*
-if screen width is less than or equal to 400 px, then
+If screen width is less than or equal to 400 px, then
 make listings fill the entire page
+
+For iphone 6 and iphone 6 plus:; vertical screen
 */
-@media (max-width: 400px) {
+@media (max-width: 415px) {
   .listingThumbnail {
     width: 84vw;
     height: 50vh;
   }
-}
 
-/*
-if screen width is between 401 and 799 px, then 
-change listings to fill 2 columns
-*/
-@media (min-width: 401px) and (max-width: 799px) {
-  .listingThumbnail {
-    width: 38vw;
-  }
-  
-  .item { 
-    width: 45vw;
-  }
-
-  /*
-  .item affects tagCloud, so tagCloud is respecified here
-  */
-  .tagCloud {
+  .listingThumbnailDetail {
     width: 100vw;
   }
 }
 
 /*
-if screen width is 800 px or greater, then 
+If screen width is between 421 and 799 px, then 
+change listings to fill 2 columns
+
+For iphone 6 and iphone 6 plus: horizontal screen
+*/
+@media (min-width: 650px) and (max-width: 750px) {
+  .listingThumbnail {
+    width: 38vw;
+  }
+
+  .listingThumbnailDetail {
+    width: 100vw;
+  }
+}
+
+/*
+If screen width is 800 px or greater, then 
 change listings to fill 3 columns
+
+For large screens: ipad/computer screen
 */
 @media (min-width: 800px) {
   .listingThumbnail {
     width: 28vw;
   }
-}
 
-/*
-after clicking on a card, .listingThumbnailDetail 
-is loaded
-*/
-.listingThumbnailDetail {
-  width: 100vw;
+  .listingThumbnailDetail {
+    width: 100vw;
+  }
 }
 
 .cardTitle {
