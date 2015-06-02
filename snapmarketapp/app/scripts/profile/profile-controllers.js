@@ -1,33 +1,28 @@
-angular.module('profile.controllers', ['firebase'])
-.controller('LoginCtrl', function($scope, $state, $firebaseObject, $rootScope) {
-  
-  var ref = new Firebase("https://snapmarket.firebaseio.com");
-  var users = $firebaseObject(ref.child("users"));
-
+angular.module('profile.controllers', ['firebase', 'profile.services'])
+.controller('LoginCtrl', function($scope, $state, $firebaseObject, $rootScope, $ionicHistory, Db, Profile) {
+  $ionicHistory.nextViewOptions({
+    disableAnimate: true,
+    disableBack: true
+  });
+  var users = $firebaseObject(Db.child("users"));
+    //TODO: Move this into own factory called auth
   $scope.auth = function() {
-
     //asks user to login using facebook acct
-    ref.authWithOAuthPopup("facebook", function(error, authData) {
+    Db.authWithOAuthPopup("facebook", function(error, authData) {
       if (error) {
         console.log("Login Failed!", error);
       } else {
-        console.log("Authenticated successfully with payload:", authData);
+        console.log("Authenticated successfully with payload");
 
         //waits until user has been fully loaded, then add user into firebase database
         users.$loaded().then(function() {
-
-          //create an object for a user
-          $rootScope.profile = {
-            name: authData.facebook.displayName,
-            email: authData.facebook.email,
-            photo: authData.facebook.cachedUserProfile.picture.data.url,
-            uid : authData.uid
-          };
-
-          // saves or updates user to database
-          users[authData.uid] = $rootScope.profile;
+          users[authData.uid] = Profile(authData);
           users.$save();
+        });
 
+        $ionicHistory.nextViewOptions({
+          disableAnimate: true,
+          disableBack: true
         });
         //redirect to profile page
         $state.go('tab.profile');
@@ -35,19 +30,23 @@ angular.module('profile.controllers', ['firebase'])
     }, {scope: "email"});
   }
 })
-.controller('ProfileCtrl', function($scope, $state, $rootScope) {
+.controller('ProfileCtrl', function($scope, $state, $ionicHistory, Db, Profile) {
+  $ionicHistory.nextViewOptions({
+    disableAnimate: true,
+    disableBack: true
+  });
 
-  var ref = new Firebase("https://snapmarket.firebaseio.com");
-
-  //checks if current user is logged in; if not, redirects to login page
-  if(!ref.getAuth()) {
-    $state.go('tab.login');
-  }
+  var authData = Db.getAuth();
+  $scope.profile = Profile(authData);
 
   $scope.logout = function() {
     //ends current user session
-    ref.unauth(); 
+    Db.unauth();
 
+    $ionicHistory.nextViewOptions({
+      disableAnimate: true,
+      disableBack: true
+    });
     //moves to login page
     $state.go('tab.login'); 
   };
