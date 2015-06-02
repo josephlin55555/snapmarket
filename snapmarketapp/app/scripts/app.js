@@ -131,28 +131,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'SellListingsCtrl'
         }
       }
+    })
+      .state('tab.buy-transactionChat', {
+        url: '/transaction/buyOffers/tid',
+        views: {
+          'transaction': {
+            templateUrl: 'templates/buy-transactionChat.html',
+            controller: 'BuyTransactionChatCtrl'
+          }
+        }
+      })
+      .state('tab.sellListingItems', {
+        url: '/transaction/sellListings/sellListingItems',
+        views: {
+          'transaction': {
+            templateUrl: 'templates/sell-listingItems.html',
+            controller: 'SellListingItemsCtrl'
+          }
+        }
+      })
 
-    });
-    //   .state('tab.transcationChat', {
-    //     url: '/transaction/buyOffers/:transactionChatId',
-    //     views: {
-    //       'transaction-tab': {
-    //         templateUrl: 'templates/buy-transactionChat.html',
-    //         controller: 'BuyTransactionChatCtrl'
-    //       }
-    //     }
-    //   })
-
-      // .state('tab.sellListingItems', {
-      //   url: '/transaction/sellListingItems',
-      //   views: {
-      //     'transaction': {
-      //       templateUrl: 'templates/sell-listingItems.html',
-      //       controller: 'SellListingItemsCtrl'
-      //     }
-      //   }
-      // })
-  
       //   .state('tab.sellItemOffers', {
       //     url: '/transaction/sellItemOffers',
       //     views: {
