@@ -159,16 +159,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
           }
         })
-  .state('tab.profile', {
-    url: '/profile',
-    views: {
-      'profile': {
-        templateUrl: 'templates/profile.html',
-        controller: 'ProfileCtrl'
-      }
-    }
-  });
+ 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
-
-});
+ });

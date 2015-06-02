@@ -5,16 +5,19 @@ angular.module('transaction.controllers', [])
 })
 
 //Buy Navigation controllers
-.controller('BuyOfferCtrl', function($rootScope, $scope, $state, Db) {
+.controller('BuyOfferCtrl', function($rootScope, $scope, $state, $firebaseObject, Db) {
   $scope.dummy = [1,3,4,5,2,8];
-  //array of the particular user's buyOffer listing objects
-  $scope.allOffers = [];
-  //array of listingId's (of the offers) in user's firebase object
-  $scope.listingIds = [];
+ 
+  $scope.view = function(){
+    $state.go('tab.buy-transactionChat');
+  }
+
+  var buyOffers = Db.child('Users')
+
 })
 .controller('BuyTransactionChatCtrl', function($scope, Db) {})
   //var buyOffer = Db.child('Users')
-
+  
 
 //////////////////Sell Navigation controllers
 .controller('SellListingsCtrl', function($scope, $state, Db) {
@@ -26,7 +29,7 @@ angular.module('transaction.controllers', [])
    }
 
 })
-.controller('SellListingItemsCtrl', function($scope, $state) {
+.controller('SellListingItemsCtrl', function($scope, $state, Db) {
   $scope.dummy = ['LISTING 1', 'LISTING 2', 'LISTING 3'];
 
   $scope.viewItem = function(){
@@ -35,7 +38,7 @@ angular.module('transaction.controllers', [])
 
   }
 })
-.controller('SellItemOffersCtrl', function($scope, $state) {
+.controller('SellItemOffersCtrl', function($scope, $state, Db) {
   console.log('sellitemoffers is trying to load');
 })
 
