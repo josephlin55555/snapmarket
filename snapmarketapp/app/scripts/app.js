@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives', 'config'])
 
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);
@@ -44,7 +44,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         templateUrl: 'templates/profile.html',
         controller: 'ProfileCtrl'
       }
-    }
+    },
+    data: {requireLogin: true}
   })
   .state('tab.buySearch', {
     url: '/buySearch',
@@ -80,7 +81,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         templateUrl: 'templates/sell-camera.html',
         controller: 'SellCameraCtrl'
       }
-    }
+    },
+    data: {requireLogin: true}
   })
     .state('tab.sellCreateListing', {
       url: '/sellCamera/sellCreateListing',
@@ -89,7 +91,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/sell-createListing.html',
           controller: 'SellCreateListingCtrl',
         }
-      }
+      },
+      data: {requireLogin: true}
     })
       .state('tab.sellTagItem', {
         url: '/sellCamera/sellCreateListing/sellTagItem',
@@ -105,9 +108,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'transaction': {
         templateUrl: 'templates/transaction.html',
-        controller: 'TransactionCtrl'
+        controller: 'TransactionCtrl',
       }
-    }
+    },
+    data: {requireLogin: true}
   })
     .state('tab.transaction.buyOffers', {
       url: '/buyOffers',

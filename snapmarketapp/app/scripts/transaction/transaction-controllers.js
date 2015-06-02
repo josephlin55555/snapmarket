@@ -1,20 +1,11 @@
 angular.module('transaction.controllers', [])
 .controller('TransactionCtrl', function($rootScope, $scope, $state, Db) {
-  //default to Buy view once transaction tab is pressed
-  console.log('Loaded Transaction');
-  if(Db.getAuth()) {
-    $state.go('tab.transaction.buyOffers'); 
-  } else {
-    $state.go('tab.login');
-  }
+  //default to buy view once transaction tab is pressed
+  $state.go('tab.transaction.buyOffers'); 
 })
 
 //Buy Navigation controllers
 .controller('BuyOfferCtrl', function($rootScope, $scope, $state, Db) {
-  if(!Db.getAuth()) {
-    $state.go('tab.login');
-  }
-
   $scope.dummy = [1,3,4,5,2,8];
   //array of the particular user's buyOffer listing objects
   $scope.allOffers = [];
