@@ -27,9 +27,16 @@ angular.module('transaction.controllers', [])
 
 })
 .controller('SellListingItemsCtrl', function($scope, $state) {
-  $scope.dummy = ['YO ITS COOL', 'FIRE STUFF', 'MAD SHIZZ'];
+  $scope.dummy = ['LISTING 1', 'LISTING 2', 'LISTING 3'];
 
+  $scope.viewItem = function(){
+    console.log('CHANGING OUR STATE');
+    $state.go('tab.sellListingItems.sellItemOffers');
+
+  }
 })
-.controller('SellItemOffersCtrl', function($scope, $state) {})
+.controller('SellItemOffersCtrl', function($scope, $state) {
+  console.log('sellitemoffers is trying to load');
+})
 
 

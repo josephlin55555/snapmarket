@@ -1,9 +1,12 @@
-    <p>
-    SELL YOUR STUFF
-    </p>
-    <p>
-    SELL YOUR STUFF
-    </p>
-    <p>
-    SELL YOUR STUFF
-    </p>
+<ion-list>
+  <ion-item collection-repeat="value in dummy">
+     <div class="item item-thumbnail-left item-icon-right" ng-click="viewList()">
+      <img src="http://pngimg.com/upload/basketball_PNG1095.png">
+      <strong>{{value}}</strong>
+      <p>This is a description of the item</p>
+      <p>$5,000</p>
+      <i class="icon ion-arrow-right-b"></i>
+    </div>
+  </ion-item>
+<ion-list>
+ 
