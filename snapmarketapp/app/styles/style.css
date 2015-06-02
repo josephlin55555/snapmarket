@@ -26,44 +26,67 @@
   border: 0;
 }
 
+.masonry-brick {
+  background-color: #B2DFDB;
+}
+
+.tagCloud {
+  background-color: #607D8B;
+}
+
+.detailView {
+  background-color: #B2DFDB;
+}
+
 /*
 allows for scrolling capability; 
 80vh is required to allow for full view of listings
 */
 ion-scroll[direction=y] {
   height: 80vh;
+  margin: 0;
+  width: 100vw;
+  background-color: #B2DFDB;
 }
 
 /*
-If screen width is less than or equal to 400 px, then
+If screen width is less than or equal to 415 px, then
 make listings fill the entire page
 
 For iphone 6 and iphone 6 plus:; vertical screen
 */
 @media (max-width: 415px) {
   .listingThumbnail {
-    width: 84vw;
+    width: 100vw;
     height: 50vh;
   }
 
   .listingThumbnailDetail {
     width: 100vw;
   }
+
+  .masonry-brick {
+    width: 100vw;
+  }
 }
 
 /*
-If screen width is between 421 and 799 px, then 
+If screen width is between 650 and 750 px, then 
 change listings to fill 2 columns
 
 For iphone 6 and iphone 6 plus: horizontal screen
 */
-@media (min-width: 650px) and (max-width: 750px) {
+@media (min-width: 650px) and (max-width: 800px) {
   .listingThumbnail {
-    width: 38vw;
+    width: 50vw;
   }
 
   .listingThumbnailDetail {
     width: 100vw;
+  }
+
+  .masonry-brick {
+    width: 50vw;
   }
 }
 
@@ -73,13 +96,17 @@ change listings to fill 3 columns
 
 For large screens: ipad/computer screen
 */
-@media (min-width: 800px) {
+@media (min-width: 801px) {
   .listingThumbnail {
-    width: 28vw;
+    width: 33.333vw;
   }
 
   .listingThumbnailDetail {
     width: 100vw;
+  }
+
+  .masonry-brick {
+    width: 33.333vw;
   }
 }
 
@@ -91,4 +118,3 @@ For large screens: ipad/computer screen
 .transactionButton {
   width: 100%;
 }
-
