@@ -150,16 +150,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           }
         }
       })
-
-      //   .state('tab.sellItemOffers', {
-      //     url: '/transaction/sellItemOffers',
-      //     views: {
-      //       'transaction': {
-      //         templateUrl: 'templates/sell-itemOffers.html',
-      //         controller: 'SellItemOffersCtrl'
-      //       }
-      //     }
-      //   })
+        .state('tab.sellListingItems.sellItemOffers', {
+          url: '/itemOffers',
+          views: {
+            'transaction': {
+              templateUrl: 'templates/sell-itemOffers.html',
+              controller: 'SellItemOffersCtrl'
+            }
+          }
+        })
+  .state('tab.profile', {
+    url: '/profile',
+    views: {
+      'profile': {
+        templateUrl: 'templates/profile.html',
+        controller: 'ProfileCtrl'
+      }
+    }
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
 
