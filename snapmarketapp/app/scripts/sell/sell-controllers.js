@@ -105,7 +105,7 @@ angular.module('sell.controllers', ['ngCordova'])
     return {x : tap.x , y : tap.y-headerBarOffset};
   }
   $scope.position = function(tap){
-    return {'font-size': '90px',
+    return {'font-size': '20px',
       position: 'absolute',
             left: tap.x+'px',
             top: tap.y+'px'};
