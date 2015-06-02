@@ -26,14 +26,25 @@
   border: 0;
 }
 
+/*
+light-blue coloring for the background in buySearch view
+*/
 .masonry-brick {
   background-color: #B2DFDB;
 }
 
+/*
+dark blue color for the bar underneath search
+*/
 .tagCloud {
   background-color: #607D8B;
 }
 
+
+/*
+light-blue color for remaining the remaining itemDetail view
+(other than .masonry-brick)
+*/
 .detailView {
   background-color: #B2DFDB;
 }
@@ -41,6 +52,8 @@
 /*
 allows for scrolling capability; 
 80vh is required to allow for full view of listings
+
+background-color is light-blue for remaining background in buySearch view
 */
 ion-scroll[direction=y] {
   height: 80vh;
