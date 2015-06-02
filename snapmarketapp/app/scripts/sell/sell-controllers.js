@@ -6,7 +6,7 @@ angular.module('sell.controllers', ['ngCordova'])
         var options = { 
             quality : 75, 
             destinationType : 0, 
-            sourceType : 0, 
+            sourceType : 1, 
             allowEdit : true,
             encodingType: 0,
             targetWidth: 750,
@@ -98,7 +98,6 @@ angular.module('sell.controllers', ['ngCordova'])
     var tap = { x:0, y:0 };
     if(event.gesture.touches.length>0){
       tt = event.gesture.touches[0];
-      console.log('LAYER:',tt.layerX,tt.layerY);
       tap.x = tt.clientX || tt.pageX || tt.screenX ||0;
       tap.y = tt.clientY || tt.pageY || tt.screenY ||0;  
     }
