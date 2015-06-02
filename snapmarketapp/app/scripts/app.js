@@ -35,7 +35,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
       }
-    }
+    },
+    data: {redirectOnAuth: true}
   })
   .state('tab.profile', {
     url: '/profile',
