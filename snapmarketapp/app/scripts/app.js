@@ -106,10 +106,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
   .state('tab.transaction', {
     url: '/transaction',
+    abstract: true,
     views: {
       'transaction': {
         templateUrl: 'templates/transaction.html',
-        controller: 'TransactionCtrl',
       }
     },
     data: {requireLogin: true}
@@ -121,8 +121,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/buy-offers.html',
           controller: 'BuyOfferCtrl'
         } 
-      }
+      },
+      data: {requireLogin: true}
     })
+      .state('tab.transaction.transactionChat', {
+        url: '/transactionChat',
+        views: {
+          'offers': {
+            templateUrl: 'templates/buy-transactionChat.html',
+            controller: 'BuyTransactionChatCtrl'
+          }
+        }
+      })
      .state('tab.transaction.sellListings', {
       url: '/sellListings',
       views: {
@@ -130,37 +140,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/sell-listings.html',
           controller: 'SellListingsCtrl'
         }
-      }
-    });
-    //   .state('tab.transcationChat', {
-    //     url: '/transaction/buyOffers/:transactionChatId',
-    //     views: {
-    //       'transaction-tab': {
-    //         templateUrl: 'templates/buy-transactionChat.html',
-    //         controller: 'BuyTransactionChatCtrl'
-    //       }
-    //     }
-    //   })
-
-      // .state('tab.sellListingItems', {
-      //   url: '/transaction/sellListingItems',
-      //   views: {
-      //     'transaction': {
-      //       templateUrl: 'templates/sell-listingItems.html',
-      //       controller: 'SellListingItemsCtrl'
-      //     }
-      //   }
-      // })
-      //   .state('tab.sellItemOffers', {
-      //     url: '/transaction/sellItemOffers',
-      //     views: {
-      //       'transaction': {
-      //         templateUrl: 'templates/sell-itemOffers.html',
-      //         controller: 'SellItemOffersCtrl'
-      //       }
-      //     }
-      //   })
+      },
+      data: {requireLogin: true}
+    })
+      .state('tab.transaction.sellListingItems', {
+        url: '/sellListingItems',
+        views: {
+          'offers': {
+            templateUrl: 'templates/sell-listingItems.html',
+            controller: 'SellListingItemsCtrl'
+          }
+        }
+      })
+        .state('tab.transaction.sellItemOffers', {
+          url: '/sellItemOffers',
+          views: {
+            'offers': {
+              templateUrl: 'templates/sell-itemOffers.html',
+              controller: 'SellItemOffersCtrl'
+            }
+          }
+        })
+ 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
-
-});
+ });
