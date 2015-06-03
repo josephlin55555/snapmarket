@@ -106,10 +106,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
   .state('tab.transaction', {
     url: '/transaction',
+    abstract: true,
     views: {
       'transaction': {
         templateUrl: 'templates/transaction.html',
-        controller: 'TransactionCtrl',
       }
     },
     data: {requireLogin: true}
@@ -121,8 +121,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/buy-offers.html',
           controller: 'BuyOfferCtrl'
         } 
-      }
+      },
+      data: {requireLogin: true}
     })
+      .state('tab.transaction.transactionChat', {
+        url: '/transactionChat',
+        views: {
+          'offers': {
+            templateUrl: 'templates/buy-transactionChat.html',
+            controller: 'BuyTransactionChatCtrl'
+          }
+        }
+      })
      .state('tab.transaction.sellListings', {
       url: '/sellListings',
       views: {
@@ -130,30 +140,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/sell-listings.html',
           controller: 'SellListingsCtrl'
         }
-      }
+      },
+      data: {requireLogin: true}
     })
-      .state('tab.buy-transactionChat', {
-        url: '/transaction/buyOffers/tid',
+      .state('tab.transaction.sellListingItems', {
+        url: '/sellListingItems',
         views: {
-          'transaction': {
-            templateUrl: 'templates/buy-transactionChat.html',
-            controller: 'BuyTransactionChatCtrl'
-          }
-        }
-      })
-      .state('tab.sellListingItems', {
-        url: '/transaction/sellListings/sellListingItems',
-        views: {
-          'transaction': {
+          'offers': {
             templateUrl: 'templates/sell-listingItems.html',
             controller: 'SellListingItemsCtrl'
           }
         }
       })
-        .state('tab.sellListingItems.sellItemOffers', {
-          url: '/itemOffers',
+        .state('tab.transaction.sellItemOffers', {
+          url: '/sellItemOffers',
           views: {
-            'transaction': {
+            'offers': {
               templateUrl: 'templates/sell-itemOffers.html',
               controller: 'SellItemOffersCtrl'
             }

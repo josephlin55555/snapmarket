@@ -1,14 +1,12 @@
-<ion-view hide-nav-bar="true">
-  <ion-content>
-      <div class="button-bar">
-          <button class="transactionButton button ion-bag button-positive" 
-          ui-sref="tab.transaction.buyOffers" ui-sref-active="active">&nbsp Buy</button>   
-          <button class="transactionButton button ion-cash button-positive" 
-          ui-sref="tab.transaction.sellListings" ui-sref-active="active">&nbsp Sell</button>
+<ion-view title="{{navTitle}}" hide-nav-bar="hideNav">
+    <div class="tabs-striped tabs-top transaction tabs-background-positive" ng-show="hideNav">
+      <div class="tabs button-bar">
+        <button class="transactionButton button ion-bag button-positive" 
+        ui-sref="tab.transaction.buyOffers" ui-sref-active="active">&nbsp Buy</button> 
+        <button class="transactionButton button ion-cash button-positive" 
+        ui-sref="tab.transaction.sellListings" ui-sref-active="active">&nbsp Sell</button>
       </div>
-    <div ui-view name='offers'></div>
-</ion-content>
+    </div>
 
+    <ui-view name="offers" class="transaction"></ui-view>
 </ion-view>
-
-<ion-nav-view></ion-nav-view>
