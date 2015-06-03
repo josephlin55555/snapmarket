@@ -19,22 +19,26 @@ angular.module('transaction.controllers', [])
     title: "Buyer: Item Chat",
     url: "#/tab/transaction/buyOffers"
   };
-  console.log('buy transaction chat initiated')
 })
   
 
 //Sell Navigation controllers
-.controller('SellListingsCtrl', function($rootScope, $scope, $state, Db) {
+.controller('SellListingsCtrl', function($rootScope, $scope, $state, $firebaseObject, Db, $ionicLoading) {
   $rootScope.nav = {
     bar : false,
     title : "Seller: Listings"
   };
-  $scope.dummy = ['YO ITS COOL', 'FIRE STUFF', 'MAD SHIZZ'];
 
-  $scope.viewList = function(){
+  $scope.viewList = function(value){
     $state.go('tab.transaction.sellListingItems');
+    $rootScope.listing = value;
    }
+  //Loading indicator while Db is being loaded
+  $ionicLoading.show({
+      template: 'Loading...'
+    });
 
+  //Create array of current user's listings
   var currentUser = Db.getAuth().uid;
   var listingArray = [];  
   var listingObj = $firebaseObject(Db);
@@ -42,14 +46,12 @@ angular.module('transaction.controllers', [])
   listingObj.$loaded().then(function(){ 
     angular.forEach(listingObj.listings2, function(value, key) {
       if(listingObj.listings2[key]['user'].toString() === currentUser.toString()){
-        console.log('hit array!'); 
         listingArray.push(listingObj.listings2[key]);
       }
-    });    
-    console.log(listingArray)
-
+    });
+    $rootScope.myListings = listingArray;
+    $ionicLoading.hide();    
   });
-  
 })
 
 .controller('SellListingItemsCtrl', function($rootScope, $scope, $state, Db) {
@@ -58,11 +60,12 @@ angular.module('transaction.controllers', [])
     title: "Seller: Items",
     url: "#/tab/transaction/sellListings"
   };
-  $scope.dummy = ['LISTING 1', 'LISTING 2', 'LISTING 3'];
 
-  $scope.viewItem = function(){
+  $scope.items = $rootScope.listing.items;
+
+  $scope.viewItem = function(value){
     $state.go('tab.transaction.sellItemOffers');
-
+    $rootScope.item = value;
   }
 })
 .controller('SellItemOffersCtrl', function($rootScope, $scope, $state, Db) {
@@ -71,7 +74,9 @@ angular.module('transaction.controllers', [])
     title: "Seller: Item Chat",
     url: "#/tab/transaction/sellListingItems"
   };
-  console.log('sellitemoffers is trying to load');
+
+
+
 })
 
 

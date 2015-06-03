@@ -1,4 +1,5 @@
 angular.module('buy.controllers', ['firebase'])
+
 .controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope, Db) {
   /*
   once buySearch view is loaded, check if keyGen variable exists and load if necessary
@@ -14,6 +15,9 @@ angular.module('buy.controllers', ['firebase'])
 
   // alternative array type for firebase listings
     //TODO: convert to Ref
+  $ionicLoading.show({
+    template: 'Loading...'
+  });
   var ref = new Firebase("https://snapmarket.firebaseio.com/listings2");
   $scope.listings = $firebaseArray(ref);
   $scope.results = [];
@@ -33,7 +37,8 @@ angular.module('buy.controllers', ['firebase'])
   // copy over full listings to the results array for display
   $scope.listings.$loaded()
     .then(function(){
-      $scope.results = filterListings($scope.listings)
+      $scope.results = filterListings($scope.listings);
+      $ionicLoading.hide();
     });
 
   //filter scope.results through one tag

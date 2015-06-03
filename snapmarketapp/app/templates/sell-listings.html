@@ -1,16 +1,17 @@
 <ion-view title="Sell" class="transaction">
-    <ion-content class="padding has-tabs-top">
-      <ion-list>
-        <ion-item collection-repeat="value in dummy">
-           <div class="item item-thumbnail-left item-icon-right" ng-click="viewList()">
-            <img src="http://pngimg.com/upload/basketball_PNG1095.png">
-            <strong>{{value}}</strong>
-            <p>This is a description of the item</p>
-            <p>$5,000</p>
-            <i class="icon ion-arrow-right-b"></i>
-          </div>
-        </ion-item>
-      <ion-list>
-    </ion-content>
+  <ion-content class="padding has-tabs-top">
+    <ion-list>
+      <ion-item collection-repeat="value in myListings">
+        <div class="item item-thumbnail-left item-icon-right" ng-click="viewList(value)">
+          <img src="{{value.img}}">
+          <strong>{{value.title}}</strong>
+          <p>{{value.allTags}}</p>
+          <p>{{value.items.length}} Item(s) in this Listing</p>
+          <i class="icon ion-arrow-right-b"></i>
+        </div>
+      </ion-item>
+    <ion-list>
+  </ion-content>
 </ion-view>
+
  

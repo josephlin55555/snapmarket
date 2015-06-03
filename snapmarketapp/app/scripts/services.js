@@ -12,18 +12,10 @@ angular.module('starter.services', [
  .run(function($rootScope, $state, $ionicTabsDelegate, Db){
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
     var shouldLogin = toState.data !== undefined && toState.data.requireLogin && !Db.getAuth();
-  
-    //for development
 
+    //for development purposes - MUST BE DELETED ONCE AUTH IS FIXED!!!
     var shouldLogin = false;
 
-    //var redirectToProfile = toState.data !== undefined && toState.data.redirectOnAuth && !!Db.getAuth();
-    //console.log('redirectToProfile:', redirectToProfile);
-    console.log('shouldLogin:', shouldLogin);
-    console.log('fromState:', fromState);
-    console.log('toState:', toState);
-
-    
     if(shouldLogin){
       console.log('redirect to LOGIN!')
       $ionicTabsDelegate.select(3);
