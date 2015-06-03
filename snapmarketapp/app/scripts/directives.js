@@ -63,6 +63,10 @@ angular.module('starter.directives', ['wu.masonry'])
         }
       };
 
+      scope.removeAllTags = function(){
+        scope.tagCloud = [];
+      }
+
       scope.clearSearch = function() {
         scope.search.value = '';
         scope.tagResults = [];
