@@ -131,3 +131,11 @@ For large screens: ipad/computer screen
 .transactionButton {
   width: 100%;
 }
+
+.transaction .has-tabs-top{
+  top: 48px;
+}
+
+.transaction > .tabs, .tabs.tabs-top {
+  top: 0;
+}
