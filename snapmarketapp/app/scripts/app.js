@@ -57,12 +57,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-    .state('tab.buyItemDetail', {
-      url: '/buySearch/:itemId',
+    .state('tab.buyListingDetail', {
+      url: '/buySearch/:listingId',
       views: {
         'buy': {
-          templateUrl: 'templates/buy-itemDetail.html',
-          controller: 'BuyItemDetailCtrl'
+          templateUrl: 'templates/buy-listingDetail.html',
+          controller: 'BuyListingDetailCtrl'
         }
       }
     })

@@ -33,7 +33,9 @@ angular.module('buy.controllers', ['firebase'])
   $scope.selectCard = function(card) {
     //card argument is listing object
     $rootScope.currentListing = card;
-    $state.go('tab.buyItemDetail');
+
+    //$id is the unique hash id for each item in the firebase array
+    $state.go('tab.buyListingDetail', {'listingId': card.$id});
   };
 
     //recompute scope.results
@@ -63,7 +65,7 @@ angular.module('buy.controllers', ['firebase'])
   });
 
 })
-.controller('BuyItemDetailCtrl', function($scope, $rootScope, $state) {
+.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state) {
   if($rootScope.currentListing === undefined) {
     $state.go('tab.buySearch');
   }

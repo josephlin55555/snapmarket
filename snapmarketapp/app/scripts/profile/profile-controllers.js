@@ -47,6 +47,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services'])
       disableAnimate: true,
       disableBack: true
     });
+
     //moves to login page
     $state.go('tab.login'); 
   };
