@@ -1,5 +1,5 @@
-<ion-view title="{{navTitle}}" hide-nav-bar="hideNav">
-    <div class="tabs-striped tabs-top transaction tabs-background-positive" ng-show="hideNav">
+<ion-view title="Transaction" hide-nav-bar="true">
+    <div class="tabs-striped tabs-top transaction tabs-background-positive" ng-hide="nav.bar">
       <div class="tabs button-bar">
         <button class="transactionButton button ion-bag button-positive" 
         ui-sref="tab.transaction.buyOffers" ui-sref-active="active">&nbsp Buy</button> 
@@ -7,6 +7,9 @@
         ui-sref="tab.transaction.sellListings" ui-sref-active="active">&nbsp Sell</button>
       </div>
     </div>
-
+    <div class="bar bar-header bar-stable" ng-show="nav.bar">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="{{nav.url}}">Back</a>
+      <h1 class="title">{{nav.title}}</h1>
+    </div>
     <ui-view name="offers" class="transaction"></ui-view>
 </ion-view>

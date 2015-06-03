@@ -1,7 +1,9 @@
 angular.module('transaction.controllers', [])
 //Buy Navigation controllers
 .controller('BuyOfferCtrl', function($rootScope, $scope, $state, $firebaseObject, Db) {
-  $rootScope.hideNav = true;
+  $rootScope.nav = {
+    bar : false
+  };
   var buyOffers = Db.child('Users')
   $scope.dummy = [1,3,4,5,2,8];
  
@@ -11,16 +13,21 @@ angular.module('transaction.controllers', [])
 
 })
 .controller('BuyTransactionChatCtrl', function($rootScope, $scope, $state, Db) {
-  $rootScope.hideNav = false;
-  $rootScope.navTitle = "Item Chat";
+  $rootScope.nav = {
+    bar : true,
+    title: "Buyer: Item Chat",
+    url: "#/tab/transaction/buyOffers"
+  };
   console.log('buy transaction chat initiated')
 })
   
 
 //Sell Navigation controllers
 .controller('SellListingsCtrl', function($rootScope, $scope, $state, Db) {
-  $rootScope.hideNav = true;
-  $rootScope.navTitle = "Listings";
+  $rootScope.nav = {
+    bar : false,
+    title : "Seller: Listings"
+  };
   $scope.dummy = ['YO ITS COOL', 'FIRE STUFF', 'MAD SHIZZ'];
 
   $scope.viewList = function(){
@@ -30,8 +37,11 @@ angular.module('transaction.controllers', [])
 })
 
 .controller('SellListingItemsCtrl', function($rootScope, $scope, $state, Db) {
-  $rootScope.hideNav = false;
-  $rootScope.navTitle = "Items";
+  $rootScope.nav = {
+    bar : true,
+    title: "Seller: Items",
+    url: "#/tab/transaction/sellListings"
+  };
   $scope.dummy = ['LISTING 1', 'LISTING 2', 'LISTING 3'];
 
   $scope.viewItem = function(){
@@ -40,8 +50,11 @@ angular.module('transaction.controllers', [])
   }
 })
 .controller('SellItemOffersCtrl', function($rootScope, $scope, $state, Db) {
-  $rootScope.hideNav = false;
-  $rootScope.navTitle = "Item Chat";
+  $rootScope.nav = {
+    bar : true,
+    title: "Seller: Item Chat",
+    url: "#/tab/transaction/sellListingItems"
+  };
   console.log('sellitemoffers is trying to load');
 })
 
