@@ -35,6 +35,21 @@ angular.module('transaction.controllers', [])
     $state.go('tab.transaction.sellListingItems');
    }
 
+  var currentUser = Db.getAuth().uid;
+  var listingArray = [];  
+  var listingObj = $firebaseObject(Db);
+  //When Db loads, filter through and find all listings from that user
+  listingObj.$loaded().then(function(){ 
+    angular.forEach(listingObj.listings2, function(value, key) {
+      if(listingObj.listings2[key]['user'].toString() === currentUser.toString()){
+        console.log('hit array!'); 
+        listingArray.push(listingObj.listings2[key]);
+      }
+    });    
+    console.log(listingArray)
+
+  });
+  
 })
 
 .controller('SellListingItemsCtrl', function($rootScope, $scope, $state, Db) {
