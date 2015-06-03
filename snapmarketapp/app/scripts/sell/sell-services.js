@@ -4,6 +4,7 @@ angular.module('sell.services', [])
 
   return {
     getPicture: function(options) {
+      console.log('OPTIONS',options);
       var q = $q.defer();
 
       navigator.camera.getPicture(function(result) {        

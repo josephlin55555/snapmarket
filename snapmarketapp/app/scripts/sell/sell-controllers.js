@@ -1,11 +1,21 @@
-angular.module('sell.controllers', [])
+angular.module('sell.controllers', ['ngCordova'])
 //controller for default state when clicking on sell tab
-.controller('SellCameraCtrl', function($rootScope, $scope , $state, Camera , $firebaseObject) {
+.controller('SellCameraCtrl', function($rootScope, $scope , $state , $firebaseObject , $cordovaCamera , Camera) {
 
 
+        var options = { 
+            quality : 75, 
+            destinationType : 0, 
+            sourceType : 1, 
+            allowEdit : true,
+            encodingType: 0,
+            targetWidth: 750,
+            targetHeight: 1000,
+            saveToPhotoAlbum: false
+        };
 
   $scope.getPhoto = function() {
-    console.log('running on init',Camera.cameraExists());
+    console.log('running on init',Camera.cameraExists(),options);
     //for development if the camera does not exists redirect to a static image
     if(!Camera.cameraExists()){
       $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings/1112223334"))
@@ -15,17 +25,12 @@ angular.module('sell.controllers', [])
           $state.go('tab.sellCreateListing');
         });
     } else{
-      Camera.getPicture().then(function(imageURI) {
-        $rootScope.lastPhoto=imageURI;
+       
+      Camera.getPicture(options).then(function(imageURI) {
+        $rootScope.lastPhoto="data:image/jpeg;base64," + imageURI;
         $state.go('tab.sellCreateListing');
       }, function(err) {
         console.err(err);
-      }, {
-        quality: 100,
-        sourceType : 1,
-        targetWidth: 750,
-        targetHeight: 1334,
-        saveToPhotoAlbum: true
       });
     }
   };
@@ -34,7 +39,7 @@ angular.module('sell.controllers', [])
 
 
 
-.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover  ) {
+.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition  ) {
 
   $scope.db = $firebaseArray(new Firebase("https://snapmarket.firebaseio.com/listings2"));
 
@@ -99,7 +104,8 @@ angular.module('sell.controllers', [])
     return {x : tap.x , y : tap.y-headerBarOffset};
   }
   $scope.position = function(tap){
-    return {position: 'absolute',
+    return {'font-size': '20px',
+      position: 'absolute',
             left: tap.x+'px',
             top: tap.y+'px'};
   };
