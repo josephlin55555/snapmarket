@@ -41,12 +41,12 @@ angular.module('transaction.controllers', [])
   //Create array of current user's listings
   var currentUser = Db.getAuth().uid;
   var listingArray = [];  
-  var listingObj = $firebaseObject(Db);
+  var listingObj = $firebaseObject(Db.child('listings2'));
   //When Db loads, filter through and find all listings from that user
   listingObj.$loaded().then(function(){ 
-    angular.forEach(listingObj.listings2, function(value, key) {
-      if(listingObj.listings2[key]['user'].toString() === currentUser.toString()){
-        listingArray.push(listingObj.listings2[key]);
+    angular.forEach(listingObj, function(value, key) {
+      if(listingObj[key]['user'].toString() === currentUser.toString()){
+        listingArray.push(listingObj[key]);
       }
     });
     $rootScope.myListings = listingArray;
