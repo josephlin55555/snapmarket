@@ -1,7 +1,7 @@
   <ion-modal-view>
     <ion-header-bar>
       <h1 class="title">Tag Item</h1>
-      <button class="button right" ng-click = "closeModal(false)">
+      <button class="button right" ng-click = "closeModal(false);removeAllTags()">
         <i class="icon ion-close"></i>
       </button>
     </ion-header-bar>
@@ -10,7 +10,22 @@
   <input type="text">
 </label>
     <ion-content>
-      <form action="">
+
+    <div class="bar bar-header bar-positive item-input-inset">
+      <tag-search class="search-wrapper-light" placeholder="Search" min-length="0" model="tags" watch="true" enter-callback="filterOne">
+      </tag-search>
+      <button class="button button-clear" ng-click="addTag(search.value , syncTags)">
+        Add
+      </button>
+    </div>
+
+    <ion-item class="tagCloud">
+      <button class="button button-small button-stable" ng-repeat="tag in tagCloud" ng-click="removeTag(tag , syncTags)">
+      {{tag}}
+      </button>
+    </ion-item>
+
+      <form action="">      
         <div class="list">
           <label class="item item-input">
             <span class="input-label">Description</span>
@@ -22,6 +37,7 @@
          </label>
         </div>
       </form>
-        <button type="submit" class="button button-block button-balanced" ng-click = "closeModal(true)">Tag</button>
+        <button type="submit" class="button button-block button-balanced" ng-click = "closeModal(true);removeAllTags()">Tag</button>
     </ion-content>
   </ion-modal-view>
+

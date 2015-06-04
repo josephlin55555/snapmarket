@@ -1,10 +1,10 @@
 angular.module('sell.controllers', ['ngCordova'])
 //controller for default state when clicking on sell tab
-.controller('SellCameraCtrl', function($rootScope, $scope , $state , $firebaseObject , $cordovaCamera , Camera) {
+.controller('SellCameraCtrl', function($rootScope, $scope , $state , $firebaseObject , $cordovaCamera , Camera ) {
 
 
         var options = { 
-            quality : 75, 
+            quality : 10, 
             destinationType : 0, 
             sourceType : 1, 
             allowEdit : true,
@@ -15,10 +15,9 @@ angular.module('sell.controllers', ['ngCordova'])
         };
 
   $scope.getPhoto = function() {
-    console.log('running on init',Camera.cameraExists(),options);
     //for development if the camera does not exists redirect to a static image
     if(!Camera.cameraExists()){
-      $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings/1112223334"))
+      $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings2/-JqqHgBpAcffa_uL54G-"))
       $scope.db.$loaded().then(
         function(data){
           $rootScope.lastPhoto=data.img;
@@ -35,24 +34,22 @@ angular.module('sell.controllers', ['ngCordova'])
     }
   };
 
+
 })
 
 
 
-.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition  ) {
+.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading) {
 
-  $scope.db = $firebaseArray(new Firebase("https://snapmarket.firebaseio.com/listings2"));
+  $scope.tags = [];
+  $scope.db = $firebaseArray(Db.child('listings2'));
+  // $scope.db.$loaded().then(function(){console.log('CONTROLLER DB',Db,$scope.db)});
+  
+  $scope.lastPhoto = $rootScope.lastPhoto;
 
-  $scope.db.$loaded()
-  .then(function() {
-    console.log('finished loading firebase:', $scope.db);
-  })
-  .catch(function(err) {
-    console.error(err);
-  });
+  console.log($scope.lastPhoto);
 
   $scope.title = 'Tag Your Things';
-  $scope.lastPhoto = $rootScope.lastPhoto;
 
   //this is the newItem for the modal to use. It is set to the tap.
 
@@ -74,23 +71,29 @@ angular.module('sell.controllers', ['ngCordova'])
   $scope.openModal = function() {
     $scope.modal.show();
   };
-  
+
+  $scope.syncTags = function (string,tags){
+    console.log('INVOKED',string,tags);
+    $scope.newItem.tags=tags;
+  }
+
   $scope.closeModal = function(save) {
     //this is triggered by clicking the x
     if(!save){
       $scope.newItem = {};
+      $scope.modal.tags = [];
     } 
+
+    if($scope.newItem.price && $scope.newItem.tags){
+      $scope.newItem.id = $scope.items.length+1;
+      $scope.items.push($scope.newItem);
+      $scope.newItem={};
+      $scope.modal.tags = [];
+
+    }
     $scope.modal.hide();
   };
 
-  $scope.$on('modal.hidden', function() {
-    //the new tag is empty because modal was exited
-    //else
-    if($scope.newItem.price && $scope.newItem.text){
-      $scope.items.push($scope.newItem);
-      $scope.newItem={};
-    }
-  });
 
 
   var headerBarOffset = 44;
@@ -112,7 +115,6 @@ angular.module('sell.controllers', ['ngCordova'])
 
 
   $scope.addItem = function(){
-    console.log($rootScope.profile);
     var tagTouchRadius = 100;
     var tap = getTap(event);
     var existing = false;
@@ -137,28 +139,44 @@ angular.module('sell.controllers', ['ngCordova'])
     return result;
   }
 
-  var getUserForTesting = function(){
-    if($rootScope.profile){
-      return $rootScope.profile.uid;
-    }
-    return 'Test User';
-  };
 
   //syncs listing with fb and redirect to sell listings tab
+  var setItemsActive = function(){
+    for(var i = 0; i < $scope.items.length; i++){
+      $scope.items[i].isActive = true;
+    }
+  }
+
+  //for testing
+
+  var getAuth = function(){
+    var testing = true;
+    if(testing){
+      return 'Test User for broken Auth';
+    }
+    return Db.getAuth().uid;
+  }
 
   $scope.submitListing = function(){
-
+    setItemsActive();
     var listing = {
-      user : getUserForTesting(),
+      user :  getAuth(),
       title : $scope.title,
       img : $scope.lastPhoto || null,
       items : $scope.items,
-      allTags : allTags()
+      allTags : allTags(),
+      createdAt : new Date().toString()
     }
     if($scope.items.length>0){
+      $ionicLoading.show({
+        template: 'Adding Listing...'
+      });
       $scope.modal.remove();
-      $scope.db.$add(listing).then(console.log('SUBMIT LISTING'));
-      $state.go('tab.sellListings');
+      $scope.db.$add(listing).then(function(){
+        $ionicTabsDelegate.select(2);
+        $state.go('tab.transaction.sellListings');
+        $ionicLoading.hide();
+      });      
     }
   };
 
