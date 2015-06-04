@@ -11,11 +11,15 @@ angular.module('starter.services', [
  })
  .run(function($rootScope, $state, $ionicTabsDelegate, Db){
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
-    
     var shouldLogin = toState.data !== undefined && toState.data.requireLogin && !Db.getAuth();
+  
+    //for development
+
+    var shouldLogin = false;
+
     //var redirectToProfile = toState.data !== undefined && toState.data.redirectOnAuth && !!Db.getAuth();
-    console.log('shouldLogin:', shouldLogin);
     //console.log('redirectToProfile:', redirectToProfile);
+    console.log('shouldLogin:', shouldLogin);
     console.log('fromState:', fromState);
     console.log('toState:', toState);
 
