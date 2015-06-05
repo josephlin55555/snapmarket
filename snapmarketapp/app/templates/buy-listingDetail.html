@@ -11,12 +11,38 @@
       <ion-item class="detailView">
 
         <div class="card">
-          <div class="item cardStuffDetails">
+          <div class="item">
       
             <p><img class="listingThumbnailDetail" ng-src="{{currentListing.img }}"></p>
             <h1 class="cardTitle">{{currentListing.title}}</h1>
             <p class="cardUser">Posted by {{currentListing.user}}</p>
             <p class="cardTag">Tags: {{currentListing.allTags}}</p>  
+              
+          </div>
+          
+          <div class="item" ng-repeat="item in currentListing.items">
+            <ion-checkbox ng-model="checked" ng-change="check(checked, item)" ng-disabled="!{{item.isActive}}">
+              Item: {{item.text}}
+              <br>
+              Price: ${{item.price}}
+              <br>
+              Tags: {{item.tags}}
+              <br>
+              Position: ({{item.x}}, {{item.y}})
+              <br>
+              ItemID: {{item.id}}
+              <br>
+              Fit For Sale: {{item.isActive}}
+            </ion-checkbox>
+          </div>
+
+          <div class="item">
+            
+            <input class="buyerPrice" ng-model="buyerPrice" ng-minlength="1" placeholder="Offer"> 
+            </input>
+            <button ng-click="submitPrice(buyerPrice)"> 
+                Submit Here
+            </button>
 
           </div>
         </div>
