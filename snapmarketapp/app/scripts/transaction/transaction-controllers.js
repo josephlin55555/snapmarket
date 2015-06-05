@@ -38,23 +38,27 @@ angular.module('transaction.controllers', [])
         template: 'Loading...'
       });
 
-    //Create array of current user's listings
-    var currentUser = Db.getAuth().uid;
-    var listingArray = [];  
-    var listingObj = $firebaseObject(Db.child('listings2'));
+    //Grab facebookId of current user
+    $rootScope.currentUser = Db.getAuth().uid; 
+    //Grab object of all listings in the Db
+    var listings = $firebaseObject(Db.child('listings2'));
+    //create filtered object of current users listings
+    $rootScope.userListings = {};
     //When Db loads, filter through and find all listings from that user
-    listingObj.$loaded().then(function(){ 
-      angular.forEach(listingObj, function(value, key) {
-        if(listingObj[key]['user'].toString() === currentUser.toString()){
-          listingArray.push(listingObj[key]);
-        }
+    listings.$loaded().then(function(){ 
+      angular.forEach(listings, function(value, key) {
+        //check if user facebookId matches listingId user
+        if(listings[key]['user'].toString() === $rootScope.currentUser.toString()){
+          $rootScope.userListings[key] = listings[key];
+        } 
       });
-      $rootScope.myListings = listingArray;
+      //Hide loading screen when array is filled
+      console.log($rootScope.userListings);
       $ionicLoading.hide();    
     });
   })
 
-  .controller('SellOffersCtrl', function($rootScope, $scope, $state, Db) {
+  .controller('SellOffersCtrl', function($rootScope, $scope, $state, Db, $firebaseObject) {
     $rootScope.nav = {
       bar : true,
       title: "Seller: Offers",
@@ -67,6 +71,19 @@ angular.module('transaction.controllers', [])
       $state.go('tab.transaction.chat');
       $rootScope.item = value;
     }
+
+    var allOffers = $firebaseObject(Db.child('offers'));
+
+    console.log($rootScope.listing);
+
+    allOffers.$loaded().then(function(){
+      angular.forEach(allOffers, function(value, key) {
+      
+      })  
+    })
+
+
+
   });
 
 

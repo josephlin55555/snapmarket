@@ -1,7 +1,7 @@
 <ion-view title="Sell" class="transaction">
   <ion-content class="padding has-tabs-top">
     <ion-list>
-      <ion-item collection-repeat="value in myListings">
+      <ion-item ng-repeat="(key, value) in userListings">
         <div class="item item-thumbnail-left item-icon-right" ng-click="viewList(value)">
           <img ng-src="{{value.img}}">
           <strong>{{value.title}}</strong>
@@ -9,9 +9,7 @@
           <p>{{value.items.length}} Offer(s) in this Listing</p>
           <i class="icon ion-arrow-right-b"></i>
         </div>
-        
       </ion-item>
-
     <ion-list>
   </ion-content>
 </ion-view>
