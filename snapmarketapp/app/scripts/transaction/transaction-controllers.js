@@ -31,7 +31,7 @@ angular.module('transaction.controllers', [])
 
     $scope.viewList = function(value){
       $state.go('tab.transaction.sellOffers');
-      $rootScope.listing = value;
+      $rootScope.currentlisting = value;
      }
     //Loading indicator while Db is being loaded
     $ionicLoading.show({
@@ -53,7 +53,6 @@ angular.module('transaction.controllers', [])
         } 
       });
       //Hide loading screen when array is filled
-      console.log($rootScope.userListings);
       $ionicLoading.hide();    
     });
   })
@@ -65,25 +64,26 @@ angular.module('transaction.controllers', [])
       url: "#/tab/transaction/sellListings"
     };
 
-    $scope.items = $rootScope.listing.items;
-
     $scope.viewItem = function(value){
       $state.go('tab.transaction.chat');
       $rootScope.item = value;
     }
 
-    var allOffers = $firebaseObject(Db.child('offers'));
+    //create array of offers
+    var offerIds = $rootScope.currentlisting.offers;    
+    console.log(offerIds); 
 
-    console.log($rootScope.listing);
+    var user = $firebaseObject(Db.child('users'));
+    var offers = $firebaseObject(Db.child('offers'));
 
-    allOffers.$loaded().then(function(){
-      angular.forEach(allOffers, function(value, key) {
-      
-      })  
-    })
-
-
-
+    $scope.listingOffers = [];   //array to hold all offer objects
+    
+    offers.$loaded().then(function(){
+      for(var i=0; i < offerIds.length; i++) {
+        $scope.listingOffers.push(offers[offerIds[i]]);
+      }
+      console.log($scope.listingOffers);      
+    });
   });
 
 
