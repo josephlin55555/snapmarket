@@ -1,5 +1,16 @@
 angular.module('buy.controllers', ['firebase'])
-.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope) {
+.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope, Db) {
+  /*
+  once buySearch view is loaded, check if keyGen variable exists and load if necessary
+  keyGen is needed to keep track of offers (also tracked in user.buy)
+  */
+  var offers = $firebaseObject(Db.child('offers'));
+  offers.$loaded().then(function() {
+    if(offers.keyGen === undefined) {
+      offers.keyGen = 0;
+      offers.$save();
+    }
+  });
 
   // alternative array type for firebase listings
     //TODO: convert to Ref
@@ -65,10 +76,117 @@ angular.module('buy.controllers', ['firebase'])
   });
 
 })
-.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state) {
+.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray) {
   if($rootScope.currentListing === undefined) {
     $state.go('tab.buySearch');
   }
+
+  //changes based on what items the buyer toggles in ion-checkbox
+  $scope.totalSellerPrice = 0;
+  $scope.selectedItems = [];
+
+  //activates once ion-checkbox is selected
+  $scope.check = function(checked, item) {
+    if(checked === true) {
+      $scope.totalSellerPrice += Number(item.price);
+
+      var exists = false;
+      $scope.selectedItems.forEach(function(val) {
+        if(val.id === item.id) {
+          exists = true;
+        }
+      });
+
+      if(exists === false) {
+        $scope.selectedItems.push(item);
+      }
+
+    } else {
+      $scope.totalSellerPrice -= Number(item.price);
+
+      for(var i = 0; i < $scope.selectedItems.length; i++) {
+        if($scope.selectedItems[i]) {
+          if($scope.selectedItems[i].id === item.id) {
+            delete $scope.selectedItems[i];
+          }
+        }
+      }
+    }
+
+    //delete later
+    console.log("total amount: $" + $scope.totalSellerPrice);
+    console.log("selected items: ", $scope.selectedItems);
+  };
+
+  $scope.submitPrice = function(price) {
+
+    //clear input fields
+    $('.buyerPrice').val('');
+
+    //load up offers object
+    var offers = $firebaseObject(Db.child('offers'));
+    offers.$loaded().then(function() {
+
+      //create an offer object with relevant information
+      var offer = {
+        buyer: Db.getAuth().uid,
+        seller: $rootScope.currentListing.user,
+        listing: $rootScope.currentListing.$id,
+        messages: $rootScope.currentListing.title,
+        totalBuyerPrice: price,
+        totalSellerPrice: $scope.totalSellerPrice,
+        items: $scope.selectedItems,
+        uniqueId: offers.keyGen
+      };
+
+      //sets the offer object
+      offers[offers.keyGen] = offer;
+
+      //adds the keyGen uniqueID under users
+      var users = $firebaseObject(Db.child('users'));
+      users.$loaded().then(function() {
+
+        //be careful with forEach
+        users.forEach(function(user) {
+          if(user.uid === Db.getAuth().uid) {
+            if(user.buy === undefined) {
+              user.buy = [offers.keyGen];
+            } else {
+              user.buy.push(offers.keyGen);
+            }
+          }
+        });
+
+        //can only $save with $firebaseObject ($firebaseArray uses $add and doesn't use $save)
+        var listings = $firebaseObject(Db.child('listings2'));
+        listings.$loaded().then(function() {
+          //in order to access unique Hash ID, use for-in loop (e.g. "key")
+          for(var key in listings) {
+            if(key === $rootScope.currentListing.$id) {
+              if(listings[key].offers === undefined) {
+                listings[key].offers = [offers.keyGen];
+              } else {
+                listings[key].offers.push(offers.keyGen);
+              }
+            }
+          }
+
+          //multiple saves must be asynchronously called
+          listings.$save().then(function() {
+            users.$save().then(function() {
+              offers.keyGen++;
+              offers.$save().then(function() {
+              });
+            });
+          });
+        });
+      });
+    });
+    
+    //once everything is finished, go back to buySearch view
+    $state.go('tab.buySearch');
+  };
+
 })
 .controller('BuyItemOfferCtrl', function($scope) {})
 
