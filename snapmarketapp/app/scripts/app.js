@@ -66,15 +66,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
-      .state('tab.buyItemOffer', {
-        url: '/buySearch/:itemId/offer',
-        views: {
-          'buy': {
-            templateUrl: 'templates/buy-itemOffer.html',
-            controller: 'BuyItemOfferCtrl'
-          }
-        }
-      })
   .state('tab.sellCamera', {
     url: '/sellCamera',
     views: {
@@ -124,15 +115,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       },
       data: {requireLogin: true}
     })
-      .state('tab.transaction.chat', {
-        url: '/chat',
-        views: {
-          'offers': {
-            templateUrl: 'templates/transaction-chat.html',
-            controller: 'TransactionChatCtrl'
-          }
-        }
-      })
      .state('tab.transaction.sellListings', {
       url: '/sellListings',
       views: {
@@ -152,6 +134,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           }
         }
       })
+        .state('tab.transaction.chat', {
+          url: '/chat',
+          views: {
+            'offers': {
+              templateUrl: 'templates/transaction-chat.html',
+              controller: 'ChatCtrl'
+            }
+          }
+        })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
  });

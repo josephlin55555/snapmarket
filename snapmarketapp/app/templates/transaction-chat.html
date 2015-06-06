@@ -1,13 +1,31 @@
-<ion-view view-title="Title of Offer">
-  <ion-content class="padding has-tabs-top"> 
-    <img src="http://i0.kym-cdn.com/photos/images/newsfeed/000/101/781/Y0UJC.png" height="300px" width="300px">
-    <div>
-      <strong>title</strong>
-      <p>$5,000</p>
-      <p>You want to buy this product asap and give me money</p>
+<ion-view view-title="Chat" class="transaction">
+
+<ion-content delegate-handle="chat" id="chat-list" on-hold="showTime = !showTime"
+  class="content-stable mh-padding has-tabs-top">
+    <div ng-repeat="post in posts" ng-class="{self:post.user === handle}" class="messages">
+      <div class="message slide-right" ng-class="{'slide-right': !showTime, '': showTime}">
+        <span ng-if="post.message">{{post.message}}</span>
+        <img ng-if="post.img" ng-src="{{post.img}}" class="post-img" />
+      </div>
+      <div class="time slide-right" ng-class="{'slide-right': !showTime, '': showTime}">
+        {{post.timestamp | date:"h:mma"}}
+      </div>
     </div>
-    <ion-item>
-      User Profile Info
-    </ion-item>
-  </ion-content>
+</ion-content>
+
+
+<form id="footer-input" ng-submit="add(message)">
+  <ion-footer-bar keyboard-attach class="item-input-inset">
+
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios7-search placeholder-icon"></i>
+      <input ng-focus="inputUp()" ng-blur="inputDown()" type="text" placeholder="Message"
+      ng-model="message">
+    </label>
+    <a class="button button-clear" ng-click="takePicture()">
+      <i class="icon ion-camera"></i>
+    </a>
+  </ion-footer-bar>
+</form>
+
 </ion-view>
