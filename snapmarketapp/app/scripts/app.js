@@ -118,18 +118,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       url: '/buyOffers',
       views: {
         'offers': {
-          templateUrl: 'templates/buy-offers.html',
+          templateUrl: 'templates/transaction-buy-offers.html',
           controller: 'BuyOfferCtrl'
         } 
       },
       data: {requireLogin: true}
     })
-      .state('tab.transaction.transactionChat', {
-        url: '/transactionChat',
+      .state('tab.transaction.chat', {
+        url: '/chat',
         views: {
           'offers': {
-            templateUrl: 'templates/buy-transactionChat.html',
-            controller: 'BuyTransactionChatCtrl'
+            templateUrl: 'templates/transaction-chat.html',
+            controller: 'TransactionChatCtrl'
           }
         }
       })
@@ -137,31 +137,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       url: '/sellListings',
       views: {
         'offers': {
-          templateUrl: 'templates/sell-listings.html',
+          templateUrl: 'templates/transaction-sell-listings.html',
           controller: 'SellListingsCtrl'
         }
       },
       data: {requireLogin: true}
     })
-      .state('tab.transaction.sellListingItems', {
-        url: '/sellListingItems',
+      .state('tab.transaction.sellOffers', {
+        url: '/sellListings/sellOffers',
         views: {
           'offers': {
-            templateUrl: 'templates/sell-listingItems.html',
-            controller: 'SellListingItemsCtrl'
+            templateUrl: 'templates/transaction-sell-offers.html',
+            controller: 'SellOffersCtrl'
           }
         }
       })
-        .state('tab.transaction.sellItemOffers', {
-          url: '/sellItemOffers',
-          views: {
-            'offers': {
-              templateUrl: 'templates/sell-itemOffers.html',
-              controller: 'SellItemOffersCtrl'
-            }
-          }
-        })
- 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
  });

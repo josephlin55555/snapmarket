@@ -1,5 +1,6 @@
 angular.module('buy.controllers', ['firebase'])
-.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope, Db) {
+
+.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope, Db, $ionicLoading) {
   /*
   once buySearch view is loaded, check if keyGen variable exists and load if necessary
   keyGen is needed to keep track of offers (also tracked in user.buy)
@@ -14,6 +15,9 @@ angular.module('buy.controllers', ['firebase'])
 
   // alternative array type for firebase listings
     //TODO: convert to Ref
+  $ionicLoading.show({
+    template: 'Loading...'
+  });
   var ref = new Firebase("https://snapmarket.firebaseio.com/listings2");
   $scope.listings = $firebaseArray(ref);
   $scope.results = [];
@@ -33,7 +37,8 @@ angular.module('buy.controllers', ['firebase'])
   // copy over full listings to the results array for display
   $scope.listings.$loaded()
     .then(function(){
-      $scope.results = filterListings($scope.listings)
+      $scope.results = filterListings($scope.listings);
+      $ionicLoading.hide();
     });
 
   //filter scope.results through one tag
@@ -76,7 +81,7 @@ angular.module('buy.controllers', ['firebase'])
   });
 
 })
-.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray) {
+.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray, Profile) {
   if($rootScope.currentListing === undefined) {
     $state.go('tab.buySearch');
   }
@@ -129,7 +134,7 @@ angular.module('buy.controllers', ['firebase'])
 
       //create an offer object with relevant information
       var offer = {
-        buyer: Db.getAuth().uid,
+        buyer: Profile(Db.getAuth()),
         seller: $rootScope.currentListing.user,
         listing: $rootScope.currentListing.$id,
         messages: $rootScope.currentListing.title,
