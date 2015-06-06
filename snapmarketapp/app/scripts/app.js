@@ -128,7 +128,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         url: '/chat',
         views: {
           'offers': {
-            templateUrl: 'templates/transaction-Chat.html',
+            templateUrl: 'templates/transaction-chat.html',
             controller: 'TransactionChatCtrl'
           }
         }
