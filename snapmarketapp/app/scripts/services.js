@@ -13,6 +13,9 @@ angular.module('starter.services', [
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
     var shouldLogin = toState.data !== undefined && toState.data.requireLogin && !Db.getAuth();
 
+    //only for demo
+    //shouldLogin = false;
+
     if(shouldLogin){
       console.log('redirect to LOGIN!')
       $ionicTabsDelegate.select(3);

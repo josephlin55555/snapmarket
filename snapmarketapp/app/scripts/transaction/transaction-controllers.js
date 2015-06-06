@@ -76,9 +76,7 @@ angular.module('transaction.controllers', [])
       }
       console.log($scope.listingOffers);      
     });
-  });
-
-
+  })
 .controller('ChatCtrl', function($rootScope, $scope, ChatManager, $cordovaCamera, $ionicScrollDelegate, $ionicModal, $ionicActionSheet, $timeout, Db) {
   //title: Buyer: Offer Chat
   //title: Seller: Offer Chat
