@@ -76,7 +76,7 @@ angular.module('buy.controllers', ['firebase'])
   });
 
 })
-.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject) {
+.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray) {
   if($rootScope.currentListing === undefined) {
     $state.go('tab.buySearch');
   }
@@ -145,6 +145,8 @@ angular.module('buy.controllers', ['firebase'])
       //adds the keyGen uniqueID under users
       var users = $firebaseObject(Db.child('users'));
       users.$loaded().then(function() {
+
+        //be careful with forEach
         users.forEach(function(user) {
           if(user.uid === Db.getAuth().uid) {
             if(user.buy === undefined) {
@@ -154,12 +156,30 @@ angular.module('buy.controllers', ['firebase'])
             }
           }
         });
-        //save the users object here
-        users.$save();
 
-        //increment the keyGen variable and then save offers (keyGen is located within offers)
-        offers.keyGen++;
-        offers.$save();
+        //can only $save with $firebaseObject ($firebaseArray uses $add and doesn't use $save)
+        var listings = $firebaseObject(Db.child('listings2'));
+        listings.$loaded().then(function() {
+          //in order to access unique Hash ID, use for-in loop (e.g. "key")
+          for(var key in listings) {
+            if(key === $rootScope.currentListing.$id) {
+              if(listings[key].offers === undefined) {
+                listings[key].offers = [offers.keyGen];
+              } else {
+                listings[key].offers.push(offers.keyGen);
+              }
+            }
+          }
+
+          //multiple saves must be asynchronously called
+          listings.$save().then(function() {
+            users.$save().then(function() {
+              offers.keyGen++;
+              offers.$save().then(function() {
+              });
+            });
+          });
+        });
       });
     });
     
