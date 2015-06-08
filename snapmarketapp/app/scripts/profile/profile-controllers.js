@@ -33,6 +33,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
         } //asks user for permission to grab facebook email
       }, {scope: "email"});
     }else{
+      console.log('REDIRECTING FOR DEVELOPMENT')
       $state.go('tab.profile');
     }
   }
@@ -47,7 +48,8 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
   if($rootScope.production) console.log(JSON.stringify(Db.getAuth()));
 
   var authData = $rootScope.production ? Db.getAuth() : JSON.parse(ENV.testingUser);
-  console.log('TEST USER',Object.keys(ENV),JSON.parse(ENV.testingUser));
+
+  console.log('TEST USER',Object.keys(ENV),ENV.testingUser,JSON.parse(ENV.testingUser));
   $scope.profile = Profile(authData);
 
   $scope.logout = function() {

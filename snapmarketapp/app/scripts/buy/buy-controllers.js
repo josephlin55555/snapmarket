@@ -90,7 +90,10 @@ angular.module('buy.controllers', ['firebase'])
 
 
 })
+
 .controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray, Profile) {
+
+
   console.log($rootScope.currentListing.items);
   if($rootScope.currentListing === undefined) {
     $state.go('tab.buySearch');
@@ -201,6 +204,7 @@ angular.module('buy.controllers', ['firebase'])
     //once everything is finished, go back to buySearch view
     $state.go('tab.buySearch');
   };
+
 
   $scope.position = function(tap){
     return {'font-size': '20px',
