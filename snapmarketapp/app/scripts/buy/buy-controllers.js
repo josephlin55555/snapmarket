@@ -39,6 +39,7 @@ angular.module('buy.controllers', ['firebase'])
     .then(function(){
       $scope.results = filterListings($scope.listings);
       $ionicLoading.hide();
+      console.log($scope.results);
     });
 
   //filter scope.results through one tag
@@ -67,6 +68,13 @@ angular.module('buy.controllers', ['firebase'])
   var tags = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/tags"));
   $scope.tags = [];
   
+
+  $scope.position = function(tap){
+    return {'font-size': '20px',
+      position: 'absolute',
+            left: tap.x+'px',
+            top: tap.y+'px'};
+  };
   // once tags have been loaded, place each tag and no. of listings into an array called $scope.tags
   tags.$loaded()
     .then(function(){
@@ -80,8 +88,10 @@ angular.module('buy.controllers', ['firebase'])
       console.error(err);
   });
 
+
 })
 .controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray, Profile) {
+  console.log($rootScope.currentListing.items);
   if($rootScope.currentListing === undefined) {
     $state.go('tab.buySearch');
   }
@@ -192,6 +202,12 @@ angular.module('buy.controllers', ['firebase'])
     $state.go('tab.buySearch');
   };
 
+  $scope.position = function(tap){
+    return {'font-size': '20px',
+      position: 'absolute',
+            left: tap.x+'px',
+            top: tap.y+'px'};
+  };
 })
 .controller('BuyItemOfferCtrl', function($scope) {})
 
