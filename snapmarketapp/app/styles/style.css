@@ -56,7 +56,7 @@ allows for scrolling capability;
 background-color is light-blue for remaining background in buySearch view
 */
 ion-scroll[direction=y] {
-  height: 80vh;
+  height: 86vh;
   margin: 0;
   width: 100vw;
   background-color: #B2DFDB;
@@ -227,3 +227,82 @@ For large screens: ipad/computer screen
   width: 100%;
   max-width: 250px;
   border-radius: 10px; }
+
+.card {
+  margin : 0;
+}
+
+.item .numberOfItems {
+  font-size: 14px;
+}
+
+.item .numberOfOffers {
+  color: #727272;
+}
+
+.item .createdOn {
+  font-size: 12px;
+  font-weight: bold;
+  color: #B6B6B6;
+}
+
+a.item {
+  padding: 0;
+}
+
+.tabs-striped.tabs-background-positive .tabs  {
+  background-color: #009688;
+}
+
+.bar.bar-positive {
+  border-color: #00796B;
+  background-color: #00796B;
+  background-image: linear-gradient(0deg, #00796B, #009688 50%, transparent 50%);
+  color: #fff;
+}
+
+.tabs-background-positive .tabs, .tabs-background-positive > .tabs {
+  border-color: #009688;
+}
+
+.button.button-positive {
+  border-color: #009688;
+  background-color: #009688;
+}
+
+.button.button-positive.active, .button.button-positive.activated {
+  border-color: #00796B;
+  background-color: #00796B;
+}
+
+.item-icon-right .icon {
+  color: #FF5252;
+}
+
+.bar.item-input-inset .item-input-wrapper {
+  margin-left: 8px;
+}
+
+.buySearch {
+  height: 300px;
+}
+
+.card .listingImage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: initial;
+  z-index: 0;
+}
+
+.user, .listingTitle {
+ z-index: 1;
+ position: relative;
+ color: white;
+ text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95)
+}
+
+#addButton {
+  text-transform: none;
+}

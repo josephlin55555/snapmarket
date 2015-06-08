@@ -15,7 +15,7 @@ angular.module('transaction.controllers', [])
   })
 
   //Sell Navigation controllers
-  .controller('SellListingsCtrl', function($rootScope, $scope, $state, $firebaseObject, Db, $ionicLoading) {
+  .controller('SellListingsCtrl', function($rootScope, $scope, $state, $firebaseObject, Db, $ionicLoading, ionicMaterialMotion, ionicMaterialInk) {
     $rootScope.nav = {
       bar : false,
       title : "Seller: Listings"
@@ -94,8 +94,8 @@ angular.module('transaction.controllers', [])
 
   function scrollBottom() {
     $timeout(function() {
-      var startHandle = _.find($ionicScrollDelegate._instances, function (s) {
-          return s.$$delegateHandle === "chat";
+      var startHandle = _.find($ionicScrollDelegate._instances, function (view) {
+          return view.$$delegateHandle === "chat";
       });
       startHandle.scrollBottom();
     });
