@@ -13,14 +13,6 @@ angular.module('transaction.controllers', [])
     }
 
   })
-  .controller('TransactionChatCtrl', function($rootScope, $scope, $state, Db) {
-    $rootScope.nav = {
-      bar : true,
-      title: "Current Offer",
-      url: "#/tab/transaction/buyOffers"
-    };
-  })
-    
 
   //Sell Navigation controllers
   .controller('SellListingsCtrl', function($rootScope, $scope, $state, $firebaseObject, Db, $ionicLoading) {
@@ -84,11 +76,121 @@ angular.module('transaction.controllers', [])
       }
       console.log($scope.listingOffers);      
     });
+  })
+.controller('ChatCtrl', function($rootScope, $scope, ChatManager, $cordovaCamera, $ionicScrollDelegate, $ionicModal, $ionicActionSheet, $timeout, Db) {
+  //title: Buyer: Offer Chat
+  //title: Seller: Offer Chat
+  //url: #/tab/transaction/:offerId
+
+  $rootScope.nav = {
+    bar : true,
+    title: "Buyer: Item Chat",
+    url: "#/tab/transaction/buyOffers"
+  };
+
+  $scope.handle = Db.getAuth().uid;
+  $scope.showTime = false;
+
+
+  function scrollBottom() {
+    $timeout(function() {
+      var startHandle = _.find($ionicScrollDelegate._instances, function (s) {
+          return s.$$delegateHandle === "chat";
+      });
+      startHandle.scrollBottom();
+    });
+  }
+
+  function addPost(message, img) {
+    ChatManager.posts().$add({
+      message: message ? message : null,
+      img: img ? img : null,
+      timestamp: new Date().getTime(),
+      user: $scope.handle
+    });
+  }
+
+  $scope.data = {};
+  
+  var isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
+  $scope.inputUp = function() {
+    window.addEventListener('native.keyboardshow', function() {
+      if (isIOS) {
+        $scope.data.keyboardHeight = 216;
+      }
+      $timeout(function() {
+        $ionicScrollDelegate.scrollBottom(true);
+      }, 300);
+
+    });
+  };
+
+  $scope.inputDown = function() {
+    if (isIOS) {
+      $scope.data.keyboardHeight = 0;
+    }
+    $ionicScrollDelegate.resize();
+  };
+
+  $scope.posts = ChatManager.posts();
+  $scope.posts.$watch(scrollBottom);
+
+  $scope.add = function(message) {
+    addPost(message);
+    // pretty things up
+    $scope.message = null;
+  };
+
+  $scope.takePicture = function() {
+    $ionicActionSheet.show({
+      buttons: [{
+        text: 'Picture'
+      }, {
+        text: 'Selfie'
+      }, {
+        text: 'Saved Photo'
+      }],
+      titleText: 'Take a...',
+      cancelText: 'Cancel',
+      buttonClicked: function(index) {
+        ionic.Platform.isWebView() ? takeARealPicture(index) : takeAFakePicture();
+        return true;
+      }
   });
 
+  function takeARealPicture(cameraIndex) {
+    var options = {
+      quality: 50,
+      sourceType: cameraIndex === 2 ? 2 : 1,
+      cameraDirection: cameraIndex,
+      destinationType: Camera.DestinationType.DATA_URL,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 500,
+      targetHeight: 600,
+      saveToPhotoAlbum: false
+    };
 
+    $cordovaCamera.getPicture(options).then(function(imageData) {
+        var photo = 'data:image/jpeg;base64,' + imageData;
+        addPost(null, photo);
+      }, function(err) {
+        // error
+        console.error(err);
+        takeAFakePicture();
+      });
+  }
 
+  function takeAFakePicture() {
+      addPost(null, $cordovaCamera.getPlaceholder());
+    }
+  };
 
+  $scope.save = function(handle) {
+    localStorage.handle = $scope.handle = handle;
+    $scope.modal.hide();
+  };
 
-
-
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+});

@@ -13,8 +13,8 @@ angular.module('starter.services', [
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
     var shouldLogin = toState.data !== undefined && toState.data.requireLogin && !Db.getAuth();
 
-    //for development purposes - MUST BE DELETED ONCE AUTH IS FIXED!!!
-    var shouldLogin = false;
+    //only for demo
+    //shouldLogin = false;
 
     if(shouldLogin){
       console.log('redirect to LOGIN!')
@@ -23,12 +23,5 @@ angular.module('starter.services', [
       event.preventDefault();
       return;
     } 
-    // else if(redirectToProfile){
-    //   console.log('redirect to PROFILE!')
-    //   $ionicTabsDelegate.select(3);
-    //   $state.go('tab.profile');
-    //   event.preventDefault();
-    //   return;
-    // }
   })
 });
