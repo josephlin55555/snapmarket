@@ -41,12 +41,15 @@ angular.module('transaction.controllers', [])
       angular.forEach(listings, function(value, key) {
         //check if user facebookId matches listingId user
         if(listings[key]['user'].toString() === $rootScope.currentUser.toString()){
+          listings[key].createdAt = moment(listings[key].createdAt).fromNow(); 
+          console.log(listings[key].createdAt);
           $rootScope.userListings[key] = listings[key];
         } 
       });
       //Hide loading screen when array is filled
       $ionicLoading.hide();    
     });
+
   })
 
   .controller('SellOffersCtrl', function($rootScope, $scope, $state, Db, $firebaseObject) {
