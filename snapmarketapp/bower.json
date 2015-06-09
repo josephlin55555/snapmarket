@@ -8,7 +8,7 @@
     "angularfire": "~1.1.1",
     "angular-masonry": "~0.11.0",
     "underscore": "~1.8.3",
-    "ionic-material": "~0.4.2"
+    "ionic-material": "~0.4.2",
     "moment": "~2.10.3"
   },
   "devDependencies": {

@@ -4,11 +4,12 @@
       <div class="card" ng-repeat="(key, value) in userListings">
         <div class="item item-thumbnail-left item-icon-right" ng-click="viewList(value)">
           <img ng-src="{{value.img}}">
-          <strong>{{value.title}}</strong>
-          <p class="numberOfItem">{{value.allTags}}</p>
-          <p class="numberOfOffers">{{value.offers.length}} Offer(s) in this Listing</p>
-          <!-- Need to remove above line if no offers are made| use ng-show -->
-          <p>Created {{value.createdAt}}</p>
+          <div class = "listingDetails">
+            <p class="listingTitle">{{value.title}}</p>
+            <p class="numberOfItem">{{value.allTags}}</p>
+            <p class="numberOfOffers">{{totalOffers(value)}}</p>
+            <p class="createdOn">Created {{value.createdAt}}</p>
+          </div> 
           <i class="icon ion-arrow-right-b"></i>
         </div>
      </div>

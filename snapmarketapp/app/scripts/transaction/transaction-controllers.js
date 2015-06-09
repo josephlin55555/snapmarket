@@ -42,13 +42,18 @@ angular.module('transaction.controllers', [])
         //check if user facebookId matches listingId user
         if(listings[key]['user'].toString() === $rootScope.currentUser.toString()){
           listings[key].createdAt = moment(listings[key].createdAt).fromNow(); 
-          console.log(listings[key].createdAt);
           $rootScope.userListings[key] = listings[key];
         } 
       });
       //Hide loading screen when array is filled
       $ionicLoading.hide();    
     });
+
+    $scope.totalOffers = function(listing) {
+      if(listing.offers === undefined || listing.offers.length === 0) {return 'No one has made any offers yet';}
+      else if(listing.offers.length === 1) {return 'Someone made you an offer!';}
+      else if(listing.offers.length >= 2) {return 'You currently have ' + listing.offers.length + ' offers!';}
+    }
 
   })
 
