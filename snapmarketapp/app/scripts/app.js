@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives', 'config', 'ionic-material'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives', 'config', 'ionic-material', 'ngOrderObjectBy'])
 
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);

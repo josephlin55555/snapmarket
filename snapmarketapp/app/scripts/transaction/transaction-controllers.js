@@ -41,7 +41,7 @@ angular.module('transaction.controllers', [])
       angular.forEach(listings, function(value, key) {
         //check if user facebookId matches listingId user
         if(listings[key]['user'].toString() === $rootScope.currentUser.toString()){
-          listings[key].createdAt = moment(listings[key].createdAt).fromNow(); 
+          listings[key].moment = moment(listings[key].createdAt).fromNow(); 
           $rootScope.userListings[key] = listings[key];
         } 
       });
