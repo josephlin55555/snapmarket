@@ -132,25 +132,32 @@ angular.module('buy.controllers', ['firebase'])
     var offers = $firebaseObject(Db.child('offers'));
     offers.$loaded().then(function() {
 
-      //create an offer object with relevant information
-      var offer = {
-        buyer: Profile(Db.getAuth()),
-        seller: $rootScope.currentListing.user,
-        listing: $rootScope.currentListing.$id,
-        messages: $rootScope.currentListing.title,
-        totalBuyerPrice: price,
-        totalSellerPrice: $scope.totalSellerPrice,
-        items: $scope.selectedItems,
-        uniqueId: offers.keyGen
-      };
-
-      //sets the offer object
-      offers[offers.keyGen] = offer;
-
       //adds the keyGen uniqueID under users
       var users = $firebaseObject(Db.child('users'));
       users.$loaded().then(function() {
 
+        var sellerObj = null;
+        for(var key in users) {
+          if(key === $rootScope.currentListing.user) {
+            sellerObj = users[key];
+          }
+        }
+
+        //create an offer object with relevant information
+        var offer = {
+          buyer: Profile(Db.getAuth()),
+          seller: sellerObj,
+          listing: $rootScope.currentListing.$id,
+          messages: $rootScope.currentListing.title,
+          totalBuyerPrice: price,
+          totalSellerPrice: $scope.totalSellerPrice,
+          items: $scope.selectedItems,
+          uniqueId: offers.keyGen
+        };
+
+        //sets the offer object
+        offers[offers.keyGen] = offer;
+        
         //be careful with forEach
         users.forEach(function(user) {
           if(user.uid === Db.getAuth().uid) {

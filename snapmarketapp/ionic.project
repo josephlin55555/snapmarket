@@ -1,12 +1,4 @@
 {
   "name": "snapmarketapp",
-  "app_id": "dcceb0ae",
-  "gulpStartupTasks": [
-    "sass",
-    "watch"
-  ],
-  "watchPatterns": [
-    "www/**/*",
-    "!www/lib/**/*"
-  ]
+  "app_id": "dcceb0ae"
 }

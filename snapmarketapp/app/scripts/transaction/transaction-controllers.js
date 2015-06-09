@@ -1,17 +1,59 @@
 angular.module('transaction.controllers', [])
 
   //Buy Navigation controllers
-  .controller('BuyOfferCtrl', function($rootScope, $scope, $state, $firebaseObject, Db) {
+  .controller('BuyOfferCtrl', function($rootScope, $scope, $state, $firebaseArray, Db, $ionicLoading) {
+
     $rootScope.nav = {
       bar : false
     };
-    var buyOffers = Db.child('Users')
-    $scope.dummy = [1,3,4,5,2,8];
-   
-    $scope.view = function(){
-      $state.go('tab.transaction.chat');
-    }
 
+    //display loading template initially
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+
+    $scope.offer = [];
+    var offers = $firebaseArray(Db.child('offers'));
+    offers.$loaded().then(function() {
+
+      var listings = $firebaseArray(Db.child('listings2'));
+      listings.$loaded().then(function() {
+
+        for(var key in offers) {
+          //filters only legal offers
+          if(offers[key].listing !== undefined) {
+            if(offers[key].buyer.uid === Db.getAuth().uid) {
+
+              var ti;
+              for(var k in listings) {
+                if(k === offers[key].listing) {
+                  ti = listings[k].title;
+                }
+              }
+
+              $scope.offer.push({
+                items: offers[key].items,
+                seller: offers[key].seller,
+                title: ti
+              });            
+
+            }
+          }
+        }
+
+
+
+      //once offers is loaded, hide $ionicLoading
+      $ionicLoading.hide();  
+      });
+    });
+   
+    $scope.view = function (title){
+      //required for modifying title in buyer chat
+      $rootScope.title = title;
+      $state.go('tab.transaction.chat');
+    };
+ 
   })
 
   //Sell Navigation controllers
@@ -84,7 +126,7 @@ angular.module('transaction.controllers', [])
 
   $rootScope.nav = {
     bar : true,
-    title: "Buyer: Item Chat",
+    title: $rootScope.title,
     url: "#/tab/transaction/buyOffers"
   };
 
