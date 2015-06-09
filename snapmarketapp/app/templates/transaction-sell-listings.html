@@ -1,14 +1,15 @@
 <ion-view title="Sell" class="transaction">
   <ion-content class="has-tabs-top">
     <ion-list animate-fade-slide-in-right>
-      <div class="card" ng-repeat="(key, value) in userListings">
+      <div class="card" ng-repeat="(key, value) in userListings | orderObjectBy: 'createdAt'">
         <div class="item item-thumbnail-left item-icon-right" ng-click="viewList(value)">
           <img ng-src="{{value.img}}">
-          <strong>{{value.title}}</strong>
-          <p class="numberOfItem">{{value.allTags}}</p>
-          <p class="numberOfOffers">{{value.offers.length}} Offer(s) in this Listing</p>
-          <!-- Need to remove above line if no offers are made| use ng-show -->
-          <p class="createdOn">Created on:  {{value.createdAt}}</p>
+          <div class = "listingDetails">
+            <p class="listingTitle">{{value.title}}</p>
+            <p class="numberOfItem">{{value.allTags}}</p>
+            <p class="numberOfOffers">{{totalOffers(value)}}</p>
+            <p class="createdOn">Created {{value.moment}}</p>
+          </div> 
           <i class="icon ion-arrow-right-b"></i>
         </div>
      </div>

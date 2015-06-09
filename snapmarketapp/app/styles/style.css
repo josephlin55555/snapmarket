@@ -229,7 +229,20 @@ For large screens: ipad/computer screen
   border-radius: 10px; }
 
 .card {
-  margin : 0;
+  margin : 1px;
+}
+
+.card>.item.item-thumbnail-left, .item-thumbnail-left, .item-thumbnail-left .item-content {
+  padding-bottom: 8px;
+}
+
+.item-thumbnail-left .item-content .item-image, .item-thumbnail-left .item-content>img:first-child, .item-thumbnail-left .item-image, .item-thumbnail-left>img:first-child {
+  border-radius: 0;
+}
+
+.item .listingTitle {
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .item .numberOfItems {
@@ -238,6 +251,7 @@ For large screens: ipad/computer screen
 
 .item .numberOfOffers {
   color: #727272;
+  font-style: italic;
 }
 
 .item .createdOn {
@@ -296,7 +310,7 @@ a.item {
   z-index: 0;
 }
 
-.user, .listingTitle {
+.user {
  z-index: 1;
  position: relative;
  color: white;

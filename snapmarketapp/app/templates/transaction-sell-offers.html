@@ -2,7 +2,7 @@
   <ion-content class="padding has-tabs-top"> 
     <ion-list>
      <!--  <ion-item ng-click="" ng-repeat="offer in listingOffers"> -->
-        <div class="card" ng-repeat="offer in listingOffers | orderBy: '-totalBuyerPrice'" >
+        <div class="card" ng-repeat="offer in listingOffers" >
           <div class="item item-thumbnail-left item-icon-right" ng-click="viewItem(offer)">
             <img src="{{offer.buyer.photo}}">
             <strong>Offer from {{offer.buyer.name}}</strong>
