@@ -13,7 +13,11 @@
         <div class="card">
           <div class="item">
       
-            <p><img class="listingThumbnailDetail" ng-src="{{currentListing.img }}"></p>
+            <p><img class="listingThumbnailDetail" ng-src="{{currentListing.img }}">
+              <div ng-repeat="item in currentListing.items">
+                <i class="icon ion-social-usd" ng-style="position(item)"{{item}}> {{item.price}}</i>
+              </div>
+            </p>
             <h1 class="cardTitle">{{currentListing.title}}</h1>
             <p class="cardUser">Posted by {{currentListing.user}}</p>
             <p class="cardTag">Tags: {{currentListing.allTags}}</p>  

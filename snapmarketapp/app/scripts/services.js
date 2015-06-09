@@ -11,7 +11,11 @@ angular.module('starter.services', [
  })
  .run(function($rootScope, $state, $ionicTabsDelegate, Db){
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
-    var shouldLogin = toState.data !== undefined && toState.data.requireLogin && !Db.getAuth();
+    if(!$rootScope.production){
+      shouldLogin = false;
+    }else{
+      var shouldLogin = toState.data !== undefined && toState.data.requireLogin && !Db.getAuth();
+    }
 
     //only for demo
     //shouldLogin = false;
