@@ -1,15 +1,42 @@
 <ion-view view-title="Profile">
   <ion-content>
     <ion-list class="profileList">
-
-      <ion-item class="logoutButton"><button class="button button-positive" ng-click="logout()">Logout</button></ion-item>
+      <br>
 
       <ion-item class="profileImage"><img class="imageAvatar" ng-src="{{profile.photo}}"></ion-item>
 
       <ion-item class="profileName">{{profile.name}}</ion-item>
 
       <ion-item class="profileEmail">{{profile.email}}</ion-item>
-    
+
+      <ion-item class="profileStats">
+        <span class="statistics">BUYER STATISTICS</span>
+        <br>
+        You have {{activeUserBuyOffers.length}} active offers.
+        <!-- <br>
+        You have {{inactiveUserBuyOffers.length}} inactive offers.
+        <br>
+        You have {{completedUserBuyOffers.length}} completed offers. -->
+      </ion-item>
+      <ion-item class="profileStats">
+        <span class="statistics">SELLER STATISTICS</span>
+        <br>
+        You have {{activeUserListings.length}} active listings.
+        <br>
+        You have {{activeUserSellOffers.length}} active offers.
+        <!-- <br><br>
+        You have {{inactiveUserListings.length}} inactive listings.
+        <br>
+        You have {{inactiveUserSellOffers.length}} inactive offers. 
+        <br><br>
+        You have {{completedUserListings.length}} completed listings.
+        <br> 
+        You have {{completedUserSellOffers.length}} completed offers. -->
+      </ion-item>
+      <br>
+      <br>
+      <div class="logoutButtonContainer"><button class="logoutButton button button-positive" ng-click="logout()">Logout</button></div>
+
     </ion-list>
   </ion-content>
 </ion-view>
