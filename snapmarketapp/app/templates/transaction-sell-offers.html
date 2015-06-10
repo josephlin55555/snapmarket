@@ -3,7 +3,7 @@
     <ion-list>
      <!--  <ion-item ng-click="" ng-repeat="offer in listingOffers"> -->
         <div class="card" ng-repeat="offer in listingOffers" >
-          <div class="item item-thumbnail-left item-icon-right" ng-click="viewItem(offer)">
+          <div class="item item-thumbnail-left item-icon-right" ng-click="viewOffer(offer)">
             <img src="{{offer.buyer.photo}}">
             <strong>Offer from {{offer.buyer.name}}</strong>
             <p ng-repeat="item in offer.items | limitTo:3">

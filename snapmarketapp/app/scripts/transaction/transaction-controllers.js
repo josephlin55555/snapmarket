@@ -21,12 +21,13 @@ angular.module('transaction.controllers', [])
 
     offers.$loaded().then(function(){
       angular.forEach(offers, function(value, key) {
-        if(offers[key].buyer.uid.toString() === $rootScope.currentUser.toString()){
-          $scope.userOffers[key] = offers[key];
+        if(offers[key].hasOwnProperty('buyer') && offers[key].buyer.uid === $rootScope.currentUser.toString()){
+         $scope.userOffers[key] = offers[key];
         }
       });
       $ionicLoading.hide();    
     });
+
   })
 
   //Sell Navigation controllers
@@ -39,7 +40,7 @@ angular.module('transaction.controllers', [])
     $scope.viewList = function(value){
       $state.go('tab.transaction.sellOffers');
       $rootScope.currentlisting = value;
-     }
+    }
     //Loading indicator while Db is being loaded
     $ionicLoading.show({
         template: 'Loading...'
@@ -82,11 +83,12 @@ angular.module('transaction.controllers', [])
     $scope.viewOffer = function(value){
       $state.go('tab.transaction.chat');
       $rootScope.currentOffer = value;
+      console.log($rootScope.currentOffer);
     }
 
     //create array of offers
     var offerIds = $rootScope.currentlisting.offers;    
-    console.log(offerIds); 
+    console.log(offerIds);
 
     var user = $firebaseObject(Db.child('users'));
     var offers = $firebaseObject(Db.child('offers'));
@@ -95,6 +97,7 @@ angular.module('transaction.controllers', [])
     
     offers.$loaded().then(function(){
       for(var i=0; i < offerIds.length; i++) {
+        console.log(offerIds[i]);
         $scope.listingOffers.push(offers[offerIds[i]]);
       }
       console.log($scope.listingOffers);      

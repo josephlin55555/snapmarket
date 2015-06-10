@@ -3,10 +3,10 @@
     <ion-list>
       <div class="card" ng-repeat="value in userOffers">
          <div class="item item-thumbnail-left item-icon-right" ng-click="viewOffer(value)">
-          <img src="http://pngimg.com/upload/basketball_PNG1095.png">
-          <strong>{{value.items.}}</strong>
-          <p>This is a description of the item</p>
-          <p>$5,000</p>
+          <img src="{{value.img}}">
+          <strong>{{value.messages}}</strong>
+          <p><span ng-repeat="item in value.items">{{item.text}}</span></p>
+          <p>${{value.totalBuyerPrice}}</p>
           <i class="icon ion-arrow-right-b"></i>
         </div>
       </div>
