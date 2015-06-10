@@ -106,6 +106,7 @@ angular.module('transaction.controllers', [])
 
     offers.$loaded().then(function(){
       for(var i=0; i < offerIds.length; i++) {
+        console.log(offerIds[i]);
         $scope.listingOffers.push(offers[offerIds[i]]);
       }
        if($scope.listingOffers.length > 0) {
