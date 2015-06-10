@@ -52,7 +52,6 @@ light-blue color for remaining the remaining itemDetail view
 /*
 allows for scrolling capability; 
 80vh is required to allow for full view of listings
-
 background-color is light-blue for remaining background in buySearch view
 */
 ion-scroll[direction=y] {
@@ -65,7 +64,6 @@ ion-scroll[direction=y] {
 /*
 If screen width is less than or equal to 415 px, then
 make listings fill the entire page
-
 For iphone 6 and iphone 6 plus:; vertical screen
 */
 @media (max-width: 415px) {
@@ -86,7 +84,6 @@ For iphone 6 and iphone 6 plus:; vertical screen
 /*
 If screen width is between 650 and 750 px, then 
 change listings to fill 2 columns
-
 For iphone 6 and iphone 6 plus: horizontal screen
 */
 @media (min-width: 650px) and (max-width: 800px) {
@@ -106,7 +103,6 @@ For iphone 6 and iphone 6 plus: horizontal screen
 /*
 If screen width is 800 px or greater, then 
 change listings to fill 3 columns
-
 For large screens: ipad/computer screen
 */
 @media (min-width: 801px) {

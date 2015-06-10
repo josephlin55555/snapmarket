@@ -162,6 +162,7 @@ angular.module('sell.controllers', ['ngCordova'])
     setItemsActive();
     var listing = {
       user :  getAuth(),
+      status: 'active',
       title : $scope.title,
       img : $scope.lastPhoto || null,
       items : $scope.items,
