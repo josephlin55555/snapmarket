@@ -9,21 +9,37 @@
 
 .logoutButton {
   border: 0;
-  text-align: left;
+}
+
+.logoutButtonContainer {
+  text-align: center;
 }
 
 .profileImage {
   border: 0;
+  text-align: center !important;
 }
 
 .profileName {
   font-size: 30px;
   border: 0;
+  text-align: center !important;
 }
 
 .profileEmail {
   font-size: 20px;
   border: 0;
+  text-align: center !important;
+}
+
+.profileStats {
+  font-size: 20px;
+  border: 0;
+  text-align: center !important;
+}
+
+.statistics {
+  font-weight: bold;
 }
 
 /*
