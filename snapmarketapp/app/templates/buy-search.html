@@ -31,20 +31,14 @@
             <h2 class="listingTitle">{{result.title}}</h2>
             <p class="user">Posted by {{result.user}}</p>
             <img class="listingImage" ng-src="{{result.img}}">
-          </a>
+          
 
-        <div class="card">
-          <div class="item">
-            <p><img class="listingThumbnail" ng-src="{{ result.img }}"></p>
             <div ng-repeat="item in result.items">
-              <i class="icon ion-social-usd" ng-style="position(item)"{{item}}> {{item.price}}</i>
+              <img src="images/tag.png" ng-style="position(item)"{{item}}> 
+              <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
             </div>
 
-            <h1 class="cardTitle">{{result.title}}</h1>
-            <p class="cardUser">Posted by {{result.user}}</p>
-            <p class="cardTag">Tags: {{result.allTags}}</p> -->
-        </div>
-      </div>
+          </a>     
     </div>
   </ion-scroll> 
   </ion-content>

@@ -69,12 +69,25 @@ angular.module('buy.controllers', ['firebase'])
   $scope.tags = [];
   
 
-  $scope.position = function(tap){
+
+  $rootScope.position = function(item){
     return {'font-size': '20px',
       position: 'absolute',
-            left: tap.x+'px',
-            top: tap.y+'px'};
+            left: item.x+'px',
+            top: item.y+'px'};
   };
+
+  $rootScope.positionText = function(item){
+    var offsetx = 11;
+    var offsety = 21; 
+    return {'font-size': '20px',
+      position: 'absolute',
+            left:(item.x+offsetx)+'px',
+            top: (item.y+offsety)+'px',
+            transform: 'rotate(-20deg) scale(.8,.8)',
+            color:'#fff'};
+  };
+
   // once tags have been loaded, place each tag and no. of listings into an array called $scope.tags
   tags.$loaded()
     .then(function(){
@@ -203,14 +216,6 @@ angular.module('buy.controllers', ['firebase'])
     
     //once everything is finished, go back to buySearch view
     $state.go('tab.buySearch');
-  };
-
-
-  $scope.position = function(tap){
-    return {'font-size': '20px',
-      position: 'absolute',
-            left: tap.x+'px',
-            top: tap.y+'px'};
   };
 })
 .controller('BuyItemOfferCtrl', function($scope) {})

@@ -17,7 +17,7 @@ angular.module('sell.controllers', ['ngCordova'])
   $scope.getPhoto = function() {
     //for development if the camera does not exists redirect to a static image
     if(!Camera.cameraExists()){
-      $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings2/-JqqHgBpAcffa_uL54G-"))
+      $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings2/-Jr-K8dSXrzTgF-JQ-6t"))
       $scope.db.$loaded().then(
         function(data){
           $rootScope.lastPhoto=data.img;
@@ -39,7 +39,7 @@ angular.module('sell.controllers', ['ngCordova'])
 
 
 
-.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading) {
+.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading, Profile) {
 
   $scope.tags = [];
   $scope.db = $firebaseArray(Db.child('listings2'));
@@ -47,7 +47,7 @@ angular.module('sell.controllers', ['ngCordova'])
   
   $scope.lastPhoto = $rootScope.lastPhoto;
 
-  console.log($scope.lastPhoto);
+  console.log($rootScope.TESTUSER,Profile($rootScope.TESTUSER));
 
   $scope.title = 'Tag Your Things';
 
@@ -107,12 +107,25 @@ angular.module('sell.controllers', ['ngCordova'])
     return {x : tap.x , y : tap.y-headerBarOffset};
   }
   $scope.position = function(item){
-    var offset = 100;
     return {'font-size': '20px',
       position: 'absolute',
             left: item.x+'px',
-            top: (item.y+offset)+'px'};
+            top: item.y+'px'};
   };
+
+  $scope.positionText = function(item){
+    var offsetx = 11;
+    var offsety = 21; 
+    return {'font-size': '20px',
+      position: 'absolute',
+            left:(item.x+offsetx)+'px',
+            top: (item.y+offsety)+'px',
+            transform: 'rotate(-20deg) scale(.8,.8)',
+            color:'#fff'};
+  };
+
+
+
 
 
   $scope.addItem = function(){
@@ -151,9 +164,9 @@ angular.module('sell.controllers', ['ngCordova'])
   //for testing
 
   var getAuth = function(){
-    var testing = true;
-    if(testing){
-      return 'Test User for broken Auth';
+    
+    if(!$rootScope.production){
+      return Profile($rootScope.TESTUSER).uid;
     }
     return Db.getAuth().uid;
   }
