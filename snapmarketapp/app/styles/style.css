@@ -52,11 +52,10 @@ light-blue color for remaining the remaining itemDetail view
 /*
 allows for scrolling capability; 
 80vh is required to allow for full view of listings
-
 background-color is light-blue for remaining background in buySearch view
 */
 ion-scroll[direction=y] {
-  height: 80vh;
+  height: 86vh;
   margin: 0;
   width: 100vw;
   background-color: #B2DFDB;
@@ -65,7 +64,6 @@ ion-scroll[direction=y] {
 /*
 If screen width is less than or equal to 415 px, then
 make listings fill the entire page
-
 For iphone 6 and iphone 6 plus:; vertical screen
 */
 @media (max-width: 415px) {
@@ -86,7 +84,6 @@ For iphone 6 and iphone 6 plus:; vertical screen
 /*
 If screen width is between 650 and 750 px, then 
 change listings to fill 2 columns
-
 For iphone 6 and iphone 6 plus: horizontal screen
 */
 @media (min-width: 650px) and (max-width: 800px) {
@@ -106,7 +103,6 @@ For iphone 6 and iphone 6 plus: horizontal screen
 /*
 If screen width is 800 px or greater, then 
 change listings to fill 3 columns
-
 For large screens: ipad/computer screen
 */
 @media (min-width: 801px) {
@@ -227,3 +223,96 @@ For large screens: ipad/computer screen
   width: 100%;
   max-width: 250px;
   border-radius: 10px; }
+
+.card {
+  margin : 1px;
+}
+
+.card>.item.item-thumbnail-left, .item-thumbnail-left, .item-thumbnail-left .item-content {
+  padding-bottom: 8px;
+}
+
+.item-thumbnail-left .item-content .item-image, .item-thumbnail-left .item-content>img:first-child, .item-thumbnail-left .item-image, .item-thumbnail-left>img:first-child {
+  border-radius: 0;
+}
+
+.item .listingTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.item .numberOfItems {
+  font-size: 14px;
+}
+
+.item .numberOfOffers {
+  color: #727272;
+  font-style: italic;
+}
+
+.item .createdOn {
+  font-size: 12px;
+  font-weight: bold;
+  color: #B6B6B6;
+}
+
+a.item {
+  padding: 0;
+}
+
+.tabs-striped.tabs-background-positive .tabs  {
+  background-color: #009688;
+}
+
+.bar.bar-positive {
+  border-color: #00796B;
+  background-color: #00796B;
+  background-image: linear-gradient(0deg, #00796B, #009688 50%, transparent 50%);
+  color: #fff;
+}
+
+.tabs-background-positive .tabs, .tabs-background-positive > .tabs {
+  border-color: #009688;
+}
+
+.button.button-positive {
+  border-color: #009688;
+  background-color: #009688;
+}
+
+.button.button-positive.active, .button.button-positive.activated {
+  border-color: #00796B;
+  background-color: #00796B;
+}
+
+.item-icon-right .icon {
+  color: #FF5252;
+}
+
+.bar.item-input-inset .item-input-wrapper {
+  margin-left: 8px;
+}
+
+.buySearch {
+  height: 300px;
+}
+
+.card .listingImage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: initial;
+  z-index: 0;
+}
+
+.user {
+ z-index: 1;
+ position: relative;
+ color: white;
+ text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95)
+}
+
+#addButton {
+  text-transform: none;
+}

@@ -1,17 +1,32 @@
 angular.module('transaction.controllers', [])
 
   //Buy Navigation controllers
-  .controller('BuyOfferCtrl', function($rootScope, $scope, $state, $firebaseObject, Db) {
+  .controller('BuyOfferCtrl', function($rootScope, $scope, $state, $firebaseObject, Db, $ionicLoading) {
     $rootScope.nav = {
       bar : false
     };
-    var buyOffers = Db.child('Users')
-    $scope.dummy = [1,3,4,5,2,8];
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
    
-    $scope.view = function(){
+     $scope.viewOffer = function(value){
       $state.go('tab.transaction.chat');
+      $rootScope.currentOffer = value;
     }
 
+    //grab current user and all offers on DB
+    $rootScope.currentUser = Db.getAuth().uid; 
+    var offers = $firebaseObject(Db.child('offers'));
+    $scope.userOffers = {};
+
+    offers.$loaded().then(function(){
+      angular.forEach(offers, function(value, key) {
+        if(offers[key].buyer.uid.toString() === $rootScope.currentUser.toString()){
+          $scope.userOffers[key] = offers[key];
+        }
+      });
+      $ionicLoading.hide();    
+    });
   })
 
   //Sell Navigation controllers
@@ -56,9 +71,9 @@ angular.module('transaction.controllers', [])
       url: "#/tab/transaction/sellListings"
     };
 
-    $scope.viewItem = function(value){
+    $scope.viewOffer = function(value){
       $state.go('tab.transaction.chat');
-      $rootScope.item = value;
+      $rootScope.currentOffer = value;
     }
 
     //create array of offers
