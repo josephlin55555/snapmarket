@@ -42,7 +42,7 @@ angular.module('sell.controllers', ['ngCordova'])
 .controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading, Profile) {
 
   $scope.tags = [];
-  $scope.db = $firebaseArray(Db.child('listings2'));
+  $scope.db = $firebaseArray(Db.child('listings'));
   // $scope.db.$loaded().then(function(){console.log('CONTROLLER DB',Db,$scope.db)});
   
   $scope.lastPhoto = $rootScope.lastPhoto;
@@ -146,10 +146,14 @@ angular.module('sell.controllers', ['ngCordova'])
   };
 
   var allTags = function(){
-    var result = '';
-    for(var i = 0; i < $scope.items.length; i++){
-      result+=' '+$scope.items[i].text;
-    }
+    var result = [];
+    $scope.items.forEach(function(item){
+      item.tags.forEach(function(tag){
+        if(result.indexOf(tag) < 0){
+          result.push(tag);
+        }
+      });
+    });
     return result;
   }
 
@@ -166,15 +170,16 @@ angular.module('sell.controllers', ['ngCordova'])
   var getAuth = function(){
     
     if(!$rootScope.production){
-      return Profile($rootScope.TESTUSER).uid;
+      return Profile($rootScope.TESTUSER);
     }
-    return Db.getAuth().uid;
+    return Db.getAuth();
   }
 
   $scope.submitListing = function(){
     setItemsActive();
     var listing = {
-      user :  getAuth(),
+      user :  getAuth().uid,
+      displayName : getAuth().name,
       status: 'active',
       title : $scope.title,
       img : $scope.lastPhoto || null,

@@ -1,6 +1,6 @@
 angular.module('buy.controllers', ['firebase'])
 
-.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope, Db, $ionicLoading) {
+.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope, Db, $ionicLoading, DisplayTags) {
   /*
   once buySearch view is loaded, check if keyGen variable exists and load if necessary
   keyGen is needed to keep track of offers (also tracked in user.buy)
@@ -18,7 +18,7 @@ angular.module('buy.controllers', ['firebase'])
   $ionicLoading.show({
     template: 'Loading...'
   });
-  var ref = new Firebase("https://snapmarket.firebaseio.com/listings2");
+  var ref = new Firebase("https://snapmarket.firebaseio.com/listings");
   $scope.listings = $firebaseArray(ref);
   $scope.results = [];
 
@@ -104,7 +104,10 @@ angular.module('buy.controllers', ['firebase'])
 
 })
 
-.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray, Profile) {
+
+
+
+.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray, Profile, DisplayTags) {
 
 
   console.log($rootScope.currentListing.items);
@@ -115,7 +118,7 @@ angular.module('buy.controllers', ['firebase'])
   //changes based on what items the buyer toggles in ion-checkbox
   $scope.totalSellerPrice = 0;
   $scope.selectedItems = [];
-
+  $scope.formatTags = DisplayTags;
   //activates once ion-checkbox is selected
   $scope.check = function(checked, item) {
     if(checked === true) {
@@ -199,7 +202,7 @@ angular.module('buy.controllers', ['firebase'])
         });
 
         //can only $save with $firebaseObject ($firebaseArray uses $add and doesn't use $save)
-        var listings = $firebaseObject(Db.child('listings2'));
+        var listings = $firebaseObject(Db.child('listings'));
         listings.$loaded().then(function() {
           //in order to access unique Hash ID, use for-in loop (e.g. "key")
           for(var key in listings) {
