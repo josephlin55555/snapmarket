@@ -311,6 +311,7 @@ a.item {
 
 .buySearch {
   height: 300px;
+  margin: 0;
 }
 
 .card .listingImage {
@@ -320,6 +321,9 @@ a.item {
   width: 100%;
   max-width: initial;
   z-index: 0;
+
+  /* here is stuff */
+  height: 100%;
 }
 
 .user {
