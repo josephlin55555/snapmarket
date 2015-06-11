@@ -7,7 +7,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
   var users = $firebaseObject(Db.child("users"));
     //TODO: Move this into own factory called auth
   
-  $rootScope.production = false;
+  $rootScope.production = true;
   
   $scope.auth = function() {
     //asks user to login using facebook acct
@@ -39,19 +39,107 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
   }
 
 })
-.controller('ProfileCtrl', function($scope, $rootScope ,$state, $ionicHistory, Db, Profile , ENV) {
+.controller('ProfileCtrl', function($scope, $rootScope ,$state, $ionicHistory, Db, Profile , ENV, $firebaseArray, $ionicLoading) {
   $ionicHistory.nextViewOptions({
     disableAnimate: true,
     disableBack: true
   });
 
+
   $rootScope.TESTUSER= JSON.parse('{"uid":"facebook:10205252634008521","provider":"facebook","facebook":{"id":"10205252634008521","accessToken":"CAAHsTNfTaFsBAPXVGZCVHcZBvy74eLpdFYiJH95Eu2kynfVwPy0V0N4YWqoyzwIcN7UBuHLQ5zUsz2UuZCZAlgon0k2VM8nfSSr0dTbWFWSZBc6uf0sOsIQQGfZCdQ4q8E36jb40kisSOg0ZBlCFRFYsFb8MdudZAFsAApfeBli2QNk8p0f0tuiHJ5msFH2RAZAc1L4ZBwqSOr7VdevlDxTNFoZAHtVi51zQFIZD","displayName":"Dave Grundfest","email":"dave4@grundfest.com","cachedUserProfile":{"id":"10205252634008521","name":"Dave Grundfest","last_name":"Grundfest","first_name":"Dave","gender":"male","link":"https://www.facebook.com/app_scoped_user_id/10205252634008521/","email":"dave4@grundfest.com","picture":{"data":{"is_silhouette":false,"url":"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p100x100/110…9dc7f4f41c&oe=55FEF874&__gda__=1442528524_cd49d3549e5526900d3dcde43cf941e7"}},"age_range":{"min":21},"locale":"en_US","timezone":-7}},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6ImZhY2Vib29rOjEwMjA1MjUyNjM0MDA4NTIxIiwicHJvdmlkZXIiOiJmYWNlYm9vayJ9LCJpYXQiOjE0MzM4MDc4NDh9.MMHKH0HlSnvUpIVlBQGdWiR_6Hge1KwnsYvT_z9MwjY","auth":{"uid":"facebook:10205252634008521","provider":"facebook"},"expires":1433894248}');
+
+  //displays during async data retrieval
+  $ionicLoading.show({
+    template: "Loading..."
+  });
 
   if($rootScope.production) console.log(JSON.stringify(Db.getAuth()));
 
   var authData = $rootScope.production ? Db.getAuth() : $rootScope.TESTUSER;
 
   $scope.profile = Profile(authData);
+
+  /*
+    used for amount of listings and offers
+  */
+
+  //active
+  $scope.activeUserListings = [];
+  $scope.activeUserBuyOffers = [];
+  $scope.activeUserSellOffers = [];
+
+  //inactive
+  $scope.inactiveUserListings = [];
+  $scope.inactiveUserBuyOffers = [];
+  $scope.inactiveUserSellOffers = [];
+
+  //completed
+  $scope.completedUserListings = [];
+  $scope.completedUserBuyOffers = [];
+  $scope.completedUserSellOffers = [];
+
+  var offers = $firebaseArray(Db.child('offers'));
+  offers.$loaded().then(function() {
+
+    var listings = $firebaseArray(Db.child('listings2'));
+    listings.$loaded().then(function() {
+
+      //used to display listings
+      for(var i = 0; i < listings.length; i++) {
+        if($scope.profile.uid === listings[i].user) {
+          if(listings[i].status === "active") {
+            $scope.activeUserListings.push(listings[i]);
+          }
+
+          if(listings[i].status === "inactive") {
+            $scope.inactiveUserListings.push(listings[i]);
+          }
+
+          if(listings[i].status === "completed") {
+            $scope.completedUserListings.push(listings[i]);
+          }
+        }
+      }
+
+      for(var i = 0; i < offers.length; i++) {
+        //offers given to you
+        if(offers[i].$id !== "keyGen") {
+          if(offers[i].seller === $scope.profile.uid) {
+            if(offers[i].status === "active") {
+              $scope.activeUserSellOffers.push(offers[i]);
+            }
+
+            if(offers[i].status === "inactive") {
+              $scope.inactiveUserSellOffers.push(offers[i]);
+            }
+
+            if(offers[i].status === "completed") {
+              $scope.completedUserSellOffers.push(offers[i]);
+            }
+          }
+
+          //offers you gave to others
+          if(offers[i].buyer.uid === $scope.profile.uid) {
+            if(offers[i].status === "active") {
+              $scope.activeUserBuyOffers.push(offers[i]);
+            }
+
+            if(offers[i].status === "inactive") {
+              $scope.inactiveUserBuyOffers.push(offers[i]);
+            }
+
+            if(offers[i].status === "completed") {
+              $scope.completedUserBuyOffers.push(offers[i]);
+            }
+          }
+          
+        }
+      }
+      //closes once async retrieval is complete
+      $ionicLoading.hide();
+    });
+  });
+
 
   $scope.logout = function() {
     //ends current user session
