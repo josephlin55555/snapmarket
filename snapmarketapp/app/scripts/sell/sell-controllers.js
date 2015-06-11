@@ -17,7 +17,7 @@ angular.module('sell.controllers', ['ngCordova'])
   $scope.getPhoto = function() {
     //for development if the camera does not exists redirect to a static image
     if(!Camera.cameraExists()){
-      $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings2/-Jr-K8dSXrzTgF-JQ-6t"))
+      $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings"))
       $scope.db.$loaded().then(
         function(data){
           $rootScope.lastPhoto=data.img;

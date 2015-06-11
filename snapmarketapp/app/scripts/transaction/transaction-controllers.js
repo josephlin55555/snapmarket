@@ -58,7 +58,7 @@ angular.module('transaction.controllers', [])
     //Grab facebookId of current user
     $rootScope.currentUser = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid; 
     //Grab object of all listings in the Db
-    var listings = $firebaseObject(Db.child('listings2'));
+    var listings = $firebaseObject(Db.child('listings'));
     //create filtered object of current users listings
     $rootScope.userListings = {};
     //Flag to check if the user has any listings at all 
