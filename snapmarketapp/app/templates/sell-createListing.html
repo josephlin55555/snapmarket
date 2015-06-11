@@ -15,7 +15,8 @@
     <!-- <p>The db {{db}}</p> -->
 
     <div ng-repeat="item in items">
-      <i class="icon ion-social-usd" ng-style="position(item)"{{item}}> {{item.price}}</i>
+      <img src="images/tag.png" ng-style="position(item)"{{item}}> 
+      <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
     </div>
   </ion-content>
 </ion-view>
