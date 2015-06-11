@@ -5,9 +5,9 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
     disableBack: true
   });
   var users = $firebaseObject(Db.child("users"));
-    //TODO: Move this into own factory called auth
-  
-  $rootScope.production = true;
+
+  //for demo to circumvent auth, change $rootScope.production to false
+  $rootScope.production = false;
   
   $scope.auth = function() {
     //asks user to login using facebook acct
@@ -45,15 +45,12 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
     disableBack: true
   });
 
-
-  $rootScope.TESTUSER= JSON.parse('{"uid":"facebook:10204542119488571","provider":"facebook","facebook":{"id":"10204542119488571","accessToken":"CAAHsTNfTaFsBAFCbDEADoqxwrU29NwCfQoFpvA0lnPLkMceuDDmQoBzAk7LuaZAWQ32o6ZBgvdF98BZACLFNq7BSIvr3fnuMlq5eDy3rLtHrhanlP4jprimQkGsSGRZByZCnSOOQDZCZBF6584Hf6zqq1JFAvn9qj2Lb6Dg2ZBahiPdYE2r6AEV1XFIzSNhCbLyD48XQMAfXcDuXgrAZBrM84","displayName":"Vivek Tumrukota","email":"vtumrukota@gmail.com","cachedUserProfile":{"id":"10204542119488571","name":"Vivek Tumrukota","last_name":"Tumrukota","first_name":"Vivek","gender":"male","link":"https://www.facebook.com/app_scoped_user_id/10204542119488571/","email":"vtumrukota@gmail.com","picture":{"data":{"is_silhouette":false,"url":"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p100x100/109…2cf1841106&oe=55F431B2&__gda__=1441461351_782986e2ae99c1d2d30b38d21dac6229"}},"age_range":{"min":21},"locale":"en_US","timezone":-7}},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6ImZhY2Vib29rOjEwMjA0NTQyMTE5NDg4NTcxIiwicHJvdmlkZXIiOiJmYWNlYm9vayJ9LCJpYXQiOjE0MzM5OTE0MDN9.sv4l_fxnNu52V3XKb-AL5t_4SuNrNkOcU-eUkXJ0gtE","auth":{"uid":"facebook:10204542119488571","provider":"facebook"},"expires":1434077803}');
+  $rootScope.TESTUSER = JSON.parse('{"uid":"facebook:10103190689439614","provider":"facebook","facebook":{"id":"10103190689439614","accessToken":"CAAHsTNfTaFsBAAaybKLqgMshdBTGJUu8cIzwITPGLBWi1mXXBHfT9bYocwphBGXhwhp7BGqdxR7rV0Bu6pMZBP2fnFGWDFdIcEMbTa0QxTfgmgwdvfZCf2RVK0C7d86SAXlxHQU4ojSCTY3cBj2Qzz9ZCdjBmUyt54nZBu5mMenhmZACEg1qCTfrp205yI1R2ckhRutWzDcy796UkZAuHW","displayName":"Andy Tran","email":"imagez@gmail.com","cachedUserProfile":{"id":"10103190689439614","name":"Andy Tran","last_name":"Tran","first_name":"Andy","gender":"male","link":"https://www.facebook.com/app_scoped_user_id/10103190689439614/","email":"imagez@gmail.com","picture":{"data":{"is_silhouette":false,"url":"http://i.imgur.com/i7Ixwed.jpg"}},"age_range":{"min":21},"locale":"en_US","timezone":-7}},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6ImZhY2Vib29rOjEwMTAzMTkwNjg5NDM5NjE0IiwicHJvdmlkZXIiOiJmYWNlYm9vayJ9LCJpYXQiOjE0MzM5OTA2Njd9.hslTJCx61ooRdiPHtyF5WPlduj7vWFsGQavtRHkDDL0","auth":{"uid":"facebook:10103190689439614","provider":"facebook"},"expires":1434077067}');
 
   //displays during async data retrieval
   $ionicLoading.show({
     template: "Loading..."
   });
-
-  if($rootScope.production) console.log(JSON.stringify(Db.getAuth()));
 
   var authData = $rootScope.production ? Db.getAuth() : $rootScope.TESTUSER;
 

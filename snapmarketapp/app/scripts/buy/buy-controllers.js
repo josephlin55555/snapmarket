@@ -174,7 +174,7 @@ angular.module('buy.controllers', ['firebase'])
       
         //create an offer object with relevant information
         var offer = {
-          buyer: Profile(Db.getAuth()),
+          buyer: Profile($rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid),
           seller: userData,
           listing: $rootScope.currentListing.$id,
           img: $rootScope.currentListing.img,
@@ -192,7 +192,7 @@ angular.module('buy.controllers', ['firebase'])
 
         //be careful with forEach
         users.forEach(function(user) {
-          if(user.uid === Db.getAuth().uid) {
+          if(user.uid === $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid) {
             if(user.buy === undefined) {
               user.buy = [offers.keyGen];
             } else {
