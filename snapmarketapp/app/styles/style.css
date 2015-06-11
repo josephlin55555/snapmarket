@@ -260,10 +260,9 @@ For large screens: ipad/computer screen
   border-radius: 0;
 }
 
-.item .listingTitle {
+.item .transactionListingTitle {
   font-size: 1.5em;
-  font-weight: bold;
-}
+  font-weight: bold;}
 
 .item .numberOfItems {
   font-size: 14px;

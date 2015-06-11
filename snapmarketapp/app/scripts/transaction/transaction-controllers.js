@@ -8,7 +8,7 @@ angular.module('transaction.controllers', [])
     $ionicLoading.show({
       template: 'Loading...'
     });
-   
+
      $scope.viewOffer = function(value){
       $state.go('tab.transaction.chat');
       $rootScope.currentOffer = value;
@@ -18,6 +18,7 @@ angular.module('transaction.controllers', [])
     $rootScope.currentUser = Db.getAuth().uid; 
     var offers = $firebaseObject(Db.child('offers'));
     $scope.userOffers = {};
+    $scope.noListings = true;
 
     offers.$loaded().then(function(){
       angular.forEach(offers, function(value, key) {
@@ -25,7 +26,10 @@ angular.module('transaction.controllers', [])
          $scope.userOffers[key] = offers[key];
         }
       });
-      $ionicLoading.hide();    
+      $ionicLoading.hide();
+      if(Object.keys($scope.userOffers).length > 0) {
+        $scope.noListings = false;
+      }  
     });
 
   })
@@ -52,6 +56,8 @@ angular.module('transaction.controllers', [])
     var listings = $firebaseObject(Db.child('listings2'));
     //create filtered object of current users listings
     $rootScope.userListings = {};
+    //Flag to check if the user has any listings at all 
+    $scope.noListings = true;
     //When Db loads, filter through and find all listings from that user
     listings.$loaded().then(function(){ 
       angular.forEach(listings, function(value, key) {
@@ -62,7 +68,10 @@ angular.module('transaction.controllers', [])
         } 
       });
       //Hide loading screen when array is filled
-      $ionicLoading.hide();    
+      $ionicLoading.hide();
+      if(Object.keys($scope.userListings).length > 0) {
+        $scope.noListings = false;
+      }              
     });
 
     $scope.totalOffers = function(listing) {
@@ -88,19 +97,20 @@ angular.module('transaction.controllers', [])
 
     //create array of offers
     var offerIds = $rootScope.currentlisting.offers;    
-    console.log(offerIds);
 
     var user = $firebaseObject(Db.child('users'));
     var offers = $firebaseObject(Db.child('offers'));
 
     $scope.listingOffers = [];   //array to hold all offer objects
-    
+    $scope.noListings = true;
+
     offers.$loaded().then(function(){
       for(var i=0; i < offerIds.length; i++) {
-        console.log(offerIds[i]);
         $scope.listingOffers.push(offers[offerIds[i]]);
       }
-      console.log($scope.listingOffers);      
+       if($scope.listingOffers.length > 0) {
+        $scope.noListings = false;
+      }      
     });
   })
 .controller('ChatCtrl', function($rootScope, $scope, ChatManager, $cordovaCamera, $ionicScrollDelegate, $ionicModal, $ionicActionSheet, $timeout, Db) {
