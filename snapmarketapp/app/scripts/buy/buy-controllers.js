@@ -174,7 +174,7 @@ angular.module('buy.controllers', ['firebase'])
           buyer: Profile(Db.getAuth()),
           seller: userData,
           listing: $rootScope.currentListing.$id,
-          messages: $rootScope.currentListing.title,
+          messages: [],
           totalBuyerPrice: price,
           totalSellerPrice: $scope.totalSellerPrice,
           items: $scope.selectedItems,
