@@ -15,7 +15,7 @@ angular.module('transaction.controllers', [])
     }
 
     //grab current user and all offers on DB
-    $rootScope.currentUser = Db.getAuth().uid; 
+    $rootScope.currentUser = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid;
     var offers = $firebaseObject(Db.child('offers'));
     $scope.userOffers = {};
     $scope.noListings = true;
@@ -51,7 +51,7 @@ angular.module('transaction.controllers', [])
       });
 
     //Grab facebookId of current user
-    $rootScope.currentUser = Db.getAuth().uid; 
+    $rootScope.currentUser = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid; 
     //Grab object of all listings in the Db
     var listings = $firebaseObject(Db.child('listings2'));
     //create filtered object of current users listings
@@ -124,7 +124,7 @@ angular.module('transaction.controllers', [])
     url: "#/tab/transaction/buyOffers"
   };
 
-  $scope.handle = Db.getAuth().uid;
+  $scope.handle = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid;
   $scope.showTime = false;
 
 
