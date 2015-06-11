@@ -8,10 +8,16 @@ angular.module('transaction.controllers', [])
     $ionicLoading.show({
       template: 'Loading...'
     });
-
-     $scope.viewOffer = function(value){
-      $state.go('tab.transaction.chat');
-      $rootScope.currentOffer = value;
+   
+     $scope.viewOffer = function(offer){
+      console.log(offer);
+      $rootScope.nav = {
+        bar : true,
+        title: offer.seller.name,
+        url: "#/tab/transaction/buyOffers"
+      };
+      $rootScope.currentOffer = offer;
+      $state.go('tab.transaction.chat', {offerId : offer.uniqueId});
     }
 
     //grab current user and all offers on DB
@@ -37,13 +43,12 @@ angular.module('transaction.controllers', [])
   //Sell Navigation controllers
   .controller('SellListingsCtrl', function($rootScope, $scope, $state, $firebaseObject, Db, $ionicLoading, ionicMaterialMotion, ionicMaterialInk) {
     $rootScope.nav = {
-      bar : false,
-      title : "Seller: Listings"
+      bar : false
     };
 
-    $scope.viewList = function(value){
+    $scope.viewList = function(listing){
+      $rootScope.currentlisting = listing;
       $state.go('tab.transaction.sellOffers');
-      $rootScope.currentlisting = value;
     }
     //Loading indicator while Db is being loaded
     $ionicLoading.show({
@@ -89,10 +94,15 @@ angular.module('transaction.controllers', [])
       url: "#/tab/transaction/sellListings"
     };
 
-    $scope.viewOffer = function(value){
-      $state.go('tab.transaction.chat');
-      $rootScope.currentOffer = value;
-      console.log($rootScope.currentOffer);
+    $scope.viewOffer = function(offer){
+      console.log(offer);
+      $rootScope.nav = {
+        bar : true,
+        title: offer.buyer.name,
+        url: "#/tab/transaction/sellListings/sellOffers"
+      };
+      $rootScope.currentOffer = offer;
+      $state.go('tab.transaction.chat', {offerId : offer.uniqueId});
     }
 
     //create array of offers
@@ -116,15 +126,10 @@ angular.module('transaction.controllers', [])
   })
 .controller('ChatCtrl', function($rootScope, $scope, ChatManager, $cordovaCamera, $ionicScrollDelegate, $ionicModal, $ionicActionSheet, $timeout, Db) {
 
-  $rootScope.nav = {
-    bar : true,
-    title: "Buyer: Item Chat",
-    url: "#/tab/transaction/buyOffers"
-  };
-
   $scope.handle = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid;
-  $scope.showTime = false;
 
+  $scope.showTime = false;
+  var offerId = $rootScope.currentOffer.uniqueId;
 
   function scrollBottom() {
     $timeout(function() {
@@ -136,7 +141,7 @@ angular.module('transaction.controllers', [])
   }
 
   function addPost(message, img) {
-    ChatManager.posts().$add({
+    ChatManager.posts(offerId).$add({
       message: message ? message : null,
       img: img ? img : null,
       timestamp: new Date().getTime(),
@@ -166,7 +171,7 @@ angular.module('transaction.controllers', [])
     $ionicScrollDelegate.resize();
   };
 
-  $scope.posts = ChatManager.posts();
+  $scope.posts = ChatManager.posts(offerId);
   $scope.posts.$watch(scrollBottom);
 
   $scope.add = function(message) {
