@@ -179,7 +179,8 @@ angular.module('buy.controllers', ['firebase'])
           totalSellerPrice: $scope.totalSellerPrice,
           items: $scope.selectedItems,
           uniqueId: offers.keyGen, 
-          status: "active"
+          status: "active",
+          createdAt: new Date().toString()
         };
 
         //sets the offer object
