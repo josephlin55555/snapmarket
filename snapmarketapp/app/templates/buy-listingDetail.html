@@ -21,7 +21,7 @@
             </p>
             <h1 class="cardTitle">{{currentListing.title}}</h1>
             <p class="cardUser">Posted by {{currentListing.user}}</p>
-            <p class="cardTag">Tags: {{currentListing.allTags}}</p>  
+            <p class="cardTag">Tags: {{formatTags(currentListing.allTags)}}</p>  
               
           </div>
           
@@ -31,13 +31,13 @@
               <br>
               Price: ${{item.price}}
               <br>
-              Tags: {{item.tags}}
+              Tags: {{formatTags(item.tags)}}
               <br>
-              Position: ({{item.x}}, {{item.y}})
+       <!--        Position: ({{item.x}}, {{item.y}})
               <br>
               ItemID: {{item.id}}
               <br>
-              Fit For Sale: {{item.isActive}}
+              Fit For Sale: {{item.isActive}} -->
             </ion-checkbox>
           </div>
 

@@ -7,7 +7,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
   var users = $firebaseObject(Db.child("users"));
     //TODO: Move this into own factory called auth
   
-  $rootScope.production = false;
+  $rootScope.production = true;
   
   $scope.auth = function() {
     //asks user to login using facebook acct
