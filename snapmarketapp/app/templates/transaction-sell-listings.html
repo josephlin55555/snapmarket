@@ -1,11 +1,12 @@
 <ion-view title="Sell" class="transaction">
   <ion-content class="has-tabs-top">
     <ion-list animate-fade-slide-in-right>
-      <div class="card" ng-repeat="(key, value) in userListings | orderObjectBy: 'createdAt'">
+
+      <div class="card" ng-show="!noListings" ng-repeat="(key, value) in userListings | orderObjectBy: 'createdAt'">
         <div class="item item-thumbnail-left item-icon-right" ng-click="viewList(value)">
           <img ng-src="{{value.img}}">
           <div class = "listingDetails">
-            <p class="listingTitle">{{value.title}}</p>
+            <p class="transactionListingTitle">{{value.title}}</p>
             <p class="numberOfItem">{{value.allTags}}</p>
             <p class="numberOfOffers">{{totalOffers(value)}}</p>
             <p class="createdOn">Created {{value.moment}}</p>
@@ -13,6 +14,10 @@
           <i class="icon ion-arrow-right-b"></i>
         </div>
      </div>
+
+ <!-- Flag check to show if the user hasnt made listings -->
+      <div class="noListings" ng-show="noListings">You haven't created any listings.</div>
+
     </ion-list>
   </ion-content>
 </ion-view>

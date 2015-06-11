@@ -22,27 +22,23 @@
       </ion-item>
     </ion-list>
       
-  <ion-scroll direction="y">
-    <div masonry> 
-      <!-- give ability to click on card below -->
-      <div class="masonry-brick" ng-repeat="result in results" ng-click="selectCard(result)">
-        <div class="card buySearch">
-          <a class="clear-bg item-bg-image has-mask-reverse">
-            <h2 class="listingTitle">{{result.title}}</h2>
-            <p class="user">Posted by {{result.user}}</p>
-            <img class="listingImage" ng-src="{{result.img}}">
-          
-
-            <div ng-repeat="item in result.items">
-              <img src="images/tag.png" ng-style="position(item)"{{item}}> 
-              <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
-            </div>
-
-          </a>
-             
-        </div>
-      </div>  
-    </div>
-  </ion-scroll> 
+    <ion-scroll direction="y">
+      <div masonry> 
+        <!-- give ability to click on card below -->
+        <div class="masonry-brick" ng-repeat="result in results" ng-click="selectCard(result)">
+          <div class="card buySearch">
+            <a class="clear-bg item-bg-image has-mask-reverse">
+              <h2 class="listingTitle">{{result.title}}</h2>
+              <p class="listingUser">Posted by {{result.user}}</p>
+              <img class="listingImage" ng-src="{{result.img}}">        
+              <div ng-repeat="item in result.items">
+                <img src="images/tag.png" ng-style="position(item)"{{item}}> 
+                <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
+              </div>
+            </a>
+          </div>
+        </div>  
+      </div>
+    </ion-scroll> 
   </ion-content>
 </ion-view>

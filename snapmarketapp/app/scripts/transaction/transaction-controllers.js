@@ -8,25 +8,30 @@ angular.module('transaction.controllers', [])
     $ionicLoading.show({
       template: 'Loading...'
     });
-   
+
      $scope.viewOffer = function(value){
       $state.go('tab.transaction.chat');
       $rootScope.currentOffer = value;
     }
 
     //grab current user and all offers on DB
-    $rootScope.currentUser = Db.getAuth().uid; 
+    $rootScope.currentUser = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid;
     var offers = $firebaseObject(Db.child('offers'));
     $scope.userOffers = {};
+    $scope.noListings = true;
 
     offers.$loaded().then(function(){
       angular.forEach(offers, function(value, key) {
-        if(offers[key].buyer.uid.toString() === $rootScope.currentUser.toString()){
-          $scope.userOffers[key] = offers[key];
+        if(offers[key].hasOwnProperty('buyer') && offers[key].buyer.uid === $rootScope.currentUser.toString()){
+         $scope.userOffers[key] = offers[key];
         }
       });
-      $ionicLoading.hide();    
+      $ionicLoading.hide();
+      if(Object.keys($scope.userOffers).length > 0) {
+        $scope.noListings = false;
+      }  
     });
+
   })
 
   //Sell Navigation controllers
@@ -39,18 +44,20 @@ angular.module('transaction.controllers', [])
     $scope.viewList = function(value){
       $state.go('tab.transaction.sellOffers');
       $rootScope.currentlisting = value;
-     }
+    }
     //Loading indicator while Db is being loaded
     $ionicLoading.show({
         template: 'Loading...'
       });
 
     //Grab facebookId of current user
-    $rootScope.currentUser = Db.getAuth().uid; 
+    $rootScope.currentUser = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid; 
     //Grab object of all listings in the Db
     var listings = $firebaseObject(Db.child('listings2'));
     //create filtered object of current users listings
     $rootScope.userListings = {};
+    //Flag to check if the user has any listings at all 
+    $scope.noListings = true;
     //When Db loads, filter through and find all listings from that user
     listings.$loaded().then(function(){ 
       angular.forEach(listings, function(value, key) {
@@ -61,7 +68,10 @@ angular.module('transaction.controllers', [])
         } 
       });
       //Hide loading screen when array is filled
-      $ionicLoading.hide();    
+      $ionicLoading.hide();
+      if(Object.keys($scope.userListings).length > 0) {
+        $scope.noListings = false;
+      }              
     });
 
     $scope.totalOffers = function(listing) {
@@ -82,22 +92,25 @@ angular.module('transaction.controllers', [])
     $scope.viewOffer = function(value){
       $state.go('tab.transaction.chat');
       $rootScope.currentOffer = value;
+      console.log($rootScope.currentOffer);
     }
 
     //create array of offers
     var offerIds = $rootScope.currentlisting.offers;    
-    console.log(offerIds); 
 
     var user = $firebaseObject(Db.child('users'));
     var offers = $firebaseObject(Db.child('offers'));
 
     $scope.listingOffers = [];   //array to hold all offer objects
-    
+    $scope.noListings = true;
+
     offers.$loaded().then(function(){
       for(var i=0; i < offerIds.length; i++) {
         $scope.listingOffers.push(offers[offerIds[i]]);
       }
-      console.log($scope.listingOffers);      
+       if($scope.listingOffers.length > 0) {
+        $scope.noListings = false;
+      }      
     });
   })
 .controller('ChatCtrl', function($rootScope, $scope, ChatManager, $cordovaCamera, $ionicScrollDelegate, $ionicModal, $ionicActionSheet, $timeout, Db) {
@@ -111,7 +124,7 @@ angular.module('transaction.controllers', [])
     url: "#/tab/transaction/buyOffers"
   };
 
-  $scope.handle = Db.getAuth().uid;
+  $scope.handle = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid;
   $scope.showTime = false;
 
 

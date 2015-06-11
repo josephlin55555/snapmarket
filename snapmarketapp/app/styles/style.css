@@ -246,7 +246,13 @@ For large screens: ipad/computer screen
 .post-img {
   width: 100%;
   max-width: 250px;
-  border-radius: 10px; }
+  border-radius: 10px; 
+}
+
+.noListings {
+  text-align: center;
+  font-size: 1.5em;
+}
 
 .card {
   margin : 1px;
@@ -260,10 +266,9 @@ For large screens: ipad/computer screen
   border-radius: 0;
 }
 
-.item .listingTitle {
+.item .transactionListingTitle {
   font-size: 1.5em;
-  font-weight: bold;
-}
+  font-weight: bold;}
 
 .item .numberOfItems {
   font-size: 14px;
@@ -334,11 +339,23 @@ a.item {
   height: 100%;
 }
 
-.user {
- z-index: 1;
- position: relative;
- color: white;
- text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95)
+.card .listingTitle{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.95);
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  color: white;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.card .listingUser {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.95);
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  color: white;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
 }
 
 #addButton {
