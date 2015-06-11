@@ -37,7 +37,6 @@ angular.module('transaction.controllers', [])
         $scope.noListings = false;
       }  
     });
-
   })
 
   //Sell Navigation controllers
@@ -53,7 +52,7 @@ angular.module('transaction.controllers', [])
     //Loading indicator while Db is being loaded
     $ionicLoading.show({
         template: 'Loading...'
-      });
+    });
 
     //Grab facebookId of current user
     $rootScope.currentUser = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid; 
@@ -127,7 +126,6 @@ angular.module('transaction.controllers', [])
 .controller('ChatCtrl', function($rootScope, $scope, ChatManager, $cordovaCamera, $ionicScrollDelegate, $ionicModal, $ionicActionSheet, $timeout, Db) {
 
   $scope.handle = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid;
-
   $scope.showTime = false;
   var offerId = $rootScope.currentOffer.uniqueId;
 

@@ -7,7 +7,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
   var users = $firebaseObject(Db.child("users"));
 
   //for demo to circumvent auth, change $rootScope.production to false
-  $rootScope.production = true;
+  $rootScope.production = false;
   
   $scope.auth = function() {
     //asks user to login using facebook acct
@@ -45,11 +45,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
     disableBack: true
   });
 
-
-  $rootScope.TESTUSER = JSON.parse('{"uid":"facebook:10103190689439614","provider":"facebook","facebook":{"id":"10103190689439614","accessToken":"CAAHsTNfTaFsBAAaybKLqgMshdBTGJUu8cIzwITPGLBWi1mXXBHfT9bYocwphBGXhwhp7BGqdxR7rV0Bu6pMZBP2fnFGWDFdIcEMbTa0QxTfgmgwdvfZCf2RVK0C7d86SAXlxHQU4ojSCTY3cBj2Qzz9ZCdjBmUyt54nZBu5mMenhmZACEg1qCTfrp205yI1R2ckhRutWzDcy796UkZAuHW","displayName":"Andy Tran","email":"imagez@gmail.com","cachedUserProfile":{"id":"10103190689439614","name":"Andy Tran","last_name":"Tran","first_name":"Andy","gender":"male","link":"https://www.facebook.com/app_scoped_user_id/10103190689439614/","email":"imagez@gmail.com","picture":{"data":{"is_silhouette":false,"url":"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xtp1/v/t1.0-1/p100x100/104…74322400c2&oe=56353496&__gda__=1441819982_c06a576f1758a863f97cb32e1353960a"}},"age_range":{"min":21},"locale":"en_US","timezone":-7}},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6ImZhY2Vib29rOjEwMTAzMTkwNjg5NDM5NjE0IiwicHJvdmlkZXIiOiJmYWNlYm9vayJ9LCJpYXQiOjE0MzM5OTA2Njd9.hslTJCx61ooRdiPHtyF5WPlduj7vWFsGQavtRHkDDL0","auth":{"uid":"facebook:10103190689439614","provider":"facebook"},"expires":1434077067}');
-  if($rootScope.production){
-    console.log(Db.getAuth());
-  };
+  $rootScope.TESTUSER = JSON.parse('{"uid":"facebook:10103190689439614","provider":"facebook","facebook":{"id":"10103190689439614","accessToken":"CAAHsTNfTaFsBAAaybKLqgMshdBTGJUu8cIzwITPGLBWi1mXXBHfT9bYocwphBGXhwhp7BGqdxR7rV0Bu6pMZBP2fnFGWDFdIcEMbTa0QxTfgmgwdvfZCf2RVK0C7d86SAXlxHQU4ojSCTY3cBj2Qzz9ZCdjBmUyt54nZBu5mMenhmZACEg1qCTfrp205yI1R2ckhRutWzDcy796UkZAuHW","displayName":"Andy Tran","email":"imagez@gmail.com","cachedUserProfile":{"id":"10103190689439614","name":"Andy Tran","last_name":"Tran","first_name":"Andy","gender":"male","link":"https://www.facebook.com/app_scoped_user_id/10103190689439614/","email":"imagez@gmail.com","picture":{"data":{"is_silhouette":false,"url":"http://i.imgur.com/i7Ixwed.jpg"}},"age_range":{"min":21},"locale":"en_US","timezone":-7}},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6ImZhY2Vib29rOjEwMTAzMTkwNjg5NDM5NjE0IiwicHJvdmlkZXIiOiJmYWNlYm9vayJ9LCJpYXQiOjE0MzM5OTA2Njd9.hslTJCx61ooRdiPHtyF5WPlduj7vWFsGQavtRHkDDL0","auth":{"uid":"facebook:10103190689439614","provider":"facebook"},"expires":1434077067}');
 
   //displays during async data retrieval
   $ionicLoading.show({
