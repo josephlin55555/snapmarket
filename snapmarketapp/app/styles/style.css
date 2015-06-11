@@ -56,6 +56,14 @@ dark blue color for the bar underneath search
   background-color: #607D8B;
 }
 
+/*
+Created from ion-list
+*/
+.list {
+  /* removes 1px padding underneath search bar */
+  padding: 0;
+}
+
 
 /*
 light-blue color for remaining the remaining itemDetail view
