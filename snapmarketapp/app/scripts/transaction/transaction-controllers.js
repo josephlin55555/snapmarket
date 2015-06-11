@@ -115,9 +115,6 @@ angular.module('transaction.controllers', [])
     });
   })
 .controller('ChatCtrl', function($rootScope, $scope, ChatManager, $cordovaCamera, $ionicScrollDelegate, $ionicModal, $ionicActionSheet, $timeout, Db) {
-  //title: Buyer: Offer Chat
-  //title: Seller: Offer Chat
-  //url: #/tab/transaction/:offerId
 
   $rootScope.nav = {
     bar : true,

@@ -135,7 +135,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
         .state('tab.transaction.chat', {
-          url: '/chat',
+          url: '/chat/:offerId',
           views: {
             'offers': {
               templateUrl: 'templates/transaction-chat.html',
