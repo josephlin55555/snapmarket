@@ -104,13 +104,8 @@ angular.module('buy.controllers', ['firebase'])
 
 })
 
-
-
-
 .controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray, Profile, DisplayTags) {
 
-
-  console.log($rootScope.currentListing.items);
   if($rootScope.currentListing === undefined) {
     $state.go('tab.buySearch');
   }
@@ -154,6 +149,13 @@ angular.module('buy.controllers', ['firebase'])
 
   $scope.submitPrice = function(price) {
 
+    var userAuth = $rootScope.production ? Db.getAuth() : $rootScope.TESTUSER;
+    console.log('userAuth ', userAuth)
+    //if user is not logged in redirect to login
+    if(!userAuth){
+      $state.go(tab.login);
+    }
+    
     //clear input fields
     $('.buyerPrice').val('');
 
@@ -171,10 +173,11 @@ angular.module('buy.controllers', ['firebase'])
             userData = users[key];
           }
         }
-      
+        
+
         //create an offer object with relevant information
         var offer = {
-          buyer: Profile($rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid),
+          buyer: Profile(userAuth),
           seller: userData,
           listing: $rootScope.currentListing.$id,
           img: $rootScope.currentListing.img,
@@ -192,7 +195,7 @@ angular.module('buy.controllers', ['firebase'])
 
         //be careful with forEach
         users.forEach(function(user) {
-          if(user.uid === $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid) {
+          if(user.uid === userAuth.uid) {
             if(user.buy === undefined) {
               user.buy = [offers.keyGen];
             } else {
