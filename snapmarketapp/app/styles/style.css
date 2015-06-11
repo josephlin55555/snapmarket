@@ -246,7 +246,13 @@ For large screens: ipad/computer screen
 .post-img {
   width: 100%;
   max-width: 250px;
-  border-radius: 10px; }
+  border-radius: 10px; 
+}
+
+.noListings {
+  text-align: center;
+  font-size: 1.5em;
+}
 
 .card {
   margin : 1px;
