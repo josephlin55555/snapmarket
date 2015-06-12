@@ -8,13 +8,14 @@
 
 .loginButton {
   top: 10em;
+}
 
 /* top bar for back views */
 .bar.bar-stable {
   background-color: #009688;
 }
 
-/* name of view title */
+/*------------------Navigaton Bar for Nested Views----------------------*/
 .bar.bar-header .button+.title {
   color: #FFFFFF;
   text-align: center;
@@ -27,6 +28,8 @@
   color: #FFFFFF;
 
 }
+/*----------------------------------------------------------------------*/
+
 
 /* 
   Sets size of profile picture and changes the shape to a circle
@@ -74,6 +77,8 @@
   font-weight: bold;
 }
 
+
+/*--------------------Profile Page---------------------------------*/
 table {
   width: 100%;
   border: 2px solid black;
@@ -109,6 +114,8 @@ td {
   color: #FFFFFF;
   border-color: #00796B;
 }
+
+/******************************************************************/
 
 /*
 light-blue coloring for the background in buySearch view
