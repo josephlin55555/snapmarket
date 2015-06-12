@@ -39,7 +39,6 @@ angular.module('buy.controllers', ['firebase'])
     .then(function(){
       $scope.results = filterListings($scope.listings);
       $ionicLoading.hide();
-      console.log($scope.results);
     });
 
   //filter scope.results through one tag
