@@ -1,7 +1,7 @@
 <ion-view title="Buy" class="transaction">
   <ion-content class="has-tabs-top">
     <ion-list>
-      <div class="card" ng-show="!noListings" ng-repeat="value in userOffers">
+      <div class="card" ng-hide="noListings" ng-repeat="value in userOffers">
          <div class="item item-thumbnail-left item-icon-right" ng-click="viewOffer(value)">
           <img src="{{value.img}}">
           <div class="listingDetails">
