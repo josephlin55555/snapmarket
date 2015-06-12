@@ -1,13 +1,15 @@
 <ion-view title="Buy" class="transaction">
-  <ion-content class="padding has-tabs-top">
+  <ion-content class="has-tabs-top">
     <ion-list>
       <div class="card" ng-show="!noListings" ng-repeat="value in userOffers">
          <div class="item item-thumbnail-left item-icon-right" ng-click="viewOffer(value)">
           <img src="{{value.img}}">
-          <strong>{{value.messages}}</strong>
-          <p><span ng-repeat="item in value.items">{{item.text}}</span></p>
-          <p>${{value.totalBuyerPrice}}</p>
+          <div class="listingDetails">
+          <p class="transactionListingTitle">{{value.listingTitle}}</p>
+          <p class="itemText"><span ng-repeat="item in value.items">{{item.text}}</span></p>
+          <p class="buyerPrice">${{value.totalBuyerPrice}}</p>
           <i class="icon ion-arrow-right-b"></i>
+          </div>
         </div>
       </div>
       <div class="noListings" ng-show="noListings">You haven't created any listings.</div>

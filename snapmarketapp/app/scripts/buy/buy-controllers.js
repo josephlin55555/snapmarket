@@ -180,6 +180,7 @@ angular.module('buy.controllers', ['firebase'])
           buyer: Profile(userAuth),
           seller: userData,
           listing: $rootScope.currentListing.$id,
+          listingTitle: $rootScope.currentListing.title,
           img: $rootScope.currentListing.img,
           messages: [],
           totalBuyerPrice: price,

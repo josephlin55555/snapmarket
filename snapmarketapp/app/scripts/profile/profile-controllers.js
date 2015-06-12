@@ -73,7 +73,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
   var offers = $firebaseArray(Db.child('offers'));
   offers.$loaded().then(function() {
 
-    var listings = $firebaseArray(Db.child('listings2'));
+    var listings = $firebaseArray(Db.child('listings'));
     listings.$loaded().then(function() {
 
       //used to display listings

@@ -1,3 +1,15 @@
+/*-----------------Login Page---------------------*/
+.loginPage {
+  text-align: center;
+  background: url('/images/login.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.loginButton {
+  top: 10em;
+}
+
 /* 
   Sets size of profile picture and changes the shape to a circle
 */
@@ -153,11 +165,7 @@ For large screens: ipad/computer screen
 }
 
 .transaction .has-tabs-top{
-  top: 48px;
-}
-
-.transaction > .tabs, .tabs.tabs-top {
-  top: 0;
+  position: absolute;
 }
 
 .content-stable {
