@@ -1,4 +1,4 @@
-<ion-view title="Sell" class="transaction">
+<ion-nav-view title="Sell" class="Transaction">
   <ion-content class="has-tabs-top">
     <ion-list animate-fade-slide-in-right>
 
@@ -7,7 +7,7 @@
           <img ng-src="{{value.img}}">
           <div class = "listingDetails">
             <p class="transactionListingTitle">{{value.title}}</p>
-            <p class="numberOfItem">{{value.allTags}}</p>
+             <p class="numberOfItem"><span ng-repeat="item in value.items | limitTo:4">{{item.text}} </span></p>
             <p class="numberOfOffers">{{totalOffers(value)}}</p>
             <p class="createdOn">Created {{value.moment}}</p>
           </div> 
@@ -20,6 +20,6 @@
 
     </ion-list>
   </ion-content>
-</ion-view>
+</ion-nav-view>
 
  
