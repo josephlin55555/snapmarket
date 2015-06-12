@@ -1,15 +1,15 @@
-<ion-view view-title="Profile">
-  <ion-content>
+<ion-view view-title=" My Profile">
+  <ion-content class='profile'>
     <ion-list class="profileList">
       <br>
-
+      <div class="logoutButtonContainer">
+        <button class="logoutButton button button-positive" ng-click="logout()">Logout</button>
+      </div>
       <ion-item class="profileImage"><img class="imageAvatar" ng-src="{{profile.photo}}"></ion-item>
-
-      <ion-item class="profileName">{{profile.name}}</ion-item>
-
-      <ion-item class="profileEmail">{{profile.email}}</ion-item>
-      
-      <ion-item class="profileStats">
+      <center><div class="userInfo">
+        <ion-item class="profileName">{{profile.name}}</ion-item>
+        <ion-item class="profileEmail">{{profile.email}}</ion-item>
+      </div></center>  
       <table class="topTable">
         <tr class="top">
           <th class="statistics">
@@ -17,25 +17,18 @@
           </th>
         </tr>
       </table>
-
       <table>
-
         <tr>
           <td class="statistics">Buy</td>
           <td class="statistics">Sell</td>
         </tr>
-
         <tr>
           <td>{{activeUserBuyOffers.length}}</td>
           <td>{{activeUserSellOffers.length}}</td>
         </tr>
-
       </table>
     </ion-item>
-
       <br>
-      <div class="logoutButtonContainer"><button class="logoutButton button button-positive" ng-click="logout()">Logout</button></div>
-
     </ion-list>
   </ion-content>
 </ion-view>

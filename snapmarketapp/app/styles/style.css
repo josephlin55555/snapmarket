@@ -30,10 +30,17 @@
 }
 /*----------------------------------------------------------------------*/
 
+/*--------------------Profile Page---------------------------------*/
 
-/* 
-  Sets size of profile picture and changes the shape to a circle
-*/
+.profile{
+  background: url('/images/money.jpg');
+}
+
+.userInfo{
+  background-color: white;
+  width:80%;
+}
+
 .imageAvatar {
   border-radius: 50%;
   width: 140px;
@@ -58,6 +65,7 @@
   border: 0;
   text-align: center !important;
   font-weight: bold;
+  color: black;
 }
 
 .profileEmail {
@@ -65,20 +73,13 @@
   border: 0;
   text-align: center !important;
   font-style: italic;
-}
-
-.profileStats {
-  font-size: 20px;
-  border: 0;
-  text-align: center !important;
+  color: black;
 }
 
 .statistics {
   font-weight: bold;
 }
 
-
-/*--------------------Profile Page---------------------------------*/
 table {
   width: 100%;
   border: 2px solid black;
