@@ -8,6 +8,24 @@
 
 .loginButton {
   top: 10em;
+
+/* top bar for back views */
+.bar.bar-stable {
+  background-color: #009688;
+}
+
+/* name of view title */
+.bar.bar-header .button+.title {
+  color: #FFFFFF;
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+
+/* back button */
+.bar .button.button-clear {
+  color: #FFFFFF;
+
 }
 
 /* 
@@ -36,12 +54,14 @@
   font-size: 30px;
   border: 0;
   text-align: center !important;
+  font-weight: bold;
 }
 
 .profileEmail {
   font-size: 20px;
   border: 0;
   text-align: center !important;
+  font-style: italic;
 }
 
 .profileStats {
@@ -52,6 +72,42 @@
 
 .statistics {
   font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border: 2px solid black;
+  margin: 0;
+  border-color: #00796B;
+}
+
+.top {
+  border: 0;
+}
+
+.topTable {
+  border-bottom: 0;
+}
+
+th {
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  background-color: #727272;
+  color: #FFFFFF;
+}
+
+tr {
+  border: 2px solid black;
+}
+
+td {
+  width: 50%;
+  border: 2px solid black;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  background-color: #009688;
+  color: #FFFFFF;
+  border-color: #00796B;
 }
 
 /*
@@ -302,8 +358,8 @@ a.item {
 }
 
 .bar.bar-positive {
-  border-color: #00796B;
-  background-color: #00796B;
+  border-color: #009688;
+  background-color: #009688;
   background-image: linear-gradient(0deg, #00796B, #009688 50%, transparent 50%);
   color: #fff;
 }
