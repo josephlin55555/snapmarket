@@ -4,8 +4,41 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{chat.name}}">
+<!-- <ion-view view-title="{{chat.name}}">
   <ion-content class="padding" ng-init="getPhoto()">
-        <!-- <img ng-src="{{$root.lastPhoto}}" style="max-width: 100%">     -->
+        <img ng-src="{{$root.lastPhoto}}" style="max-width: 100%">    
+  </ion-content>
+</ion-view> -->
+
+<ion-view view-title="{{title}}">
+    <ion-nav-buttons side="right">
+      <button class="button button-icon ion-edit" ng-click = "openPopover($event)"></button>
+      <button class="button button-icon ion-arrow-right-a" ng-click = "submitListing()"></button>
+    </ion-nav-buttons>
+  <ion-content class="padding">
+    <img src="{{$root.lastPhoto}}" style="max-width: 100%" on-tap = "addItem()">
+    <!-- <p>The image item{{lastPhoto}}</p> -->
+    <!-- <p>The db {{db}}</p> -->
+
+    <div ng-repeat="item in items">
+      <img src="images/tag.png" ng-style="position(item)"{{item}}> 
+      <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
+    </div>
   </ion-content>
 </ion-view>
+
+<!-- Adds ability to edit the name of the listing as a whole -->
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-content> 
+    <form action="">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="{{popover.scope.$parent.title}}" ng-model="popover.scope.$parent.title">
+          </label>
+        </div>
+      </form>
+    </ion-content>
+
+  </ion-popover-view>
+</script>

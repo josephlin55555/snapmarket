@@ -1,64 +1,17 @@
 angular.module('sell.controllers', ['ngCordova'])
-//controller for default state when clicking on sell tab
-.controller('SellCameraCtrl', function($rootScope, $scope , $state , $firebaseObject , $cordovaCamera , Camera ) {
+.controller('SellCameraCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading, Profile) {
 
 
-        var options = { 
-            quality : 10, 
-            destinationType : 0, 
-            sourceType : 1, 
-            allowEdit : true,
-            encodingType: 0,
-            targetWidth: 750,
-            targetHeight: 1000,
-            saveToPhotoAlbum: false
-        };
-
-  $scope.getPhoto = function() {
-    //for development if the camera does not exists redirect to a static image
-    if(!Camera.cameraExists()){
-      $scope.db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings"))
-      $scope.db.$loaded().then(
-        function(data){
-          $rootScope.lastPhoto=data.img;
-          $state.go('tab.sellCreateListing');
-        });
-    } else{
-       
-      Camera.getPicture(options).then(function(imageURI) {
-        $rootScope.lastPhoto="data:image/jpeg;base64," + imageURI;
-        $state.go('tab.sellCreateListing');
-      }, function(err) {
-        console.err(err);
-      });
-    }
-  };
-
-
-})
-
-
-
-.controller('SellCreateListingCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading, Profile) {
-
+var startTag = function(){
   $scope.tags = [];
   $scope.db = $firebaseArray(Db.child('listings'));
-  // $scope.db.$loaded().then(function(){console.log('CONTROLLER DB',Db,$scope.db)});
-  
-  $scope.lastPhoto = $rootScope.lastPhoto;
-
-  console.log($rootScope.TESTUSER,Profile($rootScope.TESTUSER));
-
-  $scope.title = 'Tag Your Things';
+  $scope.title = 'Tag Your Things';  
+  $scope.newItem = {};
+  $scope.items=[];
+}
 
   //this is the newItem for the modal to use. It is set to the tap.
-
-  $scope.newItem = {};
-
   //array of tagged items will be synced with DB on submit
-
-  $scope.items=[];
-
   //modal for tagging
 
   $ionicModal.fromTemplateUrl('templates/sell-tagModal.html', {
@@ -124,11 +77,8 @@ angular.module('sell.controllers', ['ngCordova'])
             color:'#fff'};
   };
 
-
-
-
-
   $scope.addItem = function(){
+    if(!$scope.newItem) startTag();
     var tagTouchRadius = 100;
     var tap = getTap(event);
     var existing = false;
@@ -168,7 +118,6 @@ angular.module('sell.controllers', ['ngCordova'])
   //for testing
 
   var getAuth = function(){
-    
     if(!$rootScope.production){
       return Profile($rootScope.TESTUSER);
     }
@@ -182,7 +131,7 @@ angular.module('sell.controllers', ['ngCordova'])
       displayName : getAuth().name,
       status: 'active',
       title : $scope.title,
-      img : $scope.lastPhoto || null,
+      img : $rootScope.lastPhoto || null,
       items : $scope.items,
       allTags : allTags(),
       createdAt : new Date().toString()
@@ -191,9 +140,10 @@ angular.module('sell.controllers', ['ngCordova'])
       $ionicLoading.show({
         template: 'Adding Listing...'
       });
-      $scope.modal.remove();
       $scope.db.$add(listing).then(function(){
         $ionicTabsDelegate.select(2);
+        $rootScope.lastPhoto = null;
+        startTag();
         $state.go('tab.transaction.sellListings');
         $ionicLoading.hide();
       });      
@@ -218,4 +168,4 @@ angular.module('sell.controllers', ['ngCordova'])
 
 })
 
-.controller('SellTagItemCtrl', function($scope) {})
+// .controller('SellTagItemCtrl', function($scope) {})
