@@ -1,6 +1,6 @@
 angular.module('buy.controllers', ['firebase'])
 
-.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope, Db, $ionicLoading, DisplayTags) {
+.controller('BuySearchCtrl', function($scope, $firebaseObject, $firebaseArray, $state, $rootScope, Db, $ionicLoading, RenderTags) {
   /*
   once buySearch view is loaded, check if keyGen variable exists and load if necessary
   keyGen is needed to keep track of offers (also tracked in user.buy)
@@ -67,24 +67,12 @@ angular.module('buy.controllers', ['firebase'])
   var tags = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/tags"));
   $scope.tags = [];
   
-
-
-  $rootScope.position = function(item){
-    return {'font-size': '20px',
-      position: 'absolute',
-            left: item.x+'px',
-            top: item.y+'px'};
+  $scope.position = function(item){
+    return RenderTags(item,{x:0,y:0,sX:400,sY:400},{x:-72,y:-82});
   };
 
-  $rootScope.positionText = function(item){
-    var offsetx = 11;
-    var offsety = 21; 
-    return {'font-size': '20px',
-      position: 'absolute',
-            left:(item.x+offsetx)+'px',
-            top: (item.y+offsety)+'px',
-            transform: 'rotate(-20deg) scale(.8,.8)',
-            color:'#fff'};
+  $scope.positionText = function(item){
+    return RenderTags(item,{x:0,y:0,sX:400,sY:400},{x:-61,y:-61},{transform: 'rotate(-20deg) scale(.8,.8)', color:'#fff'});  
   };
 
   // once tags have been loaded, place each tag and no. of listings into an array called $scope.tags
@@ -103,11 +91,20 @@ angular.module('buy.controllers', ['firebase'])
 
 })
 
-.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray, Profile, DisplayTags) {
+.controller('BuyListingDetailCtrl', function($scope, $rootScope, $state, Db, $firebaseObject, $firebaseArray, Profile, RenderTags, DisplayTags) {
 
   if($rootScope.currentListing === undefined) {
     $state.go('tab.buySearch');
   }
+
+  $scope.position = function(item){
+    return RenderTags(item,{x:20,y:20,sX:363,sY:363},{x:-72,y:-82});
+  };
+
+  $scope.positionText = function(item){
+    return RenderTags(item,{x:20,y:20,sX:363,sY:363},{x:-61,y:-61},{transform: 'rotate(-20deg) scale(.8,.8)', color:'#fff'});  
+  };
+
 
   //changes based on what items the buyer toggles in ion-checkbox
   $scope.totalSellerPrice = 0;

@@ -1,14 +1,14 @@
 angular.module('sell.controllers', ['ngCordova'])
-.controller('SellCameraCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading, Profile) {
-
-
-var startTag = function(){
-  $scope.tags = [];
-  $scope.db = $firebaseArray(Db.child('listings'));
-  $scope.title = 'Tag Your Things';  
-  $scope.newItem = {};
-  $scope.items=[];
-}
+.controller('SellCameraCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading, Profile, RenderTags, DisplayTags) {
+  
+ $scope.formatTags = DisplayTags;
+  var startTag = function(){
+    $scope.tags = [];
+    $scope.db = $firebaseArray(Db.child('listings'));
+    $scope.title = 'Tag Your Things';  
+    $scope.newItem = {};
+    $scope.items=[];
+  }
 
   //this is the newItem for the modal to use. It is set to the tap.
   //array of tagged items will be synced with DB on submit
@@ -26,7 +26,6 @@ var startTag = function(){
   };
 
   $scope.syncTags = function (string,tags){
-    console.log('INVOKED',string,tags);
     $scope.newItem.tags=tags;
   }
 
@@ -47,53 +46,50 @@ var startTag = function(){
     $scope.modal.hide();
   };
 
-
-
-  var headerBarOffset = 44;
-  var getTap = function(event){
+  var getTapRelativePicture = function(event){
     var tap = { x:0, y:0 };
+    var element = { x:0, y:0 , sX:0 ,sY:0};
     if(event.gesture.touches.length>0){
       tt = event.gesture.touches[0];
-      tap.x = tt.clientX || tt.pageX || tt.screenX ||0;
-      tap.y = tt.clientY || tt.pageY || tt.screenY ||0;  
+      console.log('TOUCH',tt.target.x,tt.target.y,tt.clientX , tt.clientY);
+      tap.x = tt.clientX || 0;
+      tap.y = tt.clientY || 0;
+      if(!$scope.pictureSize){
+        element.x = tt.target.x || 0;
+        element.y = tt.target.y || 0;
+        element.sX = tt.target.offsetWidth;
+        element.sY = tt.target.offsetHeight;  
+        $scope.pictureSize = element;
+      }
+      element = $scope.pictureSize;
     }
-    return {x : tap.x , y : tap.y-headerBarOffset};
-  }
+    return {tap : tap,
+            element : element,
+            x : (tap.x - element.x) / element.sX,
+            y : (tap.y - element.y) / element.sY,
+          };
+  };
+
   $scope.position = function(item){
-    return {'font-size': '20px',
-      position: 'absolute',
-            left: item.x+'px',
-            top: item.y+'px'};
+    console.log(RenderTags(item,$scope.pictureSize,{x:-72,y:-82}));
+    return RenderTags(item,$scope.pictureSize,{x:-72,y:-82});
   };
 
   $scope.positionText = function(item){
-    var offsetx = 11;
-    var offsety = 21; 
-    return {'font-size': '20px',
-      position: 'absolute',
-            left:(item.x+offsetx)+'px',
-            top: (item.y+offsety)+'px',
-            transform: 'rotate(-20deg) scale(.8,.8)',
-            color:'#fff'};
+    console.log(RenderTags(item,$scope.pictureSize,{x:-61,y:-61},{transform: 'rotate(-20deg) scale(.8,.8)', color:'#fff'}));
+    return RenderTags(item,$scope.pictureSize,{x:-61,y:-61},{transform: 'rotate(-20deg) scale(.8,.8)', color:'#fff'});  
   };
 
   $scope.addItem = function(){
     if(!$scope.newItem) startTag();
-    var tagTouchRadius = 100;
-    var tap = getTap(event);
-    var existing = false;
-    for(var i = 0; i < $scope.items.length; i++){
-      if(Math.sqrt( (tap.x-$scope.items[i].x)*(tap.x-$scope.items[i].x) + (tap.y-$scope.items[i].y)*(tap.y-$scope.items[i].y)) <= tagTouchRadius){
-        $scope.newItem = $scope.items.splice(i,1)[0];
-        existing=true;
-        console.log('ALL items',$scope.items,'EXISTING TAG',$scope.newItem);
-      }
-    }
-    if(!existing){
-      $scope.newItem=tap;
-    }
+    $scope.newItem = getTapRelativePicture(event);
+    console.log('OPENING MODAL WITH' , $scope.newItem);
     $scope.openModal();
   };
+
+  $scope.removeItem = function(i){
+    $scope.items.splice(i,1);
+  }
 
   var allTags = function(){
     var result = [];
@@ -166,6 +162,4 @@ var startTag = function(){
     $scope.popover.hide();
   };
 
-})
-
-// .controller('SellTagItemCtrl', function($scope) {})
+});

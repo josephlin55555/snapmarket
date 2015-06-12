@@ -24,6 +24,16 @@
       <img src="images/tag.png" ng-style="position(item)"{{item}}> 
       <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
     </div>
+
+    <div class="item" ng-repeat="item in items track by $index">
+        <ion-checkbox ng-model="checked" ng-change="removeItem($index)">
+          Item: {{item.text}}
+          <br>
+          Price: ${{item.price}}
+          <br>
+          Tags: {{formatTags(item.tags)}}
+        </ion-checkbox>
+	  </div>
   </ion-content>
 </ion-view>
 
