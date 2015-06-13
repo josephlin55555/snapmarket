@@ -1,7 +1,7 @@
 /*-----------------Login Page---------------------*/
 .loginPage {
   text-align: center;
-  background: url('/images/login.png');
+  background: url('../images/login.png');
   background-size: cover;
   background-position: center;
 }
@@ -38,7 +38,7 @@
 /*--------------------Profile Page---------------------------------*/
 
 .profile{
-  background: url('/images/money.jpg');
+  background: url('../images/money.jpg');
 }
 
 .userInfo{
@@ -245,6 +245,7 @@ For large screens: ipad/computer screen
   position: absolute;
   top: 0;
   bottom: 49px;
+  padding-top: 20px;
 }
 
 .content-stable {
@@ -450,5 +451,5 @@ a.item {
 }
 
 .transaction .has-tabs{
-  top: 49px;
+  top: 69px;
 }

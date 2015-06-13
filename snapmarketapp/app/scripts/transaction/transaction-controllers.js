@@ -29,6 +29,7 @@ angular.module('transaction.controllers', [])
     offers.$loaded().then(function(){
       angular.forEach(offers, function(value, key) {
         if(offers[key].hasOwnProperty('buyer') && offers[key].buyer.uid === $rootScope.currentUser.toString()){
+         offers[key].moment = moment(offers[key].createdAt).fromNow();
          $scope.userOffers[key] = offers[key];
         }
       });
