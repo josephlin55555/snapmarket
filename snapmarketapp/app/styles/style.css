@@ -449,6 +449,11 @@ For large screens: ipad/computer screen
   font-size: 14px;
 }
 
+.item .buyerPrice {
+  color: #009688;
+  font-weight: bold;
+}
+
 .item .numberOfOffers {
   color: #727272;
   font-style: italic;

@@ -15,14 +15,13 @@
 
 
 <form id="footer-input" ng-submit="add(message)">
-  <ion-footer-bar keyboard-attach class="item-input-inset">
+  <ion-footer-bar keyboard-attach class="item-input-inset ion-footer-bar">
 
     <label class="item-input-wrapper">
       <i class="icon ion-ios7-search placeholder-icon"></i>
-      <input ng-focus="inputUp()" ng-blur="inputDown()" type="text" placeholder="Message"
-      ng-model="message">
+      <input ng-focus="inputUp()" ng-blur="inputDown()" type="text" placeholder="Message" ng-model="message">
     </label>
-    <a class="button button-clear" ng-click="takePicture()">
+    <a class="button button-clear camera-button" ng-click="takePicture()">
       <i class="icon ion-camera"></i>
     </a>
   </ion-footer-bar>
