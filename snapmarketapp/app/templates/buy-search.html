@@ -22,14 +22,17 @@
       </ion-item>
     </ion-list>
 
-    <ion-scroll direction="y">
+    <ion-scroll direction="y"> 
       <div masonry> 
         <!-- give ability to click on card below -->
         <div class="masonry-brick" ng-repeat="result in results" ng-click="selectCard(result)">
           <div class="card buySearch">
             <a class="clear-bg item-bg-image has-mask-reverse">
               <h2 class="listingTitle">{{result.title}}</h2>
-              <p class="listingUser">Posted by {{result.displayName}}</p>
+              <p class="listingUser">
+                {{result.displayName}} 
+                <span class="moment">Posted {{result.moment}}</span>
+              </p>
               <img class="listingImage" ng-src="{{result.img}}">        
               <div ng-repeat="item in result.items">
                 <img src="images/tag.png" ng-style="position(item)"{{item}}> 
