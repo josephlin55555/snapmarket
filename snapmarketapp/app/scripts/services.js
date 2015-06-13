@@ -16,7 +16,6 @@ angular.module('starter.services', [
   
   //check for authentication prior to state change
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
-    console.log('INTERCEPT',event, toState, toParams, fromState, fromParams);
     if(!$rootScope.production){
       shouldLogin = false;
     }else{
@@ -32,7 +31,6 @@ angular.module('starter.services', [
     } 
 
     if(toState.url === '/sellCamera'){
-      console.log('camera intercept')
       if(!$rootScope.lastPhoto){
         var options = { 
             quality : 10, 
@@ -50,7 +48,6 @@ angular.module('starter.services', [
           db.$loaded().then(
             function(data){
               $rootScope.lastPhoto=data.img;
-              console.log($rootScope.lastPhoto);
             });
         } else{
           Camera.getPicture(options).then(function(imageURI) {

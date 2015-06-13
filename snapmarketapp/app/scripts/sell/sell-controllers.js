@@ -51,7 +51,6 @@ angular.module('sell.controllers', ['ngCordova'])
     var element = { x:0, y:0 , sX:0 ,sY:0};
     if(event.gesture.touches.length>0){
       tt = event.gesture.touches[0];
-      console.log('TOUCH',tt.target.x,tt.target.y,tt.clientX , tt.clientY);
       tap.x = tt.clientX || 0;
       tap.y = tt.clientY || 0;
       if(!$scope.pictureSize){
@@ -71,12 +70,10 @@ angular.module('sell.controllers', ['ngCordova'])
   };
 
   $scope.position = function(item){
-    console.log(RenderTags(item,$scope.pictureSize,{x:-72,y:-82}));
     return RenderTags(item,$scope.pictureSize,{x:-72,y:-82});
   };
 
   $scope.positionText = function(item){
-    console.log(RenderTags(item,$scope.pictureSize,{x:-61,y:-61},{transform: 'rotate(-20deg) scale(.8,.8)', color:'#fff'}));
     return RenderTags(item,$scope.pictureSize,{x:-61,y:-61},{transform: 'rotate(-20deg) scale(.8,.8)', color:'#fff'});  
   };
 
