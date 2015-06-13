@@ -1,4 +1,5 @@
 angular.module('profile.controllers', ['firebase', 'profile.services', 'config'])
+
 .controller('LoginCtrl', function($scope, $state, $firebaseObject, $rootScope, $ionicHistory, Db, Profile) {
   $ionicHistory.nextViewOptions({
     disableAnimate: true,
@@ -34,8 +35,8 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
       $state.go('tab.profile');
     }
   }
-
 })
+
 .controller('ProfileCtrl', function($scope, $rootScope ,$state, $ionicHistory, Db, Profile , ENV, $firebaseArray, $ionicLoading) {
   $ionicHistory.nextViewOptions({
     disableAnimate: true,
@@ -96,7 +97,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
       for(var i = 0; i < offers.length; i++) {
         //offers given to you
         if(offers[i].$id !== "keyGen") {
-          if(offers[i].seller === $scope.profile.uid) {
+          if(offers[i].seller.uid === $scope.profile.uid) {
             if(offers[i].status === "active") {
               $scope.activeUserSellOffers.push(offers[i]);
             }
