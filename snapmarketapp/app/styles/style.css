@@ -241,8 +241,10 @@ For large screens: ipad/computer screen
   width: 100%;
 }
 
-.transaction .has-tabs-top{
+.transaction.button-bar{
   position: absolute;
+  top: 0;
+  bottom: 49px;
 }
 
 .content-stable {
@@ -445,4 +447,8 @@ a.item {
 
 #addButton {
   text-transform: none;
+}
+
+.transaction .has-tabs{
+  top: 49px;
 }
