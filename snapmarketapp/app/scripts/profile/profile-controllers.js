@@ -15,7 +15,7 @@ angular.module('profile.controllers', ['firebase', 'profile.services', 'config']
           console.log("Login Failed!", error);
         } else {
           console.log("Authenticated successfully with payload");
-
+          console.log(Db.getAuth());
           //waits until user has been fully loaded, then add user into firebase database
           users.$loaded().then(function() {
             users[authData.uid] = Profile(authData);
