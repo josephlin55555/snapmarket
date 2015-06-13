@@ -7,7 +7,12 @@
 }
 
 .loginButton {
-  top: 10em;
+  font-size: 1.4em;
+  top: 7em;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 /* top bar for back views */
@@ -30,10 +35,18 @@
 }
 /*----------------------------------------------------------------------*/
 
+/*--------------------Profile Page---------------------------------*/
 
-/* 
-  Sets size of profile picture and changes the shape to a circle
-*/
+.profile{
+  background: url('/images/money.jpg');
+}
+
+.userInfo{
+  background-color: #FF5252;
+  width: 100%;
+  margin-top: 5em;
+}
+
 .imageAvatar {
   border-radius: 50%;
   width: 140px;
@@ -41,7 +54,11 @@
 }
 
 .logoutButton {
-  border: 0;
+  margin-top: 0.75em;
+  border-radius: 5px;
+  font-size: 1.4em;
+  padding-left: 10px;
+  padding-right: 10px;  
 }
 
 .logoutButtonContainer {
@@ -49,70 +66,67 @@
 }
 
 .profileImage {
-  border: 0;
+  margin-top: 3em;
   text-align: center !important;
 }
 
 .profileName {
-  font-size: 30px;
-  border: 0;
+  font-size: 25px;
   text-align: center !important;
   font-weight: bold;
+  color: white;
+  padding-top: 8px;
+  margin-bottom: 0px;
 }
 
 .profileEmail {
-  font-size: 20px;
-  border: 0;
+  font-size: 15px;
   text-align: center !important;
   font-style: italic;
+  color: white;
+  padding: 2px;
+  margin-bottom: 0px;
 }
 
 .profileStats {
-  font-size: 20px;
-  border: 0;
-  text-align: center !important;
+  background-color: white;
+  height: 400px;
 }
 
 .statistics {
-  font-weight: bold;
+  font-size: 1.8em;
 }
 
-
-/*--------------------Profile Page---------------------------------*/
 table {
   width: 100%;
-  border: 2px solid black;
-  margin: 0;
-  border-color: #00796B;
+  border: 2px solid white;
+  text-align: center;
 }
 
-.top {
-  border: 0;
-}
-
-.topTable {
-  border-bottom: 0;
-}
-
-th {
-  padding-top: 0.75em;
-  padding-bottom: 0.75em;
-  background-color: #727272;
-  color: #FFFFFF;
+.tableTitle {
+  font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  padding-top: 0.2em;
 }
 
 tr {
-  border: 2px solid black;
+  background-color: #009688;
 }
 
 td {
-  width: 50%;
-  border: 2px solid black;
-  padding-top: 0.75em;
-  padding-bottom: 0.75em;
-  background-color: #009688;
-  color: #FFFFFF;
-  border-color: #00796B;
+  padding: 0.2em;
+  background-color: white;
+  color: black;
+}
+
+.number {
+  padding-top: 0.5em;
+  font-size: 1.7em;
+  color: #009688;
+  font-weight: bold;
 }
 
 /******************************************************************/
@@ -376,7 +390,7 @@ a.item {
 }
 
 .button.button-positive {
-  border-color: #009688;
+  border-color: white;
   background-color: #009688;
 }
 
