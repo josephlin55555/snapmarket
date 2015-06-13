@@ -4,14 +4,13 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{listing.view}} Details">
+<ion-view view-title="{{currentListing.title}}">
   <ion-content>
         
     <ion-list>
-      <ion-item class="detailView">
+      <ion-item class="detailView"> 
 
-        <div class="card">
-          <div class="item">
+          <div class="item details">
       
             <p><img class="listingThumbnailDetail" ng-src="{{currentListing.img }}">
               <div ng-repeat="item in currentListing.items">
@@ -19,38 +18,42 @@
                 <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
               </div>
             </p>
-            <h1 class="cardTitle">{{currentListing.title}}</h1>
-            <p class="cardUser">Posted by {{currentListing.user}}</p>
-            <p class="cardTag">Tags: {{formatTags(currentListing.allTags)}}</p>  
+            <p class="cardUser">Posted by {{currentListing.displayName}}</p> 
               
           </div>
           
-          <div class="item" ng-repeat="item in currentListing.items">
-            <ion-checkbox ng-model="checked" ng-change="check(checked, item)" ng-disabled="!{{item.isActive}}">
-              Item: {{item.text}}
-              <br>
-              Price: ${{item.price}}
-              <br>
-              Tags: {{formatTags(item.tags)}}
-              <br>
-       <!--        Position: ({{item.x}}, {{item.y}})
-              <br>
-              ItemID: {{item.id}}
-              <br>
-              Fit For Sale: {{item.isActive}} -->
-            </ion-checkbox>
+          <div class="item itemCheck" ng-repeat="item in currentListing.items">
+            
+            <div class="card">
+
+              <ion-checkbox class="checkbox-stable" ng-model="checked" ng-change="check(checked, item)" ng-disabled="!{{item.isActive}}">
+              
+
+              <p class="itemText">{{item.text}}</p>
+    
+              <p class="priceText">${{item.price}}</p>
+              
+              <p class="tagText">{{formatTags(item.tags)}}</p>
+              
+            
+              </ion-checkbox>
+            
+            </div>
+          
           </div>
 
-          <div class="item">
-            
-            <input class="buyerPrice" ng-model="buyerPrice" ng-minlength="1" placeholder="Offer"> 
+          
+            <br>
+            <input type="number" class="buyerPrice" ng-model="buyerPrice" ng-minlength="1" placeholder="Offer"> 
             </input>
-            <button ng-click="submitPrice(buyerPrice)"> 
-                Submit Here
+          
+
+            <button class="button button-full button-assertive" ng-click="submitPrice(buyerPrice)"> 
+              Submit
             </button>
 
-          </div>
-        </div>
+
+          
 
       </ion-item>
     </ion-list>
