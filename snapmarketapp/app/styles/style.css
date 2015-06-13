@@ -29,10 +29,15 @@
   margin: 0;
 }
 
-/* back button */
 .bar .button.button-clear {
   color: #FFFFFF;
+}
 
+.bar .button {
+  min-width: 80px;
+  font-weight: bold;
+  letter-spacing: -2px;
+  color: #FFFFFF;
 }
 /*----------------------------------------------------------------------*/
 
