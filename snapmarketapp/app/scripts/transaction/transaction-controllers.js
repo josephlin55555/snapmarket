@@ -90,7 +90,7 @@ angular.module('transaction.controllers', [])
   .controller('SellOffersCtrl', function($rootScope, $scope, $state, Db, $firebaseObject) {
     $rootScope.nav = {
       bar : true,
-      title: "Seller: Offers",
+      title: "My Offers",
       url: "#/tab/transaction/sellListings"
     };
 
@@ -116,7 +116,7 @@ angular.module('transaction.controllers', [])
 
     offers.$loaded().then(function(){
       for(var i=0; i < offerIds.length; i++) {
-        console.log(offerIds[i]);
+        offers[offerIds[i]].moment = moment(offers[offerIds[i]].createdAt).fromNow();
         $scope.listingOffers.push(offers[offerIds[i]]);
       }
        if($scope.listingOffers.length > 0) {

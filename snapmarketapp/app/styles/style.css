@@ -29,10 +29,15 @@
   margin: 0;
 }
 
-/* back button */
 .bar .button.button-clear {
   color: #FFFFFF;
+}
 
+.bar .button {
+  min-width: 80px;
+  font-weight: bold;
+  letter-spacing: -2px;
+  color: #FFFFFF;
 }
 /*----------------------------------------------------------------------*/
 
@@ -167,6 +172,10 @@ td {
 
 
 /*----------------------BuyDetail view-------------------*/
+
+.itemList {
+  font-weight: bold;
+}
 
 .itemText {
   font-weight: bold;
@@ -447,6 +456,11 @@ For large screens: ipad/computer screen
 
 .item .numberOfItems {
   font-size: 14px;
+}
+
+.item .buyerPrice {
+  color: #009688;
+  font-weight: bold;
 }
 
 .item .numberOfOffers {
