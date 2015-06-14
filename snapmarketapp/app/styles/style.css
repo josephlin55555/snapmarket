@@ -173,6 +173,10 @@ td {
 
 /*----------------------BuyDetail view-------------------*/
 
+.itemList {
+  font-weight: bold;
+}
+
 .itemText {
   font-weight: bold;
 }
