@@ -38,6 +38,11 @@ angular.module('buy.controllers', ['firebase'])
   $scope.listings.$loaded()
     .then(function(){
       $scope.results = filterListings($scope.listings);
+
+      for(var i = 0; i < $scope.results.length; i++) {
+        $scope.results[i].moment = moment($scope.results[i].createdAt).fromNow();
+      }
+
       $ionicLoading.hide();
     });
 
@@ -49,7 +54,7 @@ angular.module('buy.controllers', ['firebase'])
   $scope.selectCard = function(card) {
     //card argument is listing object
     $rootScope.currentListing = card;
-
+    
     //$id is the unique hash id for each item in the firebase array
     $state.go('tab.buyListingDetail', {'listingId': card.$id});
   };

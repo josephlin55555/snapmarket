@@ -26,6 +26,7 @@
   text-align: center;
   left: 0;
   right: 0;
+  margin: 0;
 }
 
 /* back button */
@@ -129,7 +130,95 @@ td {
   font-weight: bold;
 }
 
+
+
+/*----------------------BuySearch view-------------------*/
+
+.moment {
+  float: right;
+  color: #FFFFFF;
+}
+
+.card.buySearch {
+  height: 300px;
+  margin: 0;
+}
+
+.card .listingTitle{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.95);
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.card .listingUser {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.95);
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  color: #FFFFFF;
+  bottom: 0;
+  background-color: #FF5252;
+  margin: 0;
+}
+
+
+
+/*----------------------BuyDetail view-------------------*/
+
+.itemText {
+  font-weight: bold;
+}
+
+.priceText {
+  color: #388E3C !important;
+  font-weight: bold;
+}
+
+.tagText {
+  font-style: italic;
+}
+
+.item.itemCheck {
+  padding-top: 0;
+  padding-bottom: 0;
+  z-index: 2px;
+}
+
+.cardTitle {
+  font-size: 1.5em;
+}
+
+.cardUser {
+  font-weight: bold;
+}
+
+input.buyerPrice {
+  padding: 0;
+  margin: auto;
+  width: 92%;
+  text-align: center;
+  background-color: #EEE;
+  color: black;
+  height: 45px;
+}
+
+.item .details {
+  text-align: center;
+  padding: 0;
+  color: #727272;
+}
+
+.button.button-full.button-assertive {
+  margin-bottom: 0;
+}
+
+
+ 
 /******************************************************************/
+
 
 /*
 light-blue coloring for the background in buySearch view
@@ -159,7 +248,8 @@ light-blue color for remaining the remaining itemDetail view
 (other than .masonry-brick)
 */
 .detailView {
-  background-color: #B2DFDB;
+  background-color: #FFFFFF;
+  padding: 0;
 }
 
 /*
@@ -168,7 +258,7 @@ allows for scrolling capability;
 background-color is light-blue for remaining background in buySearch view
 */
 ion-scroll[direction=y] {
-  height: 86vh;
+  height: 82vh;
   margin: 0;
   width: 100vw;
   background-color: #B2DFDB;
@@ -230,10 +320,6 @@ For large screens: ipad/computer screen
   .masonry-brick {
     width: 33.333vw;
   }
-}
-
-.cardTitle {
-  font-size: 1.5em;
 }
 
 /*This affects the styling for the Transaction tab header*/
@@ -356,7 +442,8 @@ For large screens: ipad/computer screen
 
 .item .transactionListingTitle {
   font-size: 1.5em;
-  font-weight: bold;}
+  font-weight: bold;
+}
 
 .item .numberOfItems {
   font-size: 14px;
@@ -408,42 +495,6 @@ a.item {
 
 .bar.item-input-inset .item-input-wrapper {
   margin-left: 8px;
-}
-
-.buySearch {
-  height: 300px;
-  margin: 0;
-}
-
-.card .listingImage {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  max-width: initial;
-  z-index: 0;
-
-  /* here is stuff */
-  height: 100%;
-}
-
-.card .listingTitle{
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.95);
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  color: white;
-  background-color: rgba(0,0,0,0.7);
-}
-
-.card .listingUser {
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.95);
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  color: white;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.7);
 }
 
 #addButton {
