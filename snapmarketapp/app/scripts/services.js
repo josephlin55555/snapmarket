@@ -44,7 +44,7 @@ angular.module('starter.services', [
         };
           //for development if the camera does not exists redirect to a static image
         if(!Camera.cameraExists()){
-          var db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings/-Jr_9FO-UNf_0Mt0gFm0"))
+          var db = $firebaseObject(new Firebase("https://snapmarket.firebaseio.com/listings/-Jrc_vJUUoCVtFDmoiS2"))
           db.$loaded().then(
             function(data){
               $rootScope.lastPhoto=data.img;
