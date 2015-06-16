@@ -21,7 +21,7 @@
 
     <div ng-repeat="item in items">
       <img src="images/tag.png" ng-style="position(item)"{{item}}> 
-      <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
+      <i class="icon icon-clear ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
     </div>
 
     <div class="item" ng-repeat="item in items track by $index">
