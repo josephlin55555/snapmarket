@@ -15,9 +15,7 @@ angular.module('buy.controllers', ['firebase'])
 
   // alternative array type for firebase listings
     //TODO: convert to Ref
-  $ionicLoading.show({
-    template: 'Loading...'
-  });
+
   var ref = new Firebase("https://snapmarket.firebaseio.com/listings");
   $scope.listings = $firebaseArray(ref);
   $scope.results = [];
@@ -34,17 +32,27 @@ angular.module('buy.controllers', ['firebase'])
     return res;
   }
 
+  var syncCards = function(){
+    console.log('SYNCING CARDS');
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+    $scope.results = filterListings($scope.listings);
+    for(var i = 0; i < $scope.results.length; i++) {
+      $scope.results[i].moment = moment($scope.results[i].createdAt).fromNow();
+    }
+    $ionicLoading.hide();
+  };
+
   // copy over full listings to the results array for display
   $scope.listings.$loaded()
     .then(function(){
-      $scope.results = filterListings($scope.listings);
+      syncCards();
+      $scope.listings.$watch(function(){
+        syncCards();
+      });
+  });
 
-      for(var i = 0; i < $scope.results.length; i++) {
-        $scope.results[i].moment = moment($scope.results[i].createdAt).fromNow();
-      }
-
-      $ionicLoading.hide();
-    });
 
   //filter scope.results through one tag
   $scope.filterOne = function(tag){
