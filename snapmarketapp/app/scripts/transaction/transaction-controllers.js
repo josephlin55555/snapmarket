@@ -125,6 +125,8 @@ angular.module('transaction.controllers', [])
     });
   })
 .controller('ChatCtrl', function($rootScope, $scope, ChatManager, $cordovaCamera, $ionicScrollDelegate, $ionicModal, $ionicActionSheet, $timeout, Db) {
+  
+  cordova.plugins.Keyboard.disableScroll(true);
 
   $scope.handle = $rootScope.production ? Db.getAuth().uid : $rootScope.TESTUSER.uid;
   $scope.showTime = false;
