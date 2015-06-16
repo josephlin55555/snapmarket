@@ -60,6 +60,8 @@
 
 .imageAvatar {
   border-radius: 50%;
+  border: 5px solid #FF5252;
+
   width: 140px;
   height: 140px;
 }
@@ -449,10 +451,15 @@ For large screens: ipad/computer screen
 .noListings {
   text-align: center;
   font-size: 1.5em;
+  margin-top: 1em;
 }
 
 .card {
   margin : 1px;
+}
+
+.card img {
+  box-shadow: none;
 }
 
 .card>.item.item-thumbnail-left, .item-thumbnail-left, .item-thumbnail-left .item-content {
