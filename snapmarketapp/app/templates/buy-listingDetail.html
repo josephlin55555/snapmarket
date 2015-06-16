@@ -15,7 +15,7 @@
             <p><img class="listingThumbnailDetail" ng-src="{{currentListing.img }}">
               <div ng-repeat="item in currentListing.items">
                 <img src="images/tag.png" ng-style="position(item)"{{item}}> 
-                <i class="icon ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
+                <i class="icon icon-clear ion-social-usd" ng-style="positionText(item)"{{item}}> {{item.price}}</i>
               </div>
             </p>
             <p class="cardUser">Posted by {{currentListing.displayName}}</p> 
