@@ -40,6 +40,8 @@ angular.module('buy.controllers', ['firebase'])
     $scope.results = filterListings($scope.listings);
     for(var i = 0; i < $scope.results.length; i++) {
       $scope.results[i].moment = moment($scope.results[i].createdAt).fromNow();
+      $scope.results[i].order = moment($scope.results[i].createdAt).valueOf();
+      console.log("result:", moment($scope.results[i].createdAt).valueOf());
     }
     $ionicLoading.hide();
   };
