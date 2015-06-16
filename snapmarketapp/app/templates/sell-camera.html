@@ -10,12 +10,13 @@
   </ion-content>
 </ion-view> -->
 
-<ion-view view-title="{{title}}">
-    <ion-nav-buttons side="right">
-      <button class="button button-icon ion-edit" ng-click = "openPopover($event)"></button>
-      <button class="button button-icon ion-arrow-right-a" ng-click = "submitListing()"></button>
+<ion-view>
+    <ion-nav-buttons class="bar bar-header">
+      <button class="button button-clear button-icon ion-edit" ng-click="openPopover($event)"></button>
+      <h2 class="title">{{title}}</h2>
+      <button class="button button-clear button-icon ion-arrow-right-a" ng-click="submitListing()"></button>
     </ion-nav-buttons>
-  <ion-content class="padding">
+  <ion-content>
     <img src="{{$root.lastPhoto}}" style="max-width: 100%" on-tap = "addItem()">
     <!-- <p>The image item{{lastPhoto}}</p> -->
     <!-- <p>The db {{db}}</p> -->

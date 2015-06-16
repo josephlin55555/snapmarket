@@ -1,5 +1,6 @@
 angular.module('sell.controllers', ['ngCordova'])
 .controller('SellCameraCtrl', function($rootScope , $scope , $ionicModal , $state, $firebaseArray , $ionicPopover, $ionicPosition ,Db ,$ionicTabsDelegate, $ionicLoading, Profile, RenderTags, DisplayTags) {
+  $scope.title = 'Tag Your Things';  
   
  $scope.formatTags = DisplayTags;
   var startTag = function(){

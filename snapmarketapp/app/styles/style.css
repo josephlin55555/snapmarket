@@ -39,6 +39,10 @@
   letter-spacing: -2px;
   color: #FFFFFF;
 }
+
+.bar .title + .button:last-child, .bar > .button + .button:last-child, .bar > .button.pull-right, .bar .buttons.pull-right, .bar .title + .buttons{
+  top:0px;
+}
 /*----------------------------------------------------------------------*/
 
 /*--------------------Profile Page---------------------------------*/
@@ -60,7 +64,7 @@
 }
 
 .logoutButton {
-  margin-top: 0.75em;
+  margin-top: 2em;
   border-radius: 5px;
   font-size: 1.4em;
   padding-left: 10px;
