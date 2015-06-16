@@ -10,11 +10,9 @@
   </ion-content>
 </ion-view> -->
 
-<ion-view>
+<ion-view title = "{{title}}">
     <ion-nav-buttons class="bar bar-header">
       <button class="button button-clear button-icon ion-edit" ng-click="openPopover($event)"></button>
-      <h2 class="title">{{title}}</h2>
-      <button class="button button-clear button-icon ion-arrow-right-a" ng-click="submitListing()"></button>
     </ion-nav-buttons>
   <ion-content>
     <img src="{{$root.lastPhoto}}" style="max-width: 100%" on-tap = "addItem()">
@@ -35,7 +33,9 @@
           Tags: {{formatTags(item.tags)}}
         </ion-checkbox>
 	  </div>
+  <button class="button button-block button-assertive" ng-click="submitListing()">Submit</button>
   </ion-content>
+
 </ion-view>
 
 <!-- Adds ability to edit the name of the listing as a whole -->
