@@ -20,6 +20,10 @@
   background-color: #009688;
 }
 
+.bar.bar-stable .title {
+  color: white;
+}
+
 /*------------------Navigaton Bar for Nested Views----------------------*/
 .bar.bar-header .button+.title {
   color: #FFFFFF;
@@ -40,9 +44,6 @@
   color: #FFFFFF;
 }
 
-.bar .title + .button:last-child, .bar > .button + .button:last-child, .bar > .button.pull-right, .bar .buttons.pull-right, .bar .title + .buttons{
-  top:0px;
-}
 /*----------------------------------------------------------------------*/
 
 /*--------------------Profile Page---------------------------------*/
