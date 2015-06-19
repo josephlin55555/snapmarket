@@ -3,8 +3,7 @@ See what we are working on [waffle.io](http://www.github.com/snapmarket/snapmark
 
 ## Description
 *Create a market for your used goods with in a snap.*
-
-SnapMarket is an easy way to take pictures of your things and sell them on an online marketplace
+**SnapMarket is an easy way to take pictures of your things and sell them on an online marketplace.**
 
 ## Context
 Everyone has things they want to sell but creating individual posts for multiple items is a tedious process. SnapMarket allows you to quickly take a single picture of your things and tag every item that is up for sale.
