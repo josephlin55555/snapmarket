@@ -1,7 +1,9 @@
 # SnapMarket
-*Create a market for your used goods with in a snap.*
+
+See what we are working on [waffle.io](http://www.github.com/snapmarket/snapmarket)
 
 ## Description
+*Create a market for your used goods with in a snap.*
 SnapMarket is an easy way to take pictures of your things and sell them on an online marketplace
 
 ## Context
@@ -27,4 +29,3 @@ Buying on SnapMarket is as simple as typing what you want in the search bar and 
 *  Grunt
 *  Heroku
 
-See what we are working on [waffle.io](http://www.github.com/snapmarket/snapmarket)
